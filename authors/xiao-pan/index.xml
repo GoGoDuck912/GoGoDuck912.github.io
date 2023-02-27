@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xiao Pan on PEIKE LI</title>
+    <link>https://peikeli.github.io/authors/xiao-pan/</link>
+    <description>Recent content in Xiao Pan on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Tue, 01 Mar 2022 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/xiao-pan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>🍔In-N-Out Generative Learning for Dense Unsupervised Video Segmentation</title>
+      <link>https://peikeli.github.io/publication/in-n-out-generative-learning-for-dense-unsupervised-video-segmentation/</link>
+      <pubDate>Tue, 01 Mar 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/in-n-out-generative-learning-for-dense-unsupervised-video-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SFGN: Representing the Sequence with One Super Frame</title>
+      <link>https://peikeli.github.io/publication/sfgn-representing-the-sequence-with-one-super-frame/</link>
+      <pubDate>Wed, 26 Jan 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/sfgn-representing-the-sequence-with-one-super-frame/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
