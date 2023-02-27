@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shuai Bai on PEIKE LI</title>
+    <link>https://peikeli.github.io/authors/shuai-bai/</link>
+    <description>Recent content in Shuai Bai on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Tue, 01 Feb 2022 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/shuai-bai/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>👗M6-Fashion: High-Fidelity Multi-modal Image Generation and Editing</title>
+      <link>https://peikeli.github.io/publication/m6-fashion-high-fidelity-multi-modal-image-generation-and-editing/</link>
+      <pubDate>Tue, 01 Feb 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/m6-fashion-high-fidelity-multi-modal-image-generation-and-editing/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

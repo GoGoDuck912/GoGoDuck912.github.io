@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3 on PEIKE LI</title>
+    <link>https://peikeli.github.io/publication_types/3/</link>
+    <description>Recent content in 3 on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Wed, 17 Nov 2021 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/publication_types/3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Open-Vocabulary Panoptic Segmentation via Multi-modal Meta-knowledge Transferring</title>
+      <link>https://peikeli.github.io/publication/open-vocabulary-panoptic-segmentation-via-multi-modal-meta-knowledge-transferring/</link>
+      <pubDate>Wed, 17 Nov 2021 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/open-vocabulary-panoptic-segmentation-via-multi-modal-meta-knowledge-transferring/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

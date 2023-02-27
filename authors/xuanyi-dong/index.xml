@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xuanyi Dong on PEIKE LI</title>
+    <link>https://peikeli.github.io/authors/xuanyi-dong/</link>
+    <description>Recent content in Xuanyi Dong on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Mon, 11 May 2020 18:20:38 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/xuanyi-dong/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>When Humans Meet Machines: Towards Efficient Segmentation Networks</title>
+      <link>https://peikeli.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/</link>
+      <pubDate>Mon, 11 May 2020 18:20:38 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

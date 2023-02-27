@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qianyu Feng on PEIKE LI</title>
+    <link>https://peikeli.github.io/authors/qianyu-feng/</link>
+    <description>Recent content in Qianyu Feng on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Sun, 29 Sep 2019 10:46:33 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/qianyu-feng/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dual Embedding Learning for Video Instance Segmentation</title>
+      <link>https://peikeli.github.io/publication/dual-embedding-learning-for-video-instance-segmentation/</link>
+      <pubDate>Sun, 29 Sep 2019 10:46:33 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/dual-embedding-learning-for-video-instance-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Going Deeper into Embedding Learning for Video Object Segmentation</title>
+      <link>https://peikeli.github.io/publication/going-deeper-into-embedding-learning-for-video-object-segmentation/</link>
+      <pubDate>Sun, 29 Sep 2019 10:46:33 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/going-deeper-into-embedding-learning-for-video-object-segmentation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
