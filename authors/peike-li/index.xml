@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Peike Li on PEIKE LI</title>
+    <link>https://peikeli.github.io/authors/peike-li/</link>
+    <description>Recent content in Peike Li on PEIKE LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Tue, 01 Mar 2022 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/peike-li/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>🍔In-N-Out Generative Learning for Dense Unsupervised Video Segmentation</title>
+      <link>https://peikeli.github.io/publication/in-n-out-generative-learning-for-dense-unsupervised-video-segmentation/</link>
+      <pubDate>Tue, 01 Mar 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/in-n-out-generative-learning-for-dense-unsupervised-video-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>👗M6-Fashion: High-Fidelity Multi-modal Image Generation and Editing</title>
+      <link>https://peikeli.github.io/publication/m6-fashion-high-fidelity-multi-modal-image-generation-and-editing/</link>
+      <pubDate>Tue, 01 Feb 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/m6-fashion-high-fidelity-multi-modal-image-generation-and-editing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SFGN: Representing the Sequence with One Super Frame</title>
+      <link>https://peikeli.github.io/publication/sfgn-representing-the-sequence-with-one-super-frame/</link>
+      <pubDate>Wed, 26 Jan 2022 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/sfgn-representing-the-sequence-with-one-super-frame/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open-Vocabulary Panoptic Segmentation via Multi-modal Meta-knowledge Transferring</title>
+      <link>https://peikeli.github.io/publication/open-vocabulary-panoptic-segmentation-via-multi-modal-meta-knowledge-transferring/</link>
+      <pubDate>Wed, 17 Nov 2021 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/open-vocabulary-panoptic-segmentation-via-multi-modal-meta-knowledge-transferring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Super-Resolving Cross-Domain Face Miniatures by Peeking at One-Shot Exemplar</title>
+      <link>https://peikeli.github.io/publication/super-resolving-cross-domain-face-miniatures-bypeeking-at-one-shot-exemplar/</link>
+      <pubDate>Tue, 17 Nov 2020 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/super-resolving-cross-domain-face-miniatures-bypeeking-at-one-shot-exemplar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Self-Correction for Human Parsing</title>
+      <link>https://peikeli.github.io/publication/self-correction-for-human-parsing/</link>
+      <pubDate>Sun, 01 Nov 2020 10:46:33 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/self-correction-for-human-parsing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Consistent Structural Relation Learning for Zero-Shot Segmentation</title>
+      <link>https://peikeli.github.io/publication/consistent-structural-relation-learning-for-zero-shot-segmentation/</link>
+      <pubDate>Thu, 02 Jul 2020 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/consistent-structural-relation-learning-for-zero-shot-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta Parsing Networks: Towards Generalized Few-shot Scene Parsing with Adaptive Metric Learning</title>
+      <link>https://peikeli.github.io/publication/meta-parsing-networks-towards-open-set-scene-parsing-with-adaptive-metric-learning/</link>
+      <pubDate>Mon, 11 May 2020 18:20:38 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/meta-parsing-networks-towards-open-set-scene-parsing-with-adaptive-metric-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>When Humans Meet Machines: Towards Efficient Segmentation Networks</title>
+      <link>https://peikeli.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/</link>
+      <pubDate>Mon, 11 May 2020 18:20:38 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dual Embedding Learning for Video Instance Segmentation</title>
+      <link>https://peikeli.github.io/publication/dual-embedding-learning-for-video-instance-segmentation/</link>
+      <pubDate>Sun, 29 Sep 2019 10:46:33 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/dual-embedding-learning-for-video-instance-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Going Deeper into Embedding Learning for Video Object Segmentation</title>
+      <link>https://peikeli.github.io/publication/going-deeper-into-embedding-learning-for-video-object-segmentation/</link>
+      <pubDate>Sun, 29 Sep 2019 10:46:33 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/going-deeper-into-embedding-learning-for-video-object-segmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hierarchical Temporal Modeling with Mutual Distance Matching for Video Based Person Re-Identification</title>
+      <link>https://peikeli.github.io/publication/hierarchical-temporal-modeling-with-mutual-distance-matching-for-video-based-person-re-identification/</link>
+      <pubDate>Sat, 14 Sep 2019 18:20:38 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/hierarchical-temporal-modeling-with-mutual-distance-matching-for-video-based-person-re-identification/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
