@@ -7,10 +7,28 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Tue, 17 Nov 2020 15:03:59 +1000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Feb 2024 15:03:59 +1000</lastBuildDate>
     
 	    <atom:link href="https://peikeli.github.io/authors/xin-yu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Benchmarking Audio Visual Segmentation for Long-Untrimmed Videos</title>
+      <link>https://peikeli.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/</link>
+      <pubDate>Thu, 01 Feb 2024 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Audio-Visual Segmentation by Exploring Cross-Modal Mutual Semantics</title>
+      <link>https://peikeli.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/</link>
+      <pubDate>Mon, 01 Jan 2024 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Super-Resolving Cross-Domain Face Miniatures by Peeking at One-Shot Exemplar</title>

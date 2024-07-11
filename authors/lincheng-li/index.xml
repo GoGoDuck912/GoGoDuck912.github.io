@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lincheng Li on PEIKE PATRICK LI</title>
+    <link>https://peikeli.github.io/authors/lincheng-li/</link>
+    <description>Recent content in Lincheng Li on PEIKE PATRICK LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Thu, 01 Feb 2024 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/lincheng-li/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Benchmarking Audio Visual Segmentation for Long-Untrimmed Videos</title>
+      <link>https://peikeli.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/</link>
+      <pubDate>Thu, 01 Feb 2024 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Audio-Visual Segmentation by Exploring Cross-Modal Mutual Semantics</title>
+      <link>https://peikeli.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/</link>
+      <pubDate>Mon, 01 Jan 2024 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
