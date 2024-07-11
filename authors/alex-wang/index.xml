@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alex Wang on PEIKE PATRICK LI</title>
+    <link>https://peikeli.github.io/authors/alex-wang/</link>
+    <description>Recent content in Alex Wang on PEIKE PATRICK LI</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year}</copyright>
+    <lastBuildDate>Fri, 01 Mar 2024 15:03:59 +1000</lastBuildDate>
+    
+	    <atom:link href="https://peikeli.github.io/authors/alex-wang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JEN-1: Text-Guided Universal Music Generation with Omnidirectional Diffusion Models</title>
+      <link>https://peikeli.github.io/publication/jen-1-text-guided-universal-music-generation-with-omnidirectional-diffusion-models/</link>
+      <pubDate>Fri, 01 Mar 2024 15:03:59 +1000</pubDate>
+      
+      <guid>https://peikeli.github.io/publication/jen-1-text-guided-universal-music-generation-with-omnidirectional-diffusion-models/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
