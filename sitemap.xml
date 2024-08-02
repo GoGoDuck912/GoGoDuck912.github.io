@@ -1,214 +1,354 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://peikeli.github.io/publication_types/1/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/alex-wang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/allen-wang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/</loc>
-    <lastmod>2024-07-26T09:36:23+10:00</lastmod>
-  </url><url>
+    <lastmod>2024-07-26T10:07:36+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/boyu-chen/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
-    <loc>https://peikeli.github.io/</loc>
-    <lastmod>2024-07-26T09:36:23+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/jen-1-text-guided-universal-music-generation-with-omnidirectional-diffusion-models/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/peike-li/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication_types/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/yao-yao/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/yikai-wang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/chen-liu/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/dadong-wang/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/hongwei-sheng/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/lincheng-li/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/peike-patrick-li/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/qingtao-yu/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/xin-yu/</loc>
     <lastmod>2024-06-17T19:46:02+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/hu-zhang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/xingqun-qi/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/chang-zhou/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/hongxia-yang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/huiling-zhou/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/jingren-zhou/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/xiao-pan/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/yi-yang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/zongxin-yang/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/in-n-out-generative-learning-for-dense-unsupervised-video-segmentation/</loc>
     <lastmod>2024-06-17T19:42:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/shuai-bai/</loc>
     <lastmod>2023-03-09T09:32:34+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/zhikang-li/</loc>
     <lastmod>2023-03-09T09:32:34+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/m6-fashion-high-fidelity-multi-modal-image-generation-and-editing/</loc>
     <lastmod>2023-03-09T09:32:34+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication_types/2/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/hao-luo/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/jianming-zhang/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/jianyang-gu/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/sfgn-representing-the-sequence-with-one-super-frame/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/wei-jiang/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication_types/3/</loc>
     <lastmod>2021-11-30T10:55:36+08:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/open-vocabulary-panoptic-segmentation-via-multi-modal-meta-knowledge-transferring/</loc>
     <lastmod>2021-11-30T10:55:36+08:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/super-resolving-cross-domain-face-miniatures-bypeeking-at-one-shot-exemplar/</loc>
     <lastmod>2021-11-30T11:02:16+08:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/self-correction-for-human-parsing/</loc>
     <lastmod>2020-12-31T17:54:55+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/yunchao-wei/</loc>
     <lastmod>2021-03-24T19:30:14+08:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/yunqiu-xu/</loc>
     <lastmod>2020-12-31T17:54:55+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/consistent-structural-relation-learning-for-zero-shot-segmentation/</loc>
     <lastmod>2021-03-24T19:30:14+08:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/meta-parsing-networks-towards-open-set-scene-parsing-with-adaptive-metric-learning/</loc>
     <lastmod>2020-10-13T10:43:18+11:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/</loc>
     <lastmod>2020-09-08T15:04:45+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/xuanyi-dong/</loc>
     <lastmod>2020-09-08T15:04:45+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/dual-embedding-learning-for-video-instance-segmentation/</loc>
     <lastmod>2020-07-30T12:24:01+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/going-deeper-into-embedding-learning-for-video-object-segmentation/</loc>
     <lastmod>2020-07-30T12:24:01+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/qianyu-feng/</loc>
     <lastmod>2020-07-30T12:24:01+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/hierarchical-temporal-modeling-with-mutual-distance-matching-for-video-based-person-re-identification/</loc>
     <lastmod>2020-09-08T11:29:19+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/mingliang-xu/</loc>
     <lastmod>2020-09-08T11:29:19+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/ping-liu/</loc>
     <lastmod>2020-09-08T11:29:19+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/pingbo-pan/</loc>
     <lastmod>2020-09-08T11:29:19+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/tags/deep-learning/</loc>
     <lastmod>2023-08-16T16:02:14+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/project/jen-1/</loc>
     <lastmod>2023-08-16T16:02:14+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/project/</loc>
     <lastmod>2023-08-16T16:02:14+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/tags/</loc>
     <lastmod>2023-08-16T16:02:14+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/authors/admin/</loc>
-    <lastmod>2024-07-26T09:36:23+10:00</lastmod>
-  </url><url>
+    <lastmod>2024-07-26T10:07:36+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication_types/4/</loc>
     <lastmod>2020-09-26T10:22:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/categories/</loc>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/tags/competition/</loc>
     <lastmod>2020-09-26T10:22:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/competitions/</loc>
     <lastmod>2019-06-25T13:55:51+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/competitions/cvpr2019-lip-challenge/</loc>
     <lastmod>2020-09-26T10:22:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
+    <loc>https://peikeli.github.io/</loc>
+    <lastmod>2019-03-17T20:39:18+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/competitions/iccv2019-youtube-vos-challenge/</loc>
     <lastmod>2020-09-26T10:22:53+10:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/post/</loc>
     <lastmod>2019-05-06T17:54:11+01:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/talk/</loc>
     <lastmod>2019-05-06T17:54:11+01:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://peikeli.github.io/publication/</loc>
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
   </url>
+  
 </urlset>
