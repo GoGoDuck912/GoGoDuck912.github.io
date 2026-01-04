@@ -333,9 +333,14 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://peikeli.github.io/authors/admin/</guid>
-      <description>&lt;p&gt;I am a Research Scientist at Google Research, focusing on multimodal generative models and large multimodal language models. Prior to joining Google, I was a lead research scientist at JEN Music AI, where I led the development of text-to-music AI systems, built and managed the team, and spearheaded the creation of the JEN-1 series models.
-I hold a Ph.D. from the Australian Artificial Intelligence Institute (AAII) at the University of Technology Sydney (UTS), along with Ms.Eng and B.Eng degrees from Shanghai Jiao Tong University. My research interests span large-scale pre-training, transformer- and diffusion-based foundation models, with a particular emphasis on advancing AI-generated content across multiple modalities.
-My work has been published in top-tier venues including TPAMI, NeurIPS, CVPR, ICCV. I can work freely in the United States and Australia/New Zealand, and I welcome collaboration opportunities in both academia and industry.&lt;/p&gt;
+      <description>&lt;p&gt;I am a Research Scientist at Google Research. My long-term goal is to scale World Models for ASI. I focus on integrating internet-scale video pretraining with physics-based control to create unified humanoid agents capable of mastering both physical and digital environments.&lt;/p&gt;
+&lt;p&gt;I am currently exploring the intersection of World Models and System 2 Reasoning, specifically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Unifying large-scale video pretraining with high-fidelity, interactive world models.&lt;/li&gt;
+&lt;li&gt;Bridging generative vision with causal physics priors to enable robust generalization and manipulation.&lt;/li&gt;
+&lt;li&gt;Developing asynchronous multimodal reasoning for real-time planning and &amp;ldquo;thinking&amp;rdquo; within world models.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I am open to discussing the future of MLLMs, Multimodal Generative AI, World Models, and Embodied AI. I welcome high-impact collaborations across industry and academia. Authorized to work in the US and Australia.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;To accelerate the advent of machine intelligence and sustainable future&lt;/p&gt;
 &lt;/blockquote&gt;
