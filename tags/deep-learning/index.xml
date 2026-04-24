@@ -7,10 +7,20 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2026 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="https://peikeli.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VEO</title>
+      <link>https://peikeli.github.io/project/veo/</link>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://peikeli.github.io/project/veo/</guid>
+      <description>&lt;p&gt;Veo 3 lets you add sound effects, ambient noise, and even dialogue to your creations – generating all audio natively. It also delivers best in class quality, excelling in physics, realism and prompt adherence.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>JEN-1</title>
