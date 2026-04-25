@@ -2,42 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep Learning on DR. PEIKE LI</title>
-    <link>https://peikeli.github.io/tags/deep-learning/</link>
+    <link>https://gogoduck912.github.io/tags/deep-learning/</link>
     <description>Recent content in Deep Learning on DR. PEIKE LI</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
     <lastBuildDate>Wed, 01 Apr 2026 00:00:00 +0000</lastBuildDate>
     
-	    <atom:link href="https://peikeli.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="https://gogoduck912.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Gemma</title>
-      <link>https://peikeli.github.io/project/gemma/</link>
+      <link>https://gogoduck912.github.io/project/gemma/</link>
       <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://peikeli.github.io/project/gemma/</guid>
+      <guid>https://gogoduck912.github.io/project/gemma/</guid>
       <description>&lt;p&gt;Gemma is Google&amp;rsquo;s family of open models built from the same research and technology behind the Gemini models. Gemma 4 features advanced reasoning with multi-step planning, native multimodal understanding (video, image, and audio), agentic capabilities with function-calling and structured JSON output, and 256K context windows — all under the Apache 2.0 license. Models range from edge-optimized E2B/E4B for mobile and IoT to 26B MoE and 31B dense variants for research and production workloads.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>VEO</title>
-      <link>https://peikeli.github.io/project/veo/</link>
+      <link>https://gogoduck912.github.io/project/veo/</link>
       <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://peikeli.github.io/project/veo/</guid>
+      <guid>https://gogoduck912.github.io/project/veo/</guid>
       <description>&lt;p&gt;Veo 3 lets you add sound effects, ambient noise, and even dialogue to your creations – generating all audio natively. It also delivers best in class quality, excelling in physics, realism and prompt adherence.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>JEN-1</title>
-      <link>https://peikeli.github.io/project/jen-1/</link>
+      <link>https://gogoduck912.github.io/project/jen-1/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://peikeli.github.io/project/jen-1/</guid>
+      <guid>https://gogoduck912.github.io/project/jen-1/</guid>
       <description>&lt;p&gt;JEN-1 is a cutting-edge AI-powered music generation framework that redefines how music is created, customized, and composed. It combines state-of-the-art diffusion models with advanced learning techniques to enable high-fidelity text-to-music generation, personalized musical concept adaptation, and controllable multi-track composition. JEN-1 excels in producing expressive music from text prompts, capturing unique musical styles from reference tracks, and facilitating human-AI co-composition workflows. With innovations like omnidirectional diffusion modeling, pivotal parameter tuning, and curriculum training for multi-track synthesis, JEN-1 sets a new benchmark for interactive and customizable AI-driven music creation. Experience the future of AI-driven music creation at JEN Music AI &lt;a href=&#34;https://www.jenmusic.ai/&#34;&gt;https://www.jenmusic.ai/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
