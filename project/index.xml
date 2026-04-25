@@ -35,7 +35,7 @@
     <item>
       <title>JEN-1</title>
       <link>https://peikeli.github.io/project/jen-1/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
       
       <guid>https://peikeli.github.io/project/jen-1/</guid>
       <description>&lt;p&gt;JEN-1 is a cutting-edge AI-powered music generation framework that redefines how music is created, customized, and composed. It combines state-of-the-art diffusion models with advanced learning techniques to enable high-fidelity text-to-music generation, personalized musical concept adaptation, and controllable multi-track composition. JEN-1 excels in producing expressive music from text prompts, capturing unique musical styles from reference tracks, and facilitating human-AI co-composition workflows. With innovations like omnidirectional diffusion modeling, pivotal parameter tuning, and curriculum training for multi-track synthesis, JEN-1 sets a new benchmark for interactive and customizable AI-driven music creation. Experience the future of AI-driven music creation at JEN Music AI &lt;a href=&#34;https://www.jenmusic.ai/&#34;&gt;https://www.jenmusic.ai/&lt;/a&gt;.&lt;/p&gt;
