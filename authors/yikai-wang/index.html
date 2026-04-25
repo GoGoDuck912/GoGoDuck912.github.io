@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Research Scientist @ Google | Scaling World Models for ASI">
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://peikeli.github.io/authors/yikai-wang/">
@@ -76,13 +76,13 @@
 
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:400,500,600,700|DM+Sans:400,500,700|Roboto+Mono&display=swap">
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.cbb5ea9c84ee4fecdde7fe24e9818ffc.css">
+  <link rel="stylesheet" href="/css/academic.min.e434f046e14caded3443fe52ca6a29c7.css">
 
   
     
@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.3fa0e0659a488fb1745eb02cd85ddcb2.css">
+    <link rel="stylesheet" href="/css/academic.5b73dd986411426758bd28543ccc1a19.css">
   
 
   
@@ -135,7 +135,7 @@
   <meta property="og:site_name" content="DR. PEIKE LI">
   <meta property="og:url" content="https://peikeli.github.io/authors/yikai-wang/">
   <meta property="og:title" content="Yikai Wang | DR. PEIKE LI">
-  <meta property="og:description" content="Research Scientist @ Google | Scaling World Models for ASI"><meta property="og:image" content="https://peikeli.github.io/img/avatar.jpg">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://peikeli.github.io/img/avatar.jpg">
   <meta property="twitter:image" content="https://peikeli.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
   
   <meta property="og:updated_time" content="2024-03-01T15:03:59&#43;10:00">
@@ -290,7 +290,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#news"><span>Experience</span></a>
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
         </li>
 
         
@@ -516,6 +516,132 @@
     <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
 
     <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=3f51b5&w=500&t=tt&d=K2e4TTJxfPA78UonSZNFPBDfrd4Xx93yaXxvxKD3iXM&co=ffffff&ct=3f51b5"></script>
+<script>
+(function(){
+  var o = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.home-section').forEach(function(el){o.observe(el);});
+})();
+</script>
+<script>
+(function(){
+  if(window.innerWidth <= 768) return;
+  var c = document.createElement('canvas');
+  c.id = 'dotgrid-bg';
+  document.body.appendChild(c);
+  var ctx = c.getContext('2d');
+  var mx = -9999, my = -9999;
+  var GAP = 24, R = 1.0, RADIUS = 160;
+  var BASE = [197, 202, 233], ACT = [63, 81, 181];
+  var dots = [];
+
+  var formulas = [
+    'E = mc²','F = ma','∇·E = ρ/ε₀',
+    '∮ B·dl = μ₀I','ΔxΔp ≥ ħ/2',
+    'S = k_B ln Ω','ds² = -c²dt² + dx²',
+    'H|ψ⟩ = E|ψ⟩','∂ψ/∂t = iħHψ',
+    '∇×E = -∂B/∂t','Rμν - ½gμνR = 8πG Tμν',
+    '∫ψ*ψ dτ = 1','∂L/∂q - d/dt(∂L/∂q̇) = 0',
+    'P(A|B) = P(B|A)P(A)/P(B)','Σ F = dp/dt',
+    '∇²φ = -ρ/ε₀','dS/dt ≥ 0',
+    'Z = Σ e^{-βE_i}','Gμν + Λgμν = κTμν',
+    'iħ ∂/∂t |Ψ⟩ = H|Ψ⟩',
+    '∇ × B = μ₀J + μ₀ε₀ ∂E/∂t',
+    'L = T - V','pV = nRT','a² + b² = c²',
+    '∫₂₀^∞ e^{-x²} dx = √π/2',
+    'e^{iπ} + 1 = 0','∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)'
+  ];
+  var fItems = [];
+
+  function seed(s){ return function(){ s=(s*9301+49297)%233280; return s/233280; }; }
+
+  function layoutFormulas(){
+    fItems = [];
+    var rng = seed(42);
+    var cellW = 180, cellH = 100;
+    var cols = Math.ceil(c.width / cellW) + 1;
+    var rows = Math.ceil(c.height / cellH) + 1;
+    for(var row = 0; row < rows; row++){
+      for(var col = 0; col < cols; col++){
+        var fi = Math.floor(rng() * formulas.length);
+        var x = col * cellW + (rng() - 0.5) * cellW * 0.6;
+        var y = row * cellH + (rng() - 0.5) * cellH * 0.5;
+        var rot = (rng() - 0.5) * 0.25;
+        var size = 18 + rng() * 12;
+        fItems.push({ text: formulas[fi], ox: x, oy: y, x: x, y: y, vx: 0, vy: 0, rot: rot, size: size });
+      }
+    }
+  }
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    dots = [];
+    for(var x = GAP/2; x < c.width; x += GAP)
+      for(var y = GAP/2; y < c.height; y += GAP)
+        dots.push({x:x, y:y});
+    layoutFormulas();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX;
+    my = e.clientY;
+  });
+  document.addEventListener('mouseleave', function(){ mx = -9999; my = -9999; });
+
+  var scrollOff = 0;
+  window.addEventListener('scroll', function(){ scrollOff = window.scrollY; });
+
+  function draw(){
+    ctx.clearRect(0, 0, c.width, c.height);
+
+    var yShift = -(scrollOff * 0.15) % 180;
+    ctx.save();
+    for(var i = 0; i < fItems.length; i++){
+      var f = fItems[i];
+      var fy = f.oy + yShift;
+      if(fy < -30) fy += Math.ceil(c.height / 180 + 1) * 180;
+      if(fy > c.height + 30) continue;
+      ctx.save();
+      ctx.translate(f.ox, fy);
+      ctx.rotate(f.rot);
+      ctx.font = f.size + 'px serif';
+      var edgeX = Math.abs(f.ox - c.width / 2) / (c.width / 2);
+      var topFade = 1 - fy / c.height;
+      var fAlpha = (0.02 + 0.08 * topFade) * (0.3 + 0.7 * edgeX);
+      ctx.fillStyle = 'rgba(63, 81, 181, ' + fAlpha + ')';
+      ctx.fillText(f.text, 0, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+
+    for(var i = 0; i < dots.length; i++){
+      var d = dots[i];
+      var dist = Math.sqrt((d.x - mx)*(d.x - mx) + (d.y - my)*(d.y - my));
+      var t = Math.max(0, 1 - dist / RADIUS);
+      var cx = Math.abs(d.x - c.width / 2) / (c.width / 2);
+      var edgeMul = 0.3 + 0.7 * cx;
+      t = t * edgeMul;
+      var cr = Math.round(BASE[0] + (ACT[0] - BASE[0]) * t);
+      var cg = Math.round(BASE[1] + (ACT[1] - BASE[1]) * t);
+      var cb = Math.round(BASE[2] + (ACT[2] - BASE[2]) * t);
+      var size = R + t * 1.5;
+      var alpha = 0.35 + t * 0.5;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, size, 0, 6.2832);
+      ctx.fillStyle = 'rgba('+cr+','+cg+','+cb+','+alpha+')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 
 
