@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.5b73dd986411426758bd28543ccc1a19.css">
+    <link rel="stylesheet" href="/css/academic.46ade735af687e6d6b9b59091b5ed440.css">
   
 
   
@@ -570,6 +570,16 @@
     });
   },{threshold:0.12});
   document.querySelectorAll('.home-section').forEach(function(el){o.observe(el);});
+
+  document.querySelectorAll('.card[data-href]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('a')) return;
+      var href = card.getAttribute('data-href');
+      var target = card.getAttribute('target');
+      if(target === '_blank') window.open(href,'_blank');
+      else window.location.href = href;
+    });
+  });
 })();
 </script>
 <script>
