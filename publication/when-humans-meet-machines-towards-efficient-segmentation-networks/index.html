@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.e033ed80be47e8b9b08426701ab7977e.css">
+    <link rel="stylesheet" href="/css/academic.dea6a98f94b4fc2aa75ac3ee12dd1276.css">
   
 
   
@@ -908,7 +908,8 @@
 </script>
 <script>
 (function(){
-  var isMobile = window.innerWidth <= 768;
+  if(window.innerWidth <= 768) return;
+  var isMobile = false;
   var c = document.createElement('canvas');
   c.id = 'dotgrid-bg';
   document.body.appendChild(c);
