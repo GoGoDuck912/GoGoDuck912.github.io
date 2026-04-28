@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.6b153b153ba021a86416a9374233a6b8.css">
+    <link rel="stylesheet" href="/css/academic.e1b72ff139dfea564dd4df9c64758ba3.css">
   
 
   
@@ -939,7 +939,19 @@
   var GAP = isMobile ? 28 : 24;
   var R = isMobile ? 0.8 : 1.0;
   var RADIUS = 160;
-  var BASE = [197, 202, 233], ACT = [63, 81, 181];
+  function isDark(){ return document.body.classList.contains('dark'); }
+  var BASE_L = [197, 202, 233], ACT_L = [63, 81, 181];
+  var BASE_D = [60, 65, 90], ACT_D = [140, 158, 255];
+  var BASE = BASE_L, ACT = ACT_L;
+  var FALPHA_COLOR_L = '63, 81, 181';
+  var FALPHA_COLOR_D = '140, 158, 255';
+  var fColor = FALPHA_COLOR_L;
+  function updateTheme(){
+    if(isDark()){ BASE = BASE_D; ACT = ACT_D; fColor = FALPHA_COLOR_D; }
+    else { BASE = BASE_L; ACT = ACT_L; fColor = FALPHA_COLOR_L; }
+  }
+  updateTheme();
+  new MutationObserver(function(){ updateTheme(); }).observe(document.body, {attributes:true, attributeFilter:['class']});
   var dots = [];
 
   var formulas = [
@@ -1012,8 +1024,9 @@
       ctx.font = f.size + 'px serif';
       var edgeX = Math.abs(f.ox - c.width / 2) / (c.width / 2);
       var topFade = 1 - fy / c.height;
-      var fAlpha = (0.02 + 0.08 * topFade) * (0.3 + 0.7 * edgeX);
-      ctx.fillStyle = 'rgba(63, 81, 181, ' + fAlpha + ')';
+      var dk = isDark() ? 2.0 : 1.0;
+      var fAlpha = (0.02 + 0.2 * topFade) * (0.3 + 0.7 * edgeX) * dk;
+      ctx.fillStyle = 'rgba(' + fColor + ', ' + fAlpha + ')';
       ctx.fillText(f.text, 0, 0);
       ctx.restore();
     }
@@ -1025,7 +1038,7 @@
       var d = dots[i];
       ctx.beginPath();
       ctx.arc(d.x, d.y, R, 0, 6.2832);
-      ctx.fillStyle = 'rgba('+BASE[0]+','+BASE[1]+','+BASE[2]+',0.3)';
+      ctx.fillStyle = 'rgba('+BASE[0]+','+BASE[1]+','+BASE[2]+','+(isDark()?0.2:0.3)+')';
       ctx.fill();
     }
   }
@@ -1052,8 +1065,10 @@
         var cr = Math.round(BASE[0] + (ACT[0] - BASE[0]) * t);
         var cg = Math.round(BASE[1] + (ACT[1] - BASE[1]) * t);
         var cb = Math.round(BASE[2] + (ACT[2] - BASE[2]) * t);
+        var dotTopFade = 1 - d.y / c.height;
+        var dotVertMul = 0.2 + 1.2 * dotTopFade;
         var size = R + t * 1.5;
-        var alpha = 0.35 + t * 0.5;
+        var alpha = (0.35 + t * 0.5) * dotVertMul;
         ctx.beginPath();
         ctx.arc(d.x, d.y, size, 0, 6.2832);
         ctx.fillStyle = 'rgba('+cr+','+cg+','+cb+','+alpha+')';
