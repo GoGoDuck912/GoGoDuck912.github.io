@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Peike Li">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gogoduck912.github.io/tags/investigation/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:400,500,600,700|DM+Sans:400,500,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e434f046e14caded3443fe52ca6a29c7.css">
+
+  
+    
+    
+    
+    
+      
+    
+    
+    
+    <link rel="stylesheet" href="/css/academic.7a06c71479125be0a263863b37506393.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-JTFM1G9ZQK', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/tags/investigation/index.xml" type="application/rss+xml" title="DR. PEIKE LI">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://gogoduck912.github.io/tags/investigation/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@DrPatrickLi">
+  <meta property="twitter:creator" content="@DrPatrickLi">
+  
+  <meta property="og:site_name" content="DR. PEIKE LI">
+  <meta property="og:url" content="https://gogoduck912.github.io/tags/investigation/">
+  <meta property="og:title" content="Investigation | DR. PEIKE LI">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
+  <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
+  
+  <meta property="og:updated_time" content="2026-05-18T08:00:00&#43;00:00">
+  
+
+  
+
+
+  
+<meta name="keywords" content="Peike Li, Google Research, Research Scientist, multimodal foundation models, world models, LLM, multimodal AI, generative AI, video generation, music generation, computer vision, deep learning, NeurIPS, CVPR, ICCV, AAAI, TPAMI">
+
+
+<meta name="twitter:site" content="@DrPatrickLi">
+<meta name="twitter:creator" content="@DrPatrickLi">
+
+
+<meta property="og:type" content="article">
+
+
+
+
+
+
+
+
+<meta name="geo.region" content="AU">
+<meta name="geo.placename" content="Sydney">
+
+
+  <title>Investigation | DR. PEIKE LI</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">DR. PEIKE LI</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Bio</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#blog"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#miscellaneous"><span>Miscellaneous</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+    
+  
+<div class="universal-wrapper pt-3">
+  <h1 itemprop="name">Investigation</h1>
+
+  
+
+  
+</div>
+
+
+
+<div class="universal-wrapper">
+  
+
+  
+  
+  <div>
+    <h2><a href="/post/middlemen/">Half the &#39;AI APIs&#39; You&#39;re Buying Are Lying to You</a></h2>
+    <div class="article-style">
+      
+      A six-week investigation into the $1B middleman economy where 45.83% of audited providers serve fake models, 9 routers actively inject malware, and Anthropic's January 2026 OAuth attestation killed the arbitrage gold rush in 90 days.
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=3f51b5&w=500&t=tt&d=K2e4TTJxfPA78UonSZNFPBDfrd4Xx93yaXxvxKD3iXM&co=ffffff&ct=3f51b5"></script>
+<script>
+(function(){
+  var btn = document.createElement('button');
+  btn.id = 'back-to-top';
+  btn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+  btn.setAttribute('aria-label','Back to top');
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  var o = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.home-section').forEach(function(el){o.observe(el);});
+
+  document.querySelectorAll('.card[data-href]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('a')) return;
+      var href = card.getAttribute('data-href');
+      var target = card.getAttribute('target');
+      if(target === '_blank') window.open(href,'_blank');
+      else window.location.href = href;
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var isMobile = window.innerWidth <= 768;
+  var c = document.createElement('canvas');
+  c.id = 'dotgrid-bg';
+  document.body.appendChild(c);
+  var ctx = c.getContext('2d');
+  var mx = -9999, my = -9999;
+  var GAP = isMobile ? 28 : 24;
+  var R = isMobile ? 0.8 : 1.0;
+  var RADIUS = 160;
+  function isDark(){ return document.body.classList.contains('dark'); }
+  var BASE_L = [197, 202, 233], ACT_L = [63, 81, 181];
+  var BASE_D = [60, 65, 90], ACT_D = [140, 158, 255];
+  var BASE = BASE_L, ACT = ACT_L;
+  var FALPHA_COLOR_L = '63, 81, 181';
+  var FALPHA_COLOR_D = '140, 158, 255';
+  var fColor = FALPHA_COLOR_L;
+  function updateTheme(){
+    if(isDark()){ BASE = BASE_D; ACT = ACT_D; fColor = FALPHA_COLOR_D; }
+    else { BASE = BASE_L; ACT = ACT_L; fColor = FALPHA_COLOR_L; }
+  }
+  updateTheme();
+  new MutationObserver(function(){ updateTheme(); }).observe(document.body, {attributes:true, attributeFilter:['class']});
+  var dots = [];
+
+  var formulas = [
+    'E = mc²','F = ma','∇·E = ρ/ε₀',
+    '∮ B·dl = μ₀I','ΔxΔp ≥ ħ/2',
+    'S = k_B ln Ω','ds² = -c²dt² + dx²',
+    'H|ψ⟩ = E|ψ⟩','∂ψ/∂t = iħHψ',
+    '∇×E = -∂B/∂t','Rμν - ½gμνR = 8πG Tμν',
+    '∫ψ*ψ dτ = 1','∂L/∂q - d/dt(∂L/∂q̇) = 0',
+    'P(A|B) = P(B|A)P(A)/P(B)','Σ F = dp/dt',
+    '∇²φ = -ρ/ε₀','dS/dt ≥ 0',
+    'Z = Σ e^{-βE_i}','Gμν + Λgμν = κTμν',
+    'iħ ∂/∂t |Ψ⟩ = H|Ψ⟩',
+    '∇ × B = μ₀J + μ₀ε₀ ∂E/∂t',
+    'L = T - V','pV = nRT','a² + b² = c²',
+    '∫₂₀^∞ e^{-x²} dx = √π/2',
+    'e^{iπ} + 1 = 0','∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)'
+  ];
+  var fItems = [];
+
+  function seed(s){ return function(){ s=(s*9301+49297)%233280; return s/233280; }; }
+
+  function layoutFormulas(){
+    fItems = [];
+    var rng = seed(42);
+    var cellW = isMobile ? 200 : 180, cellH = isMobile ? 120 : 100;
+    var cols = Math.ceil(c.width / cellW) + 1;
+    var rows = Math.ceil(c.height / cellH) + 1;
+    for(var row = 0; row < rows; row++){
+      for(var col = 0; col < cols; col++){
+        var fi = Math.floor(rng() * formulas.length);
+        var x = col * cellW + (rng() - 0.5) * cellW * 0.6;
+        var y = row * cellH + (rng() - 0.5) * cellH * 0.5;
+        var rot = (rng() - 0.5) * 0.25;
+        var size = isMobile ? (14 + rng() * 8) : (18 + rng() * 12);
+        fItems.push({ text: formulas[fi], ox: x, oy: y, rot: rot, size: size });
+      }
+    }
+  }
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    dots = [];
+    for(var x = GAP/2; x < c.width; x += GAP)
+      for(var y = GAP/2; y < c.height; y += GAP)
+        dots.push({x:x, y:y});
+    layoutFormulas();
+    if(isMobile) drawStatic();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var scrollOff = 0;
+  window.addEventListener('scroll', function(){
+    scrollOff = window.scrollY;
+    if(isMobile) drawStatic();
+  });
+
+  function drawFormulas(yShift){
+    ctx.save();
+    for(var i = 0; i < fItems.length; i++){
+      var f = fItems[i];
+      var fy = f.oy + yShift;
+      if(fy < -30) fy += Math.ceil(c.height / 180 + 1) * 180;
+      if(fy > c.height + 30) continue;
+      ctx.save();
+      ctx.translate(f.ox, fy);
+      ctx.rotate(f.rot);
+      ctx.font = f.size + 'px serif';
+      var edgeX = Math.abs(f.ox - c.width / 2) / (c.width / 2);
+      var topFade = 1 - fy / c.height;
+      var dk = isDark() ? 2.0 : 1.0;
+      var fAlpha = (0.02 + 0.2 * topFade) * (0.3 + 0.7 * edgeX) * dk;
+      ctx.fillStyle = 'rgba(' + fColor + ', ' + fAlpha + ')';
+      ctx.fillText(f.text, 0, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawDots(){
+    for(var i = 0; i < dots.length; i++){
+      var d = dots[i];
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, R, 0, 6.2832);
+      ctx.fillStyle = 'rgba('+BASE[0]+','+BASE[1]+','+BASE[2]+','+(isDark()?0.2:0.3)+')';
+      ctx.fill();
+    }
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0, 0, c.width, c.height);
+    drawFormulas(-(scrollOff * 0.15) % 180);
+    drawDots();
+  }
+
+  if(!isMobile){
+    document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+    document.addEventListener('mouseleave', function(){ mx = -9999; my = -9999; });
+
+    function draw(){
+      ctx.clearRect(0, 0, c.width, c.height);
+      drawFormulas(-(scrollOff * 0.15) % 180);
+      for(var i = 0; i < dots.length; i++){
+        var d = dots[i];
+        var dist = Math.sqrt((d.x - mx)*(d.x - mx) + (d.y - my)*(d.y - my));
+        var t = Math.max(0, 1 - dist / RADIUS);
+        var cx = Math.abs(d.x - c.width / 2) / (c.width / 2);
+        t = t * (0.3 + 0.7 * cx);
+        var cr = Math.round(BASE[0] + (ACT[0] - BASE[0]) * t);
+        var cg = Math.round(BASE[1] + (ACT[1] - BASE[1]) * t);
+        var cb = Math.round(BASE[2] + (ACT[2] - BASE[2]) * t);
+        var dotTopFade = 1 - d.y / c.height;
+        var dotVertMul = 0.2 + 1.2 * dotTopFade;
+        var size = R + t * 1.5;
+        var alpha = (0.35 + t * 0.5) * dotVertMul;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, size, 0, 6.2832);
+        ctx.fillStyle = 'rgba('+cr+','+cg+','+cb+','+alpha+')';
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+})();
+</script>
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2018-2026 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

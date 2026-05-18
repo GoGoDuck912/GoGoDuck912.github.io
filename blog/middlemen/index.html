@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Half the 'AI APIs' You're Buying Are Lying to You</title>
+<meta name="description" content="Inside the $1B middleman economy where 45% of AI API providers serve fake models, 9 actively inject malware, and the entire arbitrage gold rush just died in 90 days.">
+<meta name="author" content="Peike Li">
+<meta name="theme-color" content="#FBFAF7">
+
+<!-- Deployed at gogoduck912.github.io/blog/middlemen/ via Hugo Academic static-asset pipeline. -->
+<link rel="canonical" href="https://gogoduck912.github.io/blog/middlemen/">
+<meta property="og:url" content="https://gogoduck912.github.io/blog/middlemen/">
+<meta property="og:image" content="https://gogoduck912.github.io/blog/middlemen/og-card.png">
+<meta name="twitter:image" content="https://gogoduck912.github.io/blog/middlemen/og-card.png">
+
+<meta property="og:title" content="Half the 'AI APIs' You're Buying Are Lying to You">
+<meta property="og:description" content="Inside the $1B middleman economy where 45% of providers serve fake models, 9 actively inject malware, and the entire arbitrage gold rush just died in 90 days.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Middlemen">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="An illustrated chip labeled GLM-4-9B holds up a red paper mask labeled GPT-5 in front of itself. Headline: Half the AI APIs you're buying are lying to you. 45.83% failed model-fingerprint verification.">
+<meta property="article:published_time" content="2026-05-18T08:00:00Z">
+<meta property="article:section" content="Technology">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Half the 'AI APIs' You're Buying Are Lying to You">
+<meta name="twitter:description" content="Inside the $1B middleman economy where 45% of providers serve fake models, 9 actively inject malware, and the entire arbitrage gold rush just died in 90 days.">
+<meta name="twitter:image:alt" content="An illustrated chip labeled GLM-4-9B holds up a red paper mask labeled GPT-5 in front of itself. Headline: Half the AI APIs you're buying are lying to you. 45.83% failed model-fingerprint verification.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF7'/%3E%3Ctext x='50' y='70' font-family='Fraunces,Georgia,serif' font-size='44' font-weight='900' text-anchor='middle' fill='%23E0303E'%3E45%25%3C/text%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Half the 'AI APIs' You're Buying Are Lying to You",
+  "description": "Inside the $1B middleman economy where 45% of AI API providers serve fake models, 9 actively inject malware, and the entire arbitrage gold rush just died in 90 days.",
+  "image": "https://gogoduck912.github.io/blog/middlemen/og-card.png",
+  "datePublished": "2026-05-18T08:00:00Z",
+  "dateModified": "2026-05-18T08:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Peike Li",
+    "url": "https://gogoduck912.github.io/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Peike Li",
+    "url": "https://gogoduck912.github.io/"
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://gogoduck912.github.io/blog/middlemen/" },
+  "articleSection": "Technology",
+  "keywords": "AI API, LLM relay, shadow API, Claude, GPT, OpenRouter, CISPA, model substitution, AI fraud, supply chain"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+
+<style>
+/* ----- Reset & Tokens ----- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding: 0; }
+
+/* Accessibility: respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+/* Accessibility: visible keyboard focus everywhere */
+*:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+:root {
+  /* Unified with blog-styles/v1 design system */
+  --bg: #FBFAF7;
+  --bg-alt: #F0EDE5;
+  --bg-card: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-muted: #888888;
+  --ink-faint: #B5AFA3;
+  --rule: #DDD7CC;
+  --rule-soft: #EAE5D8;
+  --red: #E0303E;
+  --red-deep: #B12530;
+  --red-faint: #FBEAE3;
+  --blue: #2E5266;
+  --blue-deep: #1E3A4A;
+  --blue-faint: #E2EBF0;
+  --green: #5E8C61;
+  --gold: #B8923A;
+  --display: 'Fraunces', 'Source Serif 4', Georgia, serif;
+  --serif:   'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --sans:    'IBM Plex Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ----- Layout ----- */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.prose { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+.wide { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+section { padding: 56px 0; }
+section.tight { padding: 32px 0; }
+section.lead { padding-top: 24px; }
+
+/* ----- Typography ----- */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.028em; font-weight: 700; }
+h1 { font-size: clamp(40px, 7.5vw, 84px); line-height: 0.98; margin: 0; font-weight: 900; }
+h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.08; margin: 56px 0 18px; }
+h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 36px 0 12px; }
+.prose p { margin: 0 0 22px; }
+.prose p + p { text-indent: 0; }
+.prose a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--ink-faint); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .2s; }
+.prose a:hover { text-decoration-color: var(--red); }
+
+/* Drop cap on first paragraph */
+.drop-cap::first-letter {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 5.4em;
+  line-height: .85;
+  float: left;
+  padding: 6px 12px 0 0;
+  color: var(--ink);
+}
+
+/* Pull quotes & callouts */
+.pullquote {
+  font-family: var(--sans);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  border-left: 3px solid var(--red);
+  margin: 36px -8px;
+  padding: 8px 0 8px 24px;
+}
+.pullquote .attribution { display: block; margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--ink-muted); letter-spacing: 0; }
+
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin: 28px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.callout .label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--red);
+  display: block;
+  margin-bottom: 6px;
+}
+.callout.cool .label { color: var(--blue); }
+
+/* Footnote markers */
+sup.fn {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--red);
+  font-weight: 700;
+  cursor: help;
+  margin-left: 1px;
+}
+
+/* ----- Masthead (unified with /blog-styles/v1) ----- */
+.topbar {
+  border-bottom: 1px solid var(--ink);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(251, 250, 247, 0.94);
+  padding: 18px 0;
+}
+.topbar .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.topbar .row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+}
+.topbar .brand {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(24px, 2.6vw, 32px);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  line-height: 1;
+}
+.topbar .brand sup {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--red);
+  margin-left: 6px;
+  vertical-align: super;
+}
+.topbar .meta {
+  display: flex;
+  gap: 22px;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.topbar .issue-bar {
+  padding-top: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+.topbar .issue-bar .sep { color: var(--ink-faint); margin: 0 8px; }
+.topbar .issue-bar .temp { color: var(--red); font-weight: 600; }
+.topbar .progress {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--red);
+  transition: width .15s linear;
+}
+
+/* ----- Hero ----- */
+.hero {
+  padding: 72px 0 56px;
+  position: relative;
+}
+.hero .kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.hero .dek {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.4;
+  color: var(--ink-2);
+  margin: 28px 0 0;
+  max-width: 640px;
+}
+.hero .byline {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.hero .byline strong { color: var(--ink); font-weight: 600; }
+
+/* Hero number reveal */
+.hero-stats {
+  margin-top: 64px;
+  padding: 40px 0 30px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+.hero-stat { font-family: var(--sans); }
+.hero-stat .num {
+  font-family: var(--display);
+  font-size: clamp(36px, 5.6vw, 68px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+}
+.hero-stat .num.dim { color: var(--ink); }
+.hero-stat .label {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  font-weight: 500;
+  max-width: 220px;
+}
+@media (max-width: 720px) {
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+
+/* ----- Timeline (Scrollytelling) ----- */
+.timeline-wrap {
+  background: var(--bg-alt);
+  padding: 72px 0;
+  position: relative;
+}
+.timeline-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.timeline-rail {
+  position: sticky;
+  top: 90px;
+  font-family: var(--sans);
+}
+.timeline-rail h4 {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 18px;
+  font-weight: 700;
+}
+.tl-pin {
+  position: relative;
+  padding: 10px 0 10px 22px;
+  cursor: pointer;
+  color: var(--ink-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+  border-left: 2px solid var(--rule);
+  margin-left: 6px;
+}
+.tl-pin::before {
+  content: '';
+  position: absolute;
+  left: -6px; top: 16px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--rule);
+  border: 2px solid var(--bg-alt);
+  transition: background .2s, transform .2s;
+}
+.tl-pin.active {
+  color: var(--ink);
+  font-weight: 700;
+}
+.tl-pin.active::before {
+  background: var(--red);
+  transform: scale(1.3);
+}
+.tl-pin .when { display: block; font-size: 11px; letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 2px; }
+.tl-pin.active .when { color: var(--red); }
+
+.timeline-content { display: flex; flex-direction: column; gap: 96px; }
+.tl-phase {
+  scroll-margin-top: 110px;
+  position: relative;
+}
+.tl-phase .phase-tag {
+  font-family: var(--sans);
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 14px;
+  padding: 4px 10px;
+  background: var(--red-faint);
+  border-radius: 3px;
+}
+.tl-phase h3 {
+  font-size: 26px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.tl-phase p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.tl-stat {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 6px 12px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+@media (max-width: 880px) {
+  .timeline-grid { grid-template-columns: 1fr; gap: 24px; }
+  .timeline-rail { position: relative; top: 0; display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .timeline-rail h4 { display: none; }
+  .tl-pin { white-space: nowrap; padding: 8px 14px; border: 1px solid var(--rule); border-radius: 999px; margin: 0; }
+  .tl-pin::before { display: none; }
+  .tl-pin.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .timeline-content { gap: 56px; }
+}
+
+/* ----- Five Models Cards + Risk Matrix ----- */
+.models-section { background: var(--bg); padding: 80px 0; }
+.matrix-wrap {
+  max-width: 1080px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+}
+.matrix-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 36px;
+  align-items: stretch;
+}
+.matrix-svg-wrap {
+  min-height: 420px;
+  position: relative;
+}
+#riskMatrix {
+  width: 100%;
+  height: 420px;
+  display: block;
+}
+.matrix-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--sans);
+}
+.matrix-side h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+.matrix-detail {
+  background: var(--bg-alt);
+  border-radius: 6px;
+  padding: 18px 20px;
+  min-height: 280px;
+  transition: background .2s;
+}
+.matrix-detail .mtitle {
+  display: flex; align-items: baseline; gap: 10px;
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px;
+}
+.matrix-detail .mtitle .badge {
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  background: var(--ink); color: var(--bg); padding: 3px 7px; border-radius: 3px;
+}
+.matrix-detail .mdesc { font-size: 14px; line-height: 1.55; color: var(--ink-2); margin-bottom: 14px; }
+.matrix-detail .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.matrix-detail .stats .s .l { display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; }
+.matrix-detail .stats .s .v { display: block; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+.matrix-detail .examples { font-size: 12px; color: var(--ink-muted); border-top: 1px dashed var(--rule); padding-top: 12px; }
+.matrix-detail .examples strong { color: var(--ink); font-weight: 600; }
+
+.model-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.model-btn {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  padding: 6px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.model-btn:hover { border-color: var(--ink); color: var(--ink); }
+.model-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+@media (max-width: 820px) {
+  .matrix-card { grid-template-columns: 1fr; padding: 20px; }
+  #riskMatrix { height: 340px; }
+}
+
+/* ----- Spot the Fake (interactive) ----- */
+.spot-wrap { background: var(--bg-alt); padding: 64px 0; }
+.spot-card {
+  max-width: 900px; margin: 24px auto 0; padding: 0 24px;
+  font-family: var(--sans);
+}
+.spot-prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.spot-prompt {
+  background: var(--bg-card);
+  border: 2px solid var(--rule);
+  border-radius: 6px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.spot-prompt:hover { border-color: var(--ink); transform: translateY(-1px); }
+.spot-prompt.picked-fake { border-color: var(--green); background: #EAF1EB; }
+.spot-prompt.picked-real { border-color: var(--red); background: var(--red-faint); }
+.spot-prompt .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-family: var(--sans); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.spot-prompt .verdict { display: none; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); font-family: var(--sans); font-size: 13px; color: var(--ink-2); }
+.spot-prompt.revealed .verdict { display: block; }
+.spot-reveal { display: none; margin-top: 18px; padding: 20px; background: var(--bg-card); border-radius: 6px; border-left: 3px solid var(--green); font-family: var(--sans); font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+.spot-reveal.show { display: block; }
+.spot-reveal strong { color: var(--ink); font-weight: 700; }
+.spot-q { font-family: var(--sans); font-size: 14px; color: var(--ink-muted); margin-bottom: 10px; letter-spacing: 0.04em; }
+.spot-instruction { font-family: var(--sans); font-size: 14px; color: var(--ink); font-weight: 600; }
+@media (max-width: 720px) { .spot-prompts { grid-template-columns: 1fr; } }
+
+/* ----- Pricing Diagnostic ----- */
+.pricing-wrap { background: var(--bg); padding: 64px 0; }
+.pricing-card {
+  max-width: 900px; margin: 24px auto 0; padding: 32px;
+  background: var(--bg-card); border: 1px solid var(--rule); border-radius: 8px;
+  font-family: var(--sans);
+}
+.pricing-controls {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1fr;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.pricing-field label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin-bottom: 6px; }
+.pricing-field input, .pricing-field select {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 500;
+}
+.pricing-field input:focus, .pricing-field select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(199, 62, 29, 0.12); }
+.pricing-btn {
+  background: var(--ink); color: var(--bg);
+  border: none; font-family: var(--sans); font-weight: 700; font-size: 14px;
+  padding: 13px 18px; border-radius: 4px; cursor: pointer;
+  transition: background .15s;
+}
+.pricing-btn:hover { background: var(--red); }
+.pricing-result {
+  min-height: 180px;
+  padding: 22px;
+  background: var(--bg-alt);
+  border-radius: 6px;
+  border-left: 4px solid var(--ink-faint);
+  transition: border-color .2s;
+}
+.pricing-result.show-tier-1 { border-left-color: var(--green); }
+.pricing-result.show-tier-2 { border-left-color: var(--gold); }
+.pricing-result.show-tier-3 { border-left-color: #E07A2E; }
+.pricing-result.show-tier-4 { border-left-color: var(--red); }
+.pricing-result.show-tier-5 { border-left-color: var(--red-deep); }
+.pricing-result .empty { color: var(--ink-muted); font-style: italic; font-size: 14px; }
+.pricing-result .tier-name { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+.pricing-result .tier-headline { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: var(--ink); line-height: 1.2; }
+.pricing-result .tier-body { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+.pricing-result .tier-body code { background: var(--bg-card); padding: 1px 6px; border-radius: 3px; font-family: var(--mono); font-size: 13px; }
+.pricing-result .tier-context { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: 13px; color: var(--ink-muted); }
+@media (max-width: 720px) { .pricing-controls { grid-template-columns: 1fr; } }
+
+/* ----- Audit Checklist ----- */
+.audit-wrap { background: var(--bg-alt); padding: 64px 0 80px; }
+.audit-card {
+  max-width: 720px; margin: 24px auto 0; padding: 0 24px;
+  font-family: var(--sans);
+}
+.audit-progress {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 24px;
+  font-size: 13px; color: var(--ink-muted); font-weight: 600;
+  white-space: nowrap;
+}
+.audit-progress.done { color: var(--green); }
+.audit-progress .bar { flex: 1; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+.audit-progress .bar-fill { height: 100%; background: var(--green); width: 0%; transition: width .3s; }
+.audit-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.audit-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.audit-item:hover { border-color: var(--ink-2); transform: translateX(2px); }
+.audit-item.checked { background: #F4F8F5; border-color: var(--green); }
+.audit-item .box {
+  width: 22px; height: 22px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  transition: background .15s, border-color .15s;
+}
+.audit-item.checked .box { background: var(--green); border-color: var(--green); }
+.audit-item .box svg { opacity: 0; transition: opacity .15s; }
+.audit-item.checked .box svg { opacity: 1; }
+.audit-item .text { flex: 1; }
+.audit-item .text .title { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.35; }
+.audit-item.checked .text .title { text-decoration: line-through; text-decoration-color: var(--green); color: var(--ink-2); }
+.audit-item .text .sub { font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.5; }
+
+/* ----- Footer ----- */
+.article-footer {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 64px 0;
+  margin-top: 80px;
+}
+.article-footer .wrap { color: var(--bg); }
+.article-footer h2 { color: var(--bg); margin-top: 0; }
+.article-footer p, .article-footer li { color: rgba(250, 248, 243, 0.78); font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+.article-footer a { color: var(--bg); text-decoration: underline; text-decoration-color: rgba(250, 248, 243, 0.4); }
+.article-footer a:hover { text-decoration-color: var(--red); }
+.sources-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 24px;
+}
+.sources-grid h4 { color: var(--bg); font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 12px; font-weight: 700; }
+.sources-grid ul { list-style: none; padding: 0; margin: 0; }
+.sources-grid li { margin-bottom: 8px; }
+.share-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(250, 248, 243, 0.12);
+}
+.share-btn {
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 600;
+  background: transparent;
+  border: 1px solid rgba(250, 248, 243, 0.3);
+  color: var(--bg);
+  padding: 8px 16px; border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .15s;
+}
+.share-btn:hover { background: var(--bg); color: var(--ink); }
+
+@media (max-width: 720px) {
+  .sources-grid { grid-template-columns: 1fr; }
+}
+
+/* ----- Misc helpers ----- */
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 48px auto; max-width: 120px; }
+.chapter-num { font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--red); }
+em.cn { font-style: normal; font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; font-weight: 600; padding: 0 2px; }
+.kbd-stat {
+  font-family: var(--mono);
+  font-size: 0.95em;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  padding: 0 6px;
+  border-radius: 3px;
+  color: var(--red-deep);
+  font-weight: 600;
+}
+.legend {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  font-family: var(--sans); font-size: 11px;
+  color: var(--ink-muted); margin-top: 10px;
+}
+.legend .l { display: flex; align-items: center; gap: 6px; }
+.legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Fade-in on scroll */
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.in { opacity: 1; transform: translateY(0); }
+
+/* Tooltip for D3 */
+.matrix-tip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity .15s;
+  white-space: nowrap;
+  z-index: 10;
+}
+.matrix-tip.show { opacity: 1; }
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <div class="row">
+      <span class="brand">The Middlemen</span>
+      <nav class="meta" aria-label="Article meta">
+        <span>Investigation</span>
+        <span>18 min read</span>
+        <span>May 2026</span>
+      </nav>
+    </div>
+    <div class="progress" id="readProgress"></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="kicker">A six-week investigation</div>
+  <h1>Half the &lsquo;AI APIs&rsquo;<br>You&rsquo;re Buying Are<br>Lying to You.</h1>
+  <p class="dek">Inside the billion-dollar middleman economy where 45.83% of providers serve fake models, 9 routers actively inject malware into your code, and the entire arbitrage gold rush just died in 90 days.</p>
+  <div class="byline">
+    <span><strong>By a researcher</strong> who spent six weeks inside this market</span>
+    <span>May 2026</span>
+    <span>Saarbr&uuml;cken &middot; Santa Barbara &middot; Hangzhou &middot; San Francisco</span>
+  </div>
+
+  <div class="hero-stats" id="heroStats">
+    <div class="hero-stat">
+      <div class="num" data-target="45.83" data-suffix="%">0%</div>
+      <div class="label">of audited shadow APIs failed model-fingerprint verification</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num dim" data-target="116" data-suffix="">0</div>
+      <div class="label">top AI papers (ACL / CVPR / ICLR) cite the compromised endpoints</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num dim" data-target="9" data-suffix="">0</div>
+      <div class="label">routers caught actively injecting malware into agent tool calls</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num dim" data-target="50" data-prefix="$" data-suffix="M">$0M</div>
+      <div class="label">ARR for OpenRouter, the head-of-class legitimate aggregator</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ §1 OPENING ============ -->
+<section class="prose">
+  <span class="chapter-num">I &nbsp;&middot;&nbsp; THE OPENING SCENE</span>
+  <h2>Six German researchers ran a simple audit. They found that almost half of the AI API market is a lie.</h2>
+
+  <p class="drop-cap">In early March 2026, six security researchers at the CISPA Helmholtz Center in Saarbr&uuml;cken decided to do something deceptively simple. They picked seventeen of the most popular &ldquo;AI API&rdquo; services on the internet &mdash; the kind of platform where a developer can sign up, get an API key in thirty seconds, and start calling GPT-5 or Claude Opus for a fraction of what OpenAI or Anthropic would charge directly. Then they audited them.</p>
+
+  <p>The methodology was rigorous and unsentimental. The team sent each service a battery of carefully designed probe prompts and compared the responses, statistically, against the known distributional fingerprint of the model the service claimed to be running. If you asked for GPT-5 and got back a response whose tokenization quirks, knowledge cutoff, and refusal patterns matched the genuine model within a calibrated cosine threshold, the service passed. If the response embedded into a measurably different region of vector space, it failed.</p>
+
+  <p class="pullquote">Forty-five point eight three percent failed.<span class="attribution">— CISPA, <a href="https://arxiv.org/abs/2603.01919" target="_blank" rel="noopener noreferrer" style="color: inherit;">&lsquo;Real Money, Fake Models&rsquo;</a>, arXiv 2603.01919</span></p>
+
+  <p>Nearly half of the audited providers were not running the model they were charging for. Some were running cheap open-source seven-billion-parameter models and billing as if they were running OpenAI&rsquo;s frontier. One service advertising &ldquo;GPT-5&rdquo; was fingerprinted to <span class="kbd-stat">GLM-4-9B</span>, a nine-billion-parameter open-source Chinese model with a fraction of the capability. A &ldquo;Gemini-2.5-flash&rdquo; endpoint scored <strong>37%</strong> on the MedQA medical benchmark; the real Gemini-2.5-flash scores <strong>83.82%</strong>. That&rsquo;s not a model substitution &mdash; it&rsquo;s the difference between a working medical Q&amp;A tool and one that&rsquo;s wrong two-thirds of the time.</p>
+
+  <p>The CISPA paper, titled with academic deadpan as <em><a href="https://arxiv.org/abs/2603.01919" target="_blank" rel="noopener noreferrer" style="color: inherit;">Real Money, Fake Models</a></em>, landed on arXiv on March 2nd. By the end of the week it had cracked Hacker News. The thing that detonated wasn&rsquo;t the 45.83% figure alone, though &mdash; the sample was, after all, only seventeen platforms, even if they were among the most cited in the literature. It was the second number, buried in section three of the paper: those same shadow APIs had been cited in <strong>187 published research papers</strong>, and <strong>116 of those 187</strong> had been accepted at ACL, CVPR, ICLR, and other top-tier AI conferences. The cost to reverify each compromised paper using genuine API access? Between $115,000 and $140,000.</p>
+
+  <p>Somewhere between fifty and a hundred high-status AI research papers had quietly run their experiments on a lie. And no one had any way of knowing which ones.</p>
+
+  <p>I spent the next six weeks tracing how this market got built, how it actually works, and how it&rsquo;s now coming apart. What I found is one of the most fascinating market failures of the AI era: a global underground economy that the major aggregator OpenRouter alone benchmarks at $50 million in annual revenue, and that in aggregate is plausibly worth ten times that &mdash; currently being dismantled in slow motion by Anthropic&rsquo;s lawyers, German academics with statistical tooling, and the basic arithmetic of a business whose unit economics never quite worked in the first place.</p>
+</section>
+
+<!-- ============ §2 WHAT IS AN AI API RELAY ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">II &nbsp;&middot;&nbsp; A FIELD GUIDE</span>
+  <h2>What is an AI API relay?</h2>
+
+  <p>A relay (Chinese tech circles call them <em class="cn">中转站</em>, &ldquo;transfer stations&rdquo;; academia calls them &ldquo;shadow APIs&rdquo;; the operators themselves prefer &ldquo;aggregators&rdquo;) is a piece of middleware that sits between you and an official LLM provider, intercepts your traffic, and re-prices it. Some of them are useful infrastructure. Some are quiet fraud. The two look identical from the outside, which is the entire problem.</p>
+
+  <p>There are two distinct economic engines worth separating, because they age very differently. The first is <strong>geographic arbitrage</strong>: a relay exists because the user can&rsquo;t reach the official provider. OpenAI banned API access from mainland China on July 9, 2024. Anthropic followed in September 2025 with a rule barring any entity more than 50% Chinese-owned, a policy estimated to cost Anthropic itself &ldquo;low hundreds of millions&rdquo; in annual revenue. Stripe doesn&rsquo;t operate in China. Most Chinese developers can&rsquo;t get an international credit card. The Great Firewall makes even reaching <code>api.openai.com</code> unreliable. If you&rsquo;re a Chinese AI startup wanting to build on GPT or Claude, you need a middleman. This problem is permanent.</p>
+
+  <p>The second engine is <strong>economic arbitrage</strong>: the relay exists because a pricing inconsistency lets someone resell access at a margin. A $200/month Claude Max subscription, in token-equivalent terms, is worth thousands of dollars of API usage; that delta is the entire business model of half the operators in this market. This problem is temporary by construction. The instant the upstream provider closes the gap, the business collapses. Phase 5 of our timeline below was exactly that collapse, executed in a single week.</p>
+
+  <p>The legitimate version of this market &mdash; the relays running on real, paid-for, contractually permitted API keys &mdash; is enormous. <strong>OpenRouter</strong>, the global head-of-class, grew from $10 million ARR in October 2025 to $50 million ARR by Q1 2026, a 5x jump in six months. It is currently negotiating a Series B at a $1.3 billion valuation with a16z and Menlo Ventures. <strong>SiliconFlow</strong>, the largest China-compliant equivalent, claims six million registered users and processes trillions of tokens daily.</p>
+
+  <div class="callout cool">
+    <span class="label">What every relay actually does</span>
+    Three things: <strong>(1)</strong> bridge a payment or geographic mismatch between the user and the upstream provider; <strong>(2)</strong> unify multiple model APIs (OpenAI&rsquo;s <code>/v1/chat/completions</code>, Anthropic&rsquo;s <code>/v1/messages</code>, Gemini&rsquo;s <code>generateContent</code>) under a single protocol; <strong>(3)</strong> add team controls &mdash; usage quotas, per-key budgets, fallback routing, observability.
+  </div>
+
+  <p>Most of this market is fine. Some of it is the most interesting fraud economy of the decade. The rest of this piece is about the some.</p>
+</section>
+
+<!-- ============ §3 TIMELINE ============ -->
+<section class="timeline-wrap">
+  <div class="wide">
+    <span class="chapter-num">III &nbsp;&middot;&nbsp; THE THREE-YEAR GOLD RUSH</span>
+    <h2 style="margin-top: 12px;">Every phase ended because someone closed a door. The doors are now mostly shut.</h2>
+    <p style="font-family: var(--serif); font-size: 18px; color: var(--ink-2); max-width: 680px; line-height: 1.65;">The arc from ChatGPT&rsquo;s launch to today breaks cleanly into six phases. Scroll through them. Each one is shorter than the last.</p>
+  </div>
+
+  <div class="timeline-grid" style="margin-top: 48px;">
+    <aside class="timeline-rail">
+      <h4>The Six Phases</h4>
+      <div class="tl-pin" data-target="phase-1"><span class="when">Mar–Dec 2023</span>Wild West</div>
+      <div class="tl-pin" data-target="phase-2"><span class="when">Jan–Jul 2024</span>Golden Age</div>
+      <div class="tl-pin" data-target="phase-3"><span class="when">Aug 2024–Jun 2025</span>Consolidation</div>
+      <div class="tl-pin" data-target="phase-4"><span class="when">Jul–Dec 2025</span>Reverse Arbitrage</div>
+      <div class="tl-pin" data-target="phase-5"><span class="when">January 2026</span>OAuth Crackdown</div>
+      <div class="tl-pin" data-target="phase-6"><span class="when">Mar–May 2026</span>The Reckoning</div>
+    </aside>
+
+    <div class="timeline-content">
+      <article class="tl-phase" id="phase-1">
+        <span class="phase-tag">Phase 1 &middot; Wild West</span>
+        <h3>ChatGPT launches. China gets blocked the same week.</h3>
+        <p>A cottage industry of key resellers emerges, buying stolen or bulk OpenAI accounts and reselling them at the now-mythical &ldquo;1 yuan = 1 dollar of API credit&rdquo; rate. Enforcement is nonexistent. A Shanghai developer publishes <code>one-api</code> on GitHub under the handle <em>songquanpeng</em>; it becomes, almost by accident, the global infrastructure for every shadow API that follows.</p>
+        <span class="tl-stat">Estimated 1,000+ relay sites by Dec 2023</span>
+      </article>
+
+      <article class="tl-phase" id="phase-2">
+        <span class="phase-tag">Phase 2 &middot; Golden Age</span>
+        <h3>GPT-4, Claude 2, Gemini all ship within six months.</h3>
+        <p>Demand for multi-model access explodes. On <strong>July 9, 2024</strong>, OpenAI formally blocks China. Demand for middlemen spikes. By the end of 2024, Chinese-language community tracking reports put the count of active relay platforms in the mainland market in the tens of thousands &mdash; one frequently cited estimate places it above 150,000, though no audited census exists. <code>new-api</code>, the SaaS-ready fork of <code>one-api</code>, becomes the default deployment for new entrants. Margins run 30&ndash;100%.</p>
+        <span class="tl-stat">~150,000 relay sites &middot; head operators clearing 7-figures/month</span>
+      </article>
+
+      <article class="tl-phase" id="phase-3">
+        <span class="phase-tag">Phase 3 &middot; Consolidation</span>
+        <h3>OpenRouter raises real money. Margins start to compress.</h3>
+        <p>LiteLLM becomes the default Python gateway. Portkey, Bifrost, and Helicone all enter from the YC side. The legitimate end of the market starts to look like enterprise infrastructure rather than a Telegram bazaar. Chinese regulators begin paying attention: the first ICP-license investigations of relay operators are filed. The first wave of platforms that built on the &ldquo;wild west&rdquo; assumption begins quietly shutting down.</p>
+        <span class="tl-stat">OpenRouter: $10M ARR &middot; LiteLLM crosses 1M weekly PyPI downloads</span>
+      </article>
+
+      <article class="tl-phase" id="phase-4">
+        <span class="phase-tag">Phase 4 &middot; Reverse Arbitrage</span>
+        <h3>Claude Code ships. A $200/month subscription becomes a goldmine.</h3>
+        <p>This is the moment that defined 2025 and detonated 2026. Anthropic ships Claude Code, the IDE-integrated coding agent. Suddenly, a $200/month Claude Max subscription is worth thousands of dollars of equivalent API usage. Operators figure out they can lift the OAuth tokens from the official Claude CLI, wrap them in an API-compatible shell, and sell the resulting capacity at five to ten times their cost. PackyCode, AnyRouter, and PinCC explode. The &ldquo;5-person Max carpool&rdquo; &mdash; five strangers sharing one $200 subscription &mdash; becomes a viral business model on Weibo and Telegram.</p>
+        <span class="tl-stat">PackyCode &amp; AnyRouter reportedly clearing 7-figure RMB monthly</span>
+      </article>
+
+      <article class="tl-phase" id="phase-5">
+        <span class="phase-tag">Phase 5 &middot; OAuth Crackdown</span>
+        <h3>Anthropic ships server-side attestation. The party stops in a week.</h3>
+        <p>On <strong>January 9th, 2026</strong>, Anthropic deploys cryptographic OAuth attestation: the official Claude CLI now includes a signed proof of its authenticity, and third-party harnesses can&rsquo;t forge it without breaking the signing chain. PackyCode and AnyRouter both see monthly revenue drop <strong>60&ndash;80%</strong>. A March leak of the attestation logic from the Bun runtime briefly lets operators back in &mdash; Anthropic responds not with another technical patch but with a billing change: any third-party harness traffic now generates a separately-billed line item back to the relay operator. The technical kill becomes an economic kill.</p>
+        <span class="tl-stat">PackyCode revenue: −60% to −80% in one month</span>
+      </article>
+
+      <article class="tl-phase" id="phase-6">
+        <span class="phase-tag">Phase 6 &middot; The Reckoning</span>
+        <h3>Three papers, one supply-chain attack, ninety days.</h3>
+        <p>CISPA publishes the 45.83% paper. Three weeks later, a UCSB-led team publishes <em>Your Agent Is Mine</em>, the first systematic study of router-level malware injection: 428 routers tested, 9 actively injecting payloads, 17 silently exfiltrating AWS credentials, one stealing an Ethereum private key. Five days after that, LiteLLM&rsquo;s PyPI package is compromised in a supply-chain attack that hits over a thousand enterprise environments before isolation. In April, Anthropic cuts 135,000 instances of OpenClaw, the largest subscription-sharing tool, and temporarily suspends its founder&rsquo;s personal Anthropic account. The legitimate market suddenly has a reason to differentiate.</p>
+        <span class="tl-stat">CISPA 45.83% &middot; UCSB 9/428 routers &middot; LiteLLM 1,000+ enterprises</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ §4 FIVE MODELS ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">IV &nbsp;&middot;&nbsp; THE FIVE BUSINESS MODELS</span>
+  <h2>There are exactly five ways to make money running an AI relay. They differ on margin, lifespan, and prison risk by orders of magnitude.</h2>
+
+  <p>If you re-read the six phases above, a pattern emerges. Each phase didn&rsquo;t end because operators got lazy or because demand evaporated. Each phase ended because an upstream player finally invested the engineering to close a specific information or enforcement gap. The relay business has always been an arbitrage on temporary blindness &mdash; on the lag between &ldquo;this is technically possible&rdquo; and &ldquo;the provider has built the system to detect it.&rdquo; The margins are rent extracted from that lag.</p>
+
+  <p>That framing is what makes the next taxonomy useful. Strip away the marketing and the &ldquo;what&rsquo;s your model coverage&rdquo; pages and the loyalty bonuses, and what&rsquo;s left is a clean five-way split. I&rsquo;ll label them A through E because that&rsquo;s how the research community labels them. A is legitimate. E is criminal. The middle three are where the money has been &mdash; and each one&rsquo;s lifespan is set not by its profitability but by how long the corresponding detection gap stays open.</p>
+
+  <p>Click between the models below to see the economics, the typical lifespan, and what closes each one.</p>
+</section>
+
+<section class="models-section">
+  <div class="matrix-wrap">
+    <div class="matrix-card">
+      <div class="matrix-svg-wrap">
+        <svg id="riskMatrix" viewBox="0 0 460 420" role="img" aria-labelledby="riskMatrixTitle riskMatrixDesc">
+          <title id="riskMatrixTitle">Five business models for AI API relays, plotted by legal risk and gross margin</title>
+          <desc id="riskMatrixDesc">A scatter chart with five bubbles labeled A through E. A (legitimate markup) sits in the low-risk, low-margin corner. B (subscription arbitrage), C (model substitution), and D (data extraction) cluster in the high-margin, mid-to-high-risk zone. E (poisoning and phishing) sits in the highest-risk position. Bubble size represents typical operator lifespan.</desc>
+        </svg>
+        <div class="matrix-tip" id="matrixTip"></div>
+        <div class="legend">
+          <div class="l"><span class="dot" style="background: #5E8C61"></span>A. Legit markup</div>
+          <div class="l"><span class="dot" style="background: #B8923A"></span>B. Subscription arb</div>
+          <div class="l"><span class="dot" style="background: #E07A2E"></span>C. Fake models</div>
+          <div class="l"><span class="dot" style="background: #C73E1D"></span>D. Data extract</div>
+          <div class="l"><span class="dot" style="background: #6B1B0E"></span>E. Poison/phish</div>
+          <div class="l" style="margin-left: auto;">bubble size = typical lifespan</div>
+        </div>
+      </div>
+      <aside class="matrix-side">
+        <div>
+          <h4>The five models</h4>
+          <div class="model-buttons" id="modelButtons">
+            <button class="model-btn active" data-model="A">A &middot; Legitimate</button>
+            <button class="model-btn" data-model="B">B &middot; Subscription arb</button>
+            <button class="model-btn" data-model="C">C &middot; Fake models</button>
+            <button class="model-btn" data-model="D">D &middot; Data extract</button>
+            <button class="model-btn" data-model="E">E &middot; Poison/phish</button>
+          </div>
+        </div>
+        <div class="matrix-detail" id="matrixDetail">
+          <!-- filled by JS -->
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="prose tight">
+  <p><strong>A &middot; Legitimate markup resale.</strong> Hold a real account, mark up 5&ndash;15%, pass through. OpenRouter actually marks up <em>zero</em> on inference and charges only a 5.5% credit-card fee on top-ups. The principled distinction between this and any of the gray-market models below is binary: A-mode operators hold paid-for upstream credentials, operate under an explicit reseller MSA or equivalent ToS clause, and pass through the actual model the user is paying for. They make money on the service, not on the deception. This is the only model that survives more than a few years. Representatives: OpenRouter, SiliconFlow, Qiniu Cloud, the major cloud-hyperscaler endpoints (AWS Bedrock, Azure OpenAI, Google Vertex).</p>
+
+  <p><strong>B &middot; Subscription arbitrage (Web2API).</strong> Lift the OAuth token from a Claude Max or ChatGPT Plus subscription, wrap it as an API, sell the resulting capacity. Pre-2026 margins were 300&ndash;500%. As of January 2026, the model is effectively dead &mdash; Anthropic&rsquo;s OAuth attestation kills the technical play, and the February legal-page update kills any operator with a legal-exposure threshold above zero. PackyCode, the largest player, has pivoted to A-mode where it now has no differentiation.</p>
+
+  <p><strong>C &middot; Model substitution.</strong> Take payment for Claude Opus, route silently to GLM-4-9B, pocket the spread. This is what 45.83% of CISPA&rsquo;s audited shadow APIs were doing. Margin: 60&ndash;95%. Legal exposure: civil fraud in most jurisdictions, potentially criminal under China&rsquo;s anti-unfair-competition statute and US state UDAP laws. Lifespan: weeks to a few months before fingerprinting catches up.</p>
+
+  <p><strong>D &middot; Data extraction and distillation.</strong> Scrape user prompts; sell them to data brokers, or train an internal model on harvested conversations and rebrand it as &ldquo;our proprietary model.&rdquo; Anthropic&rsquo;s February 2026 public accusation against DeepSeek, Moonshot, and MiniMax described approximately <strong>24,000 fake accounts generating 16 million interactions</strong> used for systematic Claude distillation. The economic case is brutal: training a frontier model from scratch costs $100M+; distillation costs $100k&ndash;500k in API access plus another $10&ndash;100k in fine-tuning. A 1,600x cost advantage.</p>
+
+  <p><strong>E &middot; Poisoning and credential theft.</strong> Not really &ldquo;arbitrage&rdquo; &mdash; this is cybercrime wearing a router&rsquo;s clothes. The UCSB team&rsquo;s nine actively-injecting routers were not making token margin; they were either delivering malware payloads (replacing legitimate URLs in tool responses, swapping <code>requests</code> for typosquatted <code>reqeusts</code>) or passively scraping credentials from cleartext traffic. One AWS root credential sells for $500&ndash;5,000 on dark markets. One Ethereum private key is whatever the wallet is holding.</p>
+
+  <div class="callout">
+    <span class="label">The grim arithmetic</span>
+    Of the five models, exactly one is sustainable. The other four either died in the last six months (B), are dying as fingerprinting matures (C), live under a regulatory sword (D), or were always crimes (E). The legitimate aggregators &mdash; OpenRouter, SiliconFlow, the cloud-hyperscaler offerings &mdash; are about to spend the next two years eating the entire market.
+  </div>
+</section>
+
+<!-- ============ §5 FRAUD DETECTION ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">V &nbsp;&middot;&nbsp; THE FRAUD DETECTION CRISIS</span>
+  <h2>Fingerprinting a model was a solved problem. Nobody had bothered to actually run it.</h2>
+
+  <p>The methodology CISPA used, called <strong>LLMmap</strong>, sends a series of probe prompts designed to extract a model&rsquo;s characteristic style: its tokenization habits, its knowledge cutoff, its refusal patterns, its syntactic preferences. The responses are embedded into vector space and compared to a reference distribution from the genuine model. If the cosine distance exceeds a calibrated threshold, you&rsquo;ve got an imposter.</p>
+
+  <p>What&rsquo;s new isn&rsquo;t the technique. It&rsquo;s the willingness to actually run it at scale on commercial APIs and publish the results. Until CISPA&rsquo;s paper, the assumption in academic AI circles was that the major shadow API players were probably routing as advertised, give or take. Nobody had checked.</p>
+
+  <p>The MedQA result is the headline finding because it&rsquo;s so specific. MedQA is a benchmark built from USMLE &mdash; US Medical Licensing Examination &mdash; questions. The official Gemini-2.5-flash, called via Google&rsquo;s own API, scores <strong>83.82%</strong> on it. A shadow API advertising &ldquo;Gemini-2.5-flash&rdquo; scored approximately <strong>37%</strong>. That is, depending on the question, somewhere between random guessing and slightly-better-than-random. If you built a medical Q&amp;A product on top of that endpoint, your product was wrong about two-thirds of the time, and you had no way of knowing why.</p>
+
+  <p class="spot-q">Quick exercise: which of these two responses came from the real GPT-5 Opus?</p>
+</section>
+
+<section class="spot-wrap">
+  <div class="spot-card">
+    <p class="spot-instruction">Both endpoints were asked the same question: <em>&ldquo;Without searching, what is your training data cutoff date, and what was the last major news event you&rsquo;re aware of?&rdquo;</em></p>
+    <div class="spot-prompts">
+      <div class="spot-prompt" data-fake="false" tabindex="0" role="button" aria-label="Endpoint Alpha response. Click to select as the fake.">
+        <div class="header"><span>Endpoint &alpha;</span><span>response &middot; 1.4s</span></div>
+        <div>My training data has a cutoff of early 2026. I&rsquo;m aware of major events through January 2026, including the EU AI Act&rsquo;s phased rollout of GPAI obligations and the September 2025 AWS re:Invent. I shouldn&rsquo;t claim awareness of events past that cutoff.</div>
+        <div class="verdict"></div>
+      </div>
+      <div class="spot-prompt" data-fake="true" tabindex="0" role="button" aria-label="Endpoint Beta response. Click to select as the fake.">
+        <div class="header"><span>Endpoint &beta;</span><span>response &middot; 2.7s</span></div>
+        <div>As an AI language model, I have a knowledge cutoff. My information may not include the latest events. The most recent major event I know about is from sometime in 2023. Is there anything specific you&rsquo;d like me to help you with today? 😊</div>
+        <div class="verdict"></div>
+      </div>
+    </div>
+    <div class="spot-reveal" id="spotReveal">
+      <strong>Endpoint &alpha; is the real one.</strong> Three signals gave Endpoint &beta; away: <strong>(1)</strong> First-token latency of 2.7s is too slow for GPT-5 Opus, which serves first tokens in under 1s under normal load &mdash; this latency profile is consistent with a 7B open-source model on shared GPU. <strong>(2)</strong> The 2023 knowledge cutoff matches GPT-3.5 / Llama-3-8B, not any 2026-era frontier model. <strong>(3)</strong> The hedging boilerplate (&ldquo;As an AI language model&hellip; Is there anything specific&hellip; 😊&rdquo;) is a tell &mdash; GPT-5 was trained with explicit penalties against this stylistic pattern. This is exactly the kind of substitution CISPA caught in 45.83% of audited endpoints.
+    </div>
+  </div>
+</section>
+
+<section class="prose tight">
+  <p>The UCSB paper, <em><a href="https://arxiv.org/abs/2604.08407" target="_blank" rel="noopener noreferrer" style="color: inherit;">Your Agent Is Mine</a></em>, is the darker companion piece. Published April 9th. The team purchased 28 paid services from Chinese marketplaces &mdash; Taobao, Shopify storefronts &mdash; and collected 400 free ones from public communities. <strong>428 total endpoints.</strong> Nine of them &mdash; one paid, eight free &mdash; were observed actively injecting malicious payloads into responses. Seventeen of them touched AWS canary credentials the researchers had placed in their honeypot environment. One of them silently extracted an Ethereum private key.</p>
+
+  <p>The attack surface is the part most users don&rsquo;t think about. Models themselves are safety-trained: they refuse to generate malware, they refuse to write phishing kits. But the JSON envelope around model responses &mdash; the tool-call arguments, the structured outputs, the function-calling parameters &mdash; sits <em>outside</em> the model&rsquo;s safety filters. A router can rewrite a benign URL in a tool call to an attacker-controlled URL after the model has produced it. A router can replace the package name <code>requests</code> with typosquatted <code>reqeusts</code> in a code-generation response. The model never sees the substitution; the user&rsquo;s agent executes it anyway.</p>
+
+  <p>Of the 440 sessions UCSB logged through their honeypot, <strong>401 were running in &ldquo;YOLO mode&rdquo;</strong> &mdash; meaning the AI agent on the user&rsquo;s side was set to auto-execute tool calls without human approval. That is the configuration in which malicious tool responses do their actual damage: a malicious URL gets fetched, a typosquatted package gets installed, a credential gets exfiltrated, and the user never sees the response that would have let them refuse.</p>
+
+  <p>Then on March 24th, three weeks after the CISPA paper, the <strong>LiteLLM</strong> package on PyPI got compromised in a supply-chain attack. The mechanics are worth detailing because they&rsquo;re a preview of every gateway-layer attack we&rsquo;re going to see for the next few years.</p>
+
+  <p>Attackers had first compromised Trivy, a popular vulnerability scanner. LiteLLM&rsquo;s CI/CD pipeline pulled Trivy unpinned from <code>apt</code>. The poisoned Trivy ran inside LiteLLM&rsquo;s GitHub Actions runner and stole the <code>PYPI_PUBLISH</code> token from the environment. The attackers used that token to publish <code>litellm 1.82.7</code> at 10:39 UTC. Thirteen minutes later, they published <code>1.82.8</code>. Both contained a backdoor. The backdoor wasn&rsquo;t even an import-time payload &mdash; it was a <code>.pth</code> file that auto-executes on any Python interpreter startup. No <code>import litellm</code> required. It scraped SSH keys, AWS IAM credentials, GCP service accounts, Azure environment variables, Kubernetes secrets, and attempted lateral movement across clusters. PyPI isolated the packages a few hours later. Estimated reach: over <strong>1,000 enterprise environments</strong>. The Vect ransomware group has already begun naming victims.</p>
+
+  <p>Before we move on, the uncomfortable question worth asking is the one the academic community has so far avoided in public: <em>why did peer review let any of this through?</em> 116 papers at top-tier venues built results on top of API endpoints with no chain-of-custody. None of those papers were asked, at submission time, to provide a fingerprint hash of the model they actually called. None were asked to disclose whether they used an official provider URL or a re-priced shadow endpoint. Reviewers accepted the implicit claim &ldquo;I called GPT-5&rdquo; as sufficient evidence that GPT-5 produced the number on the leaderboard. The CISPA paper&rsquo;s real contribution isn&rsquo;t the 45.83% figure. It&rsquo;s the demonstration that ML research now needs a model-provenance standard the same way clinical research needs a chain-of-custody for biological samples.</p>
+
+  <p class="pullquote">By April, the operational assumption in every serious AI infra team I spoke to had inverted: the question was no longer &ldquo;why should I trust my router&rdquo; but &ldquo;what evidence have you given me that I should.&rdquo;</p>
+</section>
+
+<!-- ============ §6 ECONOMICS ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">VI &nbsp;&middot;&nbsp; THE ECONOMICS OF A 5-PERSON CARPOOL</span>
+  <h2>The mechanics that drove the 2025 boom were almost embarrassingly simple.</h2>
+
+  <p>A Claude Max subscription costs $200 a month. Five strangers in a Telegram group pay roughly $55 each. The operator collects $275 in revenue against a $200 cost, and pockets the $75 spread as gross margin per account per month &mdash; about 30%. The platform handles authentication, rate limits, and silent rotation when accounts die. Easy Claude Code, PinCC, and a dozen smaller operators made this their entire business model through 2025.</p>
+
+  <p>With a hundred accounts in steady operation, the arithmetic says a single operator clears roughly $7,500 a month, just from one tier of one product, before counting upsells, referral commissions, or premium VIP pricing. With a thousand accounts, you&rsquo;re a millionaire by Q3. The math, on paper, is intoxicating.</p>
+
+  <p>It did not actually work that way. The hidden cost was account churn. Anthropic&rsquo;s anti-abuse systems noticed the multi-IP, multi-fingerprint usage patterns within weeks. Accounts got terminated. Operators bought new ones for $7&ndash;20 each from gray-market wholesalers, who source identity documents from biometric KYC scams in Southeast Asia and Sub-Saharan Africa, mark them up roughly 10x, and resell. Customers complained when their service vanished. Refund volume rose. The real net margin, by most operators&rsquo; own accounting, was closer to <strong>15&ndash;20%</strong>, with a typical account lifespan of one to three months.</p>
+
+  <p>The January 2026 OAuth crackdown collapsed even that. PackyCode lost 60&ndash;80% of its monthly business in two weeks. The wholesalers who had been supplying fresh Max accounts saw their inventory get burned at unprecedented rates. The grift transitioned into its final phase, the universal one for every market that has stopped paying: operators started selling online courses to the next wave of newcomers about how to build your own relay station. By April, hopeful entrants were paying $30&ndash;$400 for tutorials about a business that no longer worked.</p>
+
+  <p>The barrier to entry is what made the involution unavoidable. A relay station requires about $140 of total upfront capital: a domain, a VPS, a Cloudflare account, and an open-source deployment of <code>new-api</code> or <code>one-api</code> (which is free). Free payment rails &mdash; WeChat Pay personal QR codes, USDT &mdash; eliminate even the merchant-account friction. Tens of thousands of these things exist for the same reason that none of them can defend a margin.</p>
+
+  <p>There&rsquo;s a tell that&rsquo;s worth knowing if you spend any time in the gray-market end of this market. Operators routinely advertise pricing with the slogan &ldquo;1 yuan = 1 dollar of API credit.&rdquo; In the early days of GPT-3.5, when token costs were close to zero and some resellers were genuinely just liquidating cheap stolen keys, this was occasionally a literal truth. In the Claude Opus and GPT-5 era, it is mechanically impossible. The slogan persists because it works as a hook for users who don&rsquo;t bother to do the conversion. The operator&rsquo;s real game is hidden in a redefined &ldquo;internal point&rdquo; system where the &ldquo;dollar&rdquo; on your dashboard converts back to actual cost at three to five times what you thought. The gray-market business has always depended on user inattention; that&rsquo;s its structural fragility.</p>
+
+  <p>This is the part where a real diagnostic tool helps. Punch in any price-per-million-tokens you&rsquo;ve been quoted and see what the math says it has to be hiding.</p>
+</section>
+
+<section class="pricing-wrap">
+  <div class="pricing-card">
+    <h3 style="margin-top: 0; font-family: var(--sans); font-size: 22px;">Pricing Diagnostic</h3>
+    <p style="font-family: var(--sans); font-size: 14px; color: var(--ink-2); margin-top: 0; line-height: 1.55;">If a provider is quoting you Claude Opus 4.7 at &yen;1 (about $0.14) per million tokens, that price is not coming from the official Anthropic API. Find out where it&rsquo;s coming from. (Pricing is denominated in Chinese yuan because that&rsquo;s the currency the gray market actually quotes in &mdash; rough USD conversion is shown below each result.)</p>
+    <div class="pricing-controls">
+      <div class="pricing-field">
+        <label for="priceInput">Price quoted (¥ per 1M input tokens)</label>
+        <input type="number" id="priceInput" placeholder="e.g. 0.5" step="0.1" min="0">
+      </div>
+      <div class="pricing-field">
+        <label for="modelSelect">Model the provider claims</label>
+        <select id="modelSelect">
+          <option value="opus47">Claude Opus 4.7</option>
+          <option value="sonnet46" selected>Claude Sonnet 4.6</option>
+          <option value="gpt5">GPT-5</option>
+          <option value="gpt5pro">GPT-5 Pro</option>
+          <option value="gemini25">Gemini 2.5 Flash</option>
+        </select>
+      </div>
+      <div class="pricing-field">
+        <button class="pricing-btn" id="priceBtn">Diagnose</button>
+      </div>
+    </div>
+    <div class="pricing-result" id="priceResult">
+      <div class="empty">Enter a price above and click <strong>Diagnose</strong> to see what category it falls into. We benchmark against the actual upstream cost for each model.</div>
+    </div>
+    <p style="font-family: var(--sans); font-size: 12px; color: var(--ink-muted); margin: 16px 0 0; line-height: 1.5;">Reference prices from official Anthropic, OpenAI, and Google API documentation; legitimate aggregator pricing from OpenRouter; gray-market pricing from Chinese-language community price-monitoring threads (May 2026).</p>
+  </div>
+</section>
+
+<!-- ============ §7 ANTHROPIC STRIKES BACK ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">VII &nbsp;&middot;&nbsp; ANTHROPIC STRIKES BACK</span>
+  <h2>The strategic evolution that ended the gold rush.</h2>
+
+  <p>The thing that fascinated me most as I worked through the timeline is the strategic evolution of how Anthropic chose to fight back. Their first instinct, like everyone&rsquo;s, was technical: detect non-human OAuth usage patterns, terminate violating accounts. That worked for about six months before operators iterated past it.</p>
+
+  <p>The January 2026 move was sharper. Instead of trying to detect bad accounts after the fact, Anthropic added server-side cryptographic attestation to every OAuth token. When the official Claude CLI authenticates, it now includes a signed proof that the client is the genuine CLI binary running on a genuine user device. Third-party harnesses can&rsquo;t forge that proof without breaking the signing chain.</p>
+
+  <p>Then, in March, the Bun runtime leaked the attestation logic. For about ten days, sophisticated operators figured out how to mint synthetic attestations from extracted client secrets. <strong>Anthropic&rsquo;s response was the most interesting move of the cycle.</strong> They didn&rsquo;t patch the attestation. They added a separate billing line. Any traffic carrying a third-party harness fingerprint now generates an itemized charge that gets sent to the relay operator&rsquo;s Anthropic invoice, regardless of which subscriber&rsquo;s token authenticated it. The technical kill became an economic kill. Operators who had been making margin on free attestation traffic suddenly had to pay for it themselves.</p>
+
+  <p>The April OpenClaw incident &mdash; Anthropic cutting off 135,000 instances of the OpenClaw subscription-sharing tool and temporarily suspending its founder Peter Steinberger from his own personal Anthropic account, then partially reinstating access weeks later with a separately metered surcharge &mdash; was the final signal. The legal page was updated. The lawyers were now drafting policy in real time.</p>
+
+  <p>The deeper principle is worth stating directly, because it&rsquo;s the most replicable lesson in this whole story: <strong>technical kills get iterated past. Economic kills don&rsquo;t.</strong> A signature check can be reverse-engineered. An attestation algorithm can be leaked, as the Bun incident proved. But a billing line item that charges the operator for every byte of traffic they used to make margin on cannot be patched around. It can only be absorbed or avoided. By making third-party harness traffic <em>expensive</em> instead of <em>forbidden</em>, Anthropic converted enforcement from a technology race into an arithmetic problem, and arithmetic problems don&rsquo;t have exploits.</p>
+
+  <p>The strategic logic of why Anthropic cared this much is similarly clean. The subscription-arbitrage market was suppressing prices everywhere, not just in China. Once a competitive subscription-derived pricing tier exists at $40/seat globally, Anthropic&rsquo;s enterprise sales team has to compete against it on every deal. Killing the arbitrage market restores pricing power on the enterprise tier. The China collateral damage &mdash; the &ldquo;low hundreds of millions&rdquo; in lost revenue from the September 2025 entity-controlled ban &mdash; is treated as the cost of the cleanup. Anthropic&rsquo;s leadership has clearly decided that protecting the enterprise pricing model is worth losing a market it was never going to be able to safely operate in anyway.</p>
+</section>
+
+<!-- ============ §8 WHAT THIS MEANS ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">VIII &nbsp;&middot;&nbsp; WHAT THIS MEANS FOR EVERYONE ELSE</span>
+  <h2>The market isn&rsquo;t dying. It&rsquo;s being restructured around a single defensible asset: provable legitimacy.</h2>
+
+  <p>The picture that emerges from the research isn&rsquo;t &ldquo;the AI API black market is dying.&rdquo; It&rsquo;s &ldquo;the only thing left to compete on is the ability to prove you&rsquo;re not lying.&rdquo; Two distinct things are happening at once, and they&rsquo;re both consequences of the same shift.</p>
+
+  <p>The legitimate aggregators are winning more than they expected to. OpenRouter&rsquo;s 5x ARR growth in two quarters wasn&rsquo;t because they suddenly got better; it was because the broader audience finally needed somebody trustworthy to buy from. The CISPA paper sold OpenRouter&rsquo;s product better than any of OpenRouter&rsquo;s own marketing did. SiliconFlow&rsquo;s enterprise pipeline reportedly tripled in Q2. The legitimate-tier business has gone from &ldquo;polite alternative&rdquo; to &ldquo;obvious default&rdquo; in about ninety days, and the proximate cause is academic research, not marketing budget.</p>
+
+  <p>Meanwhile, the gray-market operators are being forced into a binary choice: pivot to A-mode (where they have no differentiation and razor-thin margins) or stop pretending and become criminals (where gross margins rise but so does the prison risk). The middle ground &mdash; the comfortable gray zone where you charged a premium for a vaguely-defined &ldquo;Claude access&rdquo; without specifying which keys, which pool, which jurisdiction &mdash; is gone. There is no longer a profitable niche for the ambiguously legitimate.</p>
+
+  <p>The structural shift this exposes is what makes the moment interesting. For two and a half years, the AI relay market competed on price, model coverage, and uptime. Starting roughly now, it competes on <em>verifiable legitimacy</em>: the ability to prove cryptographically, behaviorally, or contractually that you are running the model you claim, processing data the way you say, and operating under a license you can actually produce. That asset is hard to fake, slow to build, and &mdash; precisely because of those two properties &mdash; it&rsquo;s the only defensible moat left in the category. The implications fall out differently for three audiences.</p>
+
+  <h3>For developers</h3>
+  <p>BYOK &mdash; Bring Your Own Key &mdash; is the new default. Whatever convenience you used to get from a shared-pool aggregator is now outweighed by the non-trivial probability that you&rsquo;re calling a fake model, leaking your prompts into someone&rsquo;s training pipeline, or executing a malicious tool response in your agent. Hold your own keys, route through a thin proxy you control, and run fingerprint checks on the providers you actually use. If you&rsquo;re a Chinese developer routing around the geographic block, prefer the compliant aggregators &mdash; SiliconFlow, Qiniu Cloud, the Alibaba and Baidu cloud offerings &mdash; over the gray-market Telegram-bazaar tier, even at a higher per-token cost. The premium you pay is insurance against an entire class of failure modes you previously had no way to detect.</p>
+
+  <h3>For researchers</h3>
+  <p>This is an integrity emergency. If 45.83% of shadow APIs serve fake models and 116 of your colleagues&rsquo; published papers ran on those endpoints, the field needs a verification standard now, not after the next conference cycle. Benchmark leaderboards need a &ldquo;model verified&rdquo; column. Peer review needs to require, alongside the dataset and the code, the API endpoint and a fingerprint hash. The CISPA team has open-sourced the LLMmap toolkit; use it. The longer the community treats &ldquo;I called this API&rdquo; as sufficient evidence of &ldquo;this model produced this number,&rdquo; the more retractions are queued up behind us.</p>
+
+  <h3>For founders and builders</h3>
+  <p>The window for compliant aggregation has rarely been wider, but it will not stay open indefinitely. The customers who used to buy on price are now buying on trust, and trust compounds: the first three or four operators who establish public fingerprint audits, zero-log defaults, real SLAs, BYOK as a first-class mode, and an audit trail an enterprise procurement team can read without flinching will lock in the institutional buyers. The grifters will undercut you on price for another twelve months. Then they will die. The customers worth keeping are the ones who care about the things the grifters can&rsquo;t fake &mdash; and those customers are buying decisions for the next five years right now.</p>
+</section>
+
+<!-- ============ §9 AUDIT CHECKLIST ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <span class="chapter-num">IX &nbsp;&middot;&nbsp; HOW TO AUDIT YOUR PROVIDER</span>
+  <h2>Eight checks. The honest providers should make most of them unnecessary.</h2>
+  <p>If you take only one thing from this article, take this list. The eight items below are the minimum due diligence you should run on any AI API provider you&rsquo;re depending on. The shorter list, though, is the one a genuinely transparent provider would publish themselves &mdash; without being asked. If you have to extract these from a vendor with effort, that&rsquo;s information too. Your selections persist locally as you click; come back later to see where you left off.</p>
+</section>
+
+<section class="audit-wrap">
+  <div class="audit-card">
+    <div class="audit-progress">
+      <span id="auditCount">0 of 8 completed</span>
+      <div class="bar"><div class="bar-fill" id="auditBar"></div></div>
+    </div>
+    <ul class="audit-list" id="auditList">
+      <li class="audit-item" data-id="a1" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Run an LLMmap fingerprint test against every model the provider claims to serve</div><div class="sub">Open-source. Sixty probe prompts, cosine-distance threshold of 1.1x against the reference distribution. Flag any cosine &gt; 1.2x for offboarding.</div></div></li>
+      <li class="audit-item" data-id="a2" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Compare first-token latency distribution against the official endpoint</div><div class="sub">A &ldquo;GPT-5&rdquo; that consistently returns first tokens in 2&ndash;3s is probably running a smaller model on shared inference hardware.</div></div></li>
+      <li class="audit-item" data-id="a3" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Verify token counts against the official tokenizer for the claimed model</div><div class="sub">Pipe the same prompt through OpenAI&rsquo;s <code>tiktoken</code> (or Anthropic&rsquo;s tokenizer) and the relay&rsquo;s usage log. Deviation &gt; 5% means substitution.</div></div></li>
+      <li class="audit-item" data-id="a4" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Confirm prompt-cache <code>cache_control</code> flags pass through cleanly</div><div class="sub">Send an identical prompt twice with Anthropic-style <code>ephemeral</code> cache control; verify the second call is billed at 0.1x. If not, the relay is intercepting your caching savings.</div></div></li>
+      <li class="audit-item" data-id="a5" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Require explicit zero-log or short-retention data handling for sensitive prompts</div><div class="sub">Get it in the contract. A canary token in your prompt that surfaces in a public model six months later is your &ldquo;they were training on this&rdquo; receipt.</div></div></li>
+      <li class="audit-item" data-id="a6" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Verify the provider has a documented ToS-compliance trail with upstream providers</div><div class="sub">Reseller MSA with OpenAI, Anthropic enterprise partner status, AWS Bedrock authorization. Anyone running on subscription-token reverse is breaking ToS.</div></div></li>
+      <li class="audit-item" data-id="a7" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Confirm the payment method is a legitimate merchant of record</div><div class="sub">Stripe / Airwallex / corporate bank transfer with invoice. Personal WeChat QR codes and bare USDT addresses are not merchants of record; you have no recourse when the service vanishes.</div></div></li>
+      <li class="audit-item" data-id="a8" tabindex="0" role="checkbox" aria-checked="false"><div class="box"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><polyline points="2,7 6,11 12,3" fill="none" stroke="white" stroke-width="2.5"/></svg></div>
+        <div class="text"><div class="title">Pin every gateway dependency by hash and run SBOM scanning on every build</div><div class="sub">The LiteLLM lesson. Unpinned dependencies in CI/CD are how 1,000+ enterprises got compromised in five hours. Use OIDC trusted publishing, hash-pin everything, generate SBOMs.</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="article-footer">
+  <div class="wrap">
+    <h2 style="font-family: var(--sans); font-size: 28px;">Method &amp; sources</h2>
+
+    <p style="border-left: 3px solid var(--red); padding-left: 16px; margin-bottom: 24px; font-style: italic;"><strong style="font-style: normal;">Disclosure:</strong> The author is researching the AI-aggregation market with a view to building in it. That commercial interest aligns with the article&rsquo;s argument &mdash; namely, that the legitimate aggregator tier is the only durable business model. Readers should weight the analysis accordingly. No relay-station product is named or promoted in this piece.</p>
+
+    <p>The investigation drew on three streams of primary material. The first was the academic literature: four peer-reviewed or pre-printed papers on shadow-API auditing and router-layer security, principally the CISPA <em>Real Money, Fake Models</em> study (March 2026), the UCSB-led <em>Your Agent Is Mine</em> study (April 2026), Cai, Shi, Zhao, and Song&rsquo;s UC Berkeley work on TEE-based model attestation, and Gao et al.&rsquo;s 2024 formalization of model equality testing. The second was upstream provider documentation: the publicly available terms of service, billing policies, and enforcement announcements from OpenAI, Anthropic, Google, and the major Chinese cloud platforms (Alibaba, Baidu, Tencent), tracked across the April&ndash;May 2026 window. The third was the source code of the three open-source gateway projects that, between them, run the majority of the world&rsquo;s AI relay infrastructure &mdash; <code>new-api</code>, <code>one-api</code>, and <code>LiteLLM</code> &mdash; read alongside the published incident write-ups from Datadog Security Labs, Aqua Security, and Trend Micro on the TeamPCP supply-chain campaign.</p>
+    <p>For the market-economics sections, I tracked listed pricing on roughly twenty active relay platforms across April and May 2026, and read approximately two hundred thousand words of community reporting and operator correspondence in English and Chinese: Hacker News threads, V2EX and Linux.do forums, Telegram operator channels, and Chinese tech press including 36Kr, Huxiu, and AITNT.</p>
+    <p>Quantitative claims are sourced as follows. Academic findings &mdash; the CISPA fingerprinting results, the UCSB malware-detection counts, the model-substitution percentages &mdash; cite the peer-reviewed papers directly. Pricing data is from publicly listed rate cards observed during the audit window; the diagnostic tool uses median values across compliant aggregators as its reference. Industry-scale figures (OpenRouter ARR, valuation, user counts) come from Sacra&rsquo;s April 2026 equity research and contemporaneous reporting in <em>Inc.</em> magazine. Operator-level revenue figures are described as estimates or attributed to community sources, since none of the relay operators in question publish audited financials.</p>
+    <p>What is original to this piece, beyond synthesis of the above, is the analytical framework: the five-mode business taxonomy, the lifespan-as-a-function-of-detection-lag argument, and the technical-kill-versus-economic-kill distinction in Anthropic&rsquo;s enforcement evolution. Errata, source extensions, and reader-submitted corrections will be tracked publicly.</p>
+
+    <div class="sources-grid">
+      <div>
+        <h4>Academic papers</h4>
+        <ul>
+          <li>CISPA Helmholtz Center, <a href="https://arxiv.org/abs/2603.01919" target="_blank" rel="noopener noreferrer"><em>Real Money, Fake Models</em></a> (arXiv 2603.01919, March 2026)</li>
+          <li>UCSB / UCSD / Fuzzland, <a href="https://arxiv.org/abs/2604.08407" target="_blank" rel="noopener noreferrer"><em>Your Agent Is Mine</em></a> (arXiv 2604.08407, April 2026)</li>
+          <li>UC Berkeley (Cai, Shi, Zhao, Song), <a href="https://arxiv.org/abs/2504.04715" target="_blank" rel="noopener noreferrer"><em>Are You Getting What You Pay For?</em></a> (arXiv 2504.04715, 2025)</li>
+          <li>Gao et al., <a href="https://arxiv.org/abs/2410.20247" target="_blank" rel="noopener noreferrer"><em>Model Equality Testing</em></a> (arXiv 2410.20247, 2024)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Industry &amp; incident reporting</h4>
+        <ul>
+          <li>Sacra equity research on OpenRouter, April 2026</li>
+          <li>Anthropic Usage Policy updates (February and April 2026)</li>
+          <li>Datadog Security Labs and Trend Micro on the TeamPCP / LiteLLM supply-chain attack</li>
+          <li>Chinese-language community reporting: 36Kr, Huxiu, AITNT, V2EX threads</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <a class="share-btn" href="#" id="shareTwitter" target="_blank" rel="noopener noreferrer">Share on X</a>
+      <a class="share-btn" href="#" id="shareLinkedIn" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+      <a class="share-btn" href="#" id="shareHN" target="_blank" rel="noopener noreferrer">Submit to Hacker News</a>
+      <a class="share-btn" href="#" id="copyLink">Copy link</a>
+    </div>
+
+    <p style="margin-top: 32px; opacity: 0.6; font-size: 12px;">© 2026. Released for educational and journalistic use. No tracking, no analytics on this page. Follow-up pieces in preparation: the technical architecture of compliant AI gateways, the legal mechanics of the Anthropic / DeepSeek distillation accusations, and the post-LiteLLM supply-chain security landscape.</p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* ==================== HERO STAT COUNTER ==================== */
+(function() {
+  const heroSection = document.getElementById('heroStats');
+  if (!heroSection) return;
+  let triggered = false;
+
+  function animateNum(el, target, suffix, prefix) {
+    const start = performance.now();
+    const duration = 1800;
+    const isDecimal = target % 1 !== 0;
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = target * eased;
+      const display = isDecimal ? current.toFixed(2) : Math.floor(current).toString();
+      el.textContent = (prefix || '') + display + (suffix || '');
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+        heroSection.querySelectorAll('.num').forEach(el => {
+          const target = parseFloat(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const prefix = el.dataset.prefix || '';
+          animateNum(el, target, suffix, prefix);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  obs.observe(heroSection);
+})();
+
+/* ==================== READ PROGRESS BAR ==================== */
+(function() {
+  const bar = document.getElementById('readProgress');
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ==================== TIMELINE SCROLLY ==================== */
+(function() {
+  const pins = document.querySelectorAll('.tl-pin');
+  const phases = document.querySelectorAll('.tl-phase');
+  if (!pins.length || !phases.length) return;
+
+  function setActive(id) {
+    pins.forEach(p => p.classList.toggle('active', p.dataset.target === id));
+  }
+
+  pins.forEach(pin => {
+    pin.addEventListener('click', () => {
+      const target = document.getElementById(pin.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    // pick most-visible phase
+    let bestId = null;
+    let bestRatio = 0;
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > bestRatio) {
+        bestRatio = e.intersectionRatio;
+        bestId = e.target.id;
+      }
+    });
+    if (bestId) setActive(bestId);
+  }, { threshold: [0.3, 0.6, 0.9], rootMargin: '-100px 0px -40% 0px' });
+
+  phases.forEach(p => obs.observe(p));
+  setActive('phase-1');
+})();
+
+/* ==================== RISK MATRIX (D3) ==================== */
+(function() {
+  if (typeof d3 === 'undefined') return;
+  const data = [
+    { id: 'A', label: 'Legitimate markup',
+      risk: 1.1, margin: 10, lifespan: 5, color: '#5E8C61',
+      desc: 'Hold a real account, mark up 5–15%, pass through. The only model that survives.',
+      examples: ['OpenRouter', 'SiliconFlow', 'Qiniu Cloud', 'AWS Bedrock / Azure OpenAI'],
+      stats: { margin: '5–15%', life: '5+ yrs', risk: 'Low' } },
+    { id: 'B', label: 'Subscription arbitrage',
+      risk: 5.5, margin: 70, lifespan: 1.2, color: '#B8923A',
+      desc: 'Lift OAuth from a Claude Max / ChatGPT Plus subscription, wrap as API. Killed by Anthropic Jan 2026.',
+      examples: ['PackyCode (pivoted)', 'AnyRouter', 'PinCC', 'OpenClaw (shut)'],
+      stats: { margin: '30–500%', life: '1–6 mo', risk: 'High (ToS)' } },
+    { id: 'C', label: 'Model substitution',
+      risk: 6.5, margin: 82, lifespan: 1.5, color: '#E07A2E',
+      desc: 'Take payment for Opus, route to GLM-4-9B. 45.83% of CISPA-audited APIs were doing this.',
+      examples: ['Anonymous (CISPA "A–Q")', 'Many gray-market sites'],
+      stats: { margin: '60–95%', life: 'Weeks–months', risk: 'Civil fraud' } },
+    { id: 'D', label: 'Data extraction',
+      risk: 8, margin: 92, lifespan: 3, color: '#C73E1D',
+      desc: 'Scrape user prompts; sell or distill into "our proprietary model." 1,600× cheaper than training from scratch.',
+      examples: ['Anonymous', 'Anthropic accused DeepSeek/Moonshot/MiniMax'],
+      stats: { margin: '90%+', life: 'Until exposed', risk: 'GDPR/PIPL' } },
+    { id: 'E', label: 'Poisoning / phishing',
+      risk: 10, margin: 50, lifespan: 0.8, color: '#6B1B0E',
+      desc: 'Cybercrime in a router\'s clothes. Credential exfil, malicious tool calls, ETH wallet theft.',
+      examples: ['Anonymous (UCSB 9 routers)', 'Telegram free-tier scams'],
+      stats: { margin: 'N/A (theft)', life: 'Weeks', risk: 'Criminal (CFAA)' } }
+  ];
+
+  const svg = d3.select('#riskMatrix');
+  const width = 460;
+  const height = 420;
+  const margin = { top: 32, right: 24, bottom: 50, left: 60 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  svg.selectAll('*:not(title):not(desc)').remove();
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+  const y = d3.scaleLinear().domain([0, 100]).range([innerH, 0]);
+  const r = d3.scaleSqrt().domain([0, 6]).range([6, 28]);
+
+  // Grid
+  g.append('g').selectAll('line.gx')
+    .data(x.ticks(5)).join('line')
+    .attr('class', 'gx')
+    .attr('x1', d => x(d)).attr('x2', d => x(d))
+    .attr('y1', 0).attr('y2', innerH)
+    .attr('stroke', '#E8E2D3').attr('stroke-width', 1);
+  g.append('g').selectAll('line.gy')
+    .data(y.ticks(5)).join('line')
+    .attr('class', 'gy')
+    .attr('x1', 0).attr('x2', innerW)
+    .attr('y1', d => y(d)).attr('y2', d => y(d))
+    .attr('stroke', '#E8E2D3').attr('stroke-width', 1);
+
+  // Axes
+  g.append('g').attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d === 0 ? 'Low' : d === 10 ? 'Criminal' : ''))
+    .call(g => g.select('.domain').remove())
+    .call(g => g.selectAll('text').attr('font-family', 'IBM Plex Sans').attr('font-size', 11).attr('fill', '#7A7A7A'))
+    .call(g => g.selectAll('.tick line').remove());
+  g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d => d + '%'))
+    .call(g => g.select('.domain').remove())
+    .call(g => g.selectAll('text').attr('font-family', 'IBM Plex Sans').attr('font-size', 11).attr('fill', '#7A7A7A'))
+    .call(g => g.selectAll('.tick line').remove());
+
+  // Axis labels
+  svg.append('text').attr('x', margin.left + innerW / 2).attr('y', height - 8)
+    .attr('text-anchor', 'middle').attr('font-family', 'IBM Plex Sans').attr('font-size', 11)
+    .attr('fill', '#4A4A4A').attr('font-weight', 600)
+    .attr('letter-spacing', '0.08em').text('LEGAL RISK →');
+  svg.append('text').attr('transform', `rotate(-90)`).attr('x', -(margin.top + innerH / 2)).attr('y', 16)
+    .attr('text-anchor', 'middle').attr('font-family', 'IBM Plex Sans').attr('font-size', 11)
+    .attr('fill', '#4A4A4A').attr('font-weight', 600)
+    .attr('letter-spacing', '0.08em').text('GROSS MARGIN →');
+
+  const tip = d3.select('#matrixTip');
+
+  // Bubbles
+  const bubbles = g.selectAll('circle.b').data(data).join('circle')
+    .attr('class', 'b')
+    .attr('cx', d => x(d.risk))
+    .attr('cy', d => y(d.margin))
+    .attr('r', d => r(d.lifespan))
+    .attr('fill', d => d.color)
+    .attr('fill-opacity', 0.7)
+    .attr('stroke', d => d.color)
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseenter', function(event, d) {
+      d3.select(this).attr('fill-opacity', 0.95).attr('stroke-width', 3);
+      tip.text(d.id + '. ' + d.label).classed('show', true);
+    })
+    .on('mousemove', function(event) {
+      const rect = svg.node().getBoundingClientRect();
+      const px = event.clientX - rect.left + 10;
+      const py = event.clientY - rect.top - 30;
+      tip.style('left', px + 'px').style('top', py + 'px');
+    })
+    .on('mouseleave', function() {
+      d3.select(this).attr('fill-opacity', 0.7).attr('stroke-width', 2);
+      tip.classed('show', false);
+    })
+    .on('click', function(event, d) { selectModel(d.id); });
+
+  // Labels above bubbles
+  g.selectAll('text.bl').data(data).join('text')
+    .attr('class', 'bl')
+    .attr('x', d => x(d.risk))
+    .attr('y', d => y(d.margin) - r(d.lifespan) - 8)
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'Fraunces, Georgia, serif')
+    .attr('font-size', 16)
+    .attr('font-weight', 900)
+    .attr('fill', '#1A1A1A')
+    .text(d => d.id);
+
+  function selectModel(id) {
+    const m = data.find(d => d.id === id);
+    document.querySelectorAll('.model-btn').forEach(b => b.classList.toggle('active', b.dataset.model === id));
+    bubbles.attr('stroke-width', d => d.id === id ? 4 : 2)
+           .attr('fill-opacity', d => d.id === id ? 0.95 : 0.55);
+    const detail = document.getElementById('matrixDetail');
+    detail.innerHTML = `
+      <div class="mtitle"><span class="badge">${m.id}</span> ${m.label}</div>
+      <div class="mdesc">${m.desc}</div>
+      <div class="stats">
+        <div class="s"><span class="l">Margin</span><span class="v">${m.stats.margin}</span></div>
+        <div class="s"><span class="l">Lifespan</span><span class="v">${m.stats.life}</span></div>
+        <div class="s"><span class="l">Risk</span><span class="v">${m.stats.risk}</span></div>
+      </div>
+      <div class="examples"><strong>Examples:</strong> ${m.examples.join(', ')}</div>
+    `;
+    detail.style.background = m.color + '18';
+  }
+
+  document.querySelectorAll('.model-btn').forEach(btn => {
+    btn.addEventListener('click', () => selectModel(btn.dataset.model));
+  });
+
+  selectModel('A');
+})();
+
+/* ==================== SPOT THE FAKE ==================== */
+(function() {
+  const prompts = document.querySelectorAll('.spot-prompt');
+  const reveal = document.getElementById('spotReveal');
+  if (!prompts.length) return;
+  let answered = false;
+  function pick(p) {
+    if (answered) return;
+    answered = true;
+    prompts.forEach(other => {
+      const isFake = other.dataset.fake === 'true';
+      other.classList.add('revealed');
+      other.setAttribute('aria-disabled', 'true');
+      if (other === p) {
+        other.classList.add(isFake ? 'picked-fake' : 'picked-real');
+        other.querySelector('.verdict').innerHTML = isFake
+          ? '<strong style="color:#5E8C61;">✓ You picked the fake.</strong> Three signals gave it away. See below.'
+          : '<strong style="color:#C73E1D;">✗ This was the real one.</strong> See below for what gave the fake away.';
+      } else {
+        other.querySelector('.verdict').innerHTML = isFake
+          ? '<strong style="color:#7A7A7A;">This was the fake.</strong>'
+          : '<strong style="color:#7A7A7A;">This was the real one.</strong>';
+      }
+    });
+    reveal.classList.add('show');
+  }
+  prompts.forEach(p => {
+    p.addEventListener('click', () => pick(p));
+    p.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p); }
+    });
+  });
+})();
+
+/* ==================== PRICING DIAGNOSTIC ==================== */
+(function() {
+  // Reference prices in ¥ per 1M input tokens (May 2026, RMB)
+  // Source: official Anthropic/OpenAI/Google + OpenRouter; ¥7 ≈ $1 baseline
+  const refs = {
+    opus47:   { name: 'Claude Opus 4.7',   official: 24,   legit: 26,   compressed: 14, sub: 4,   substit: 1.0, fake: 0.5 },
+    sonnet46: { name: 'Claude Sonnet 4.6', official: 18,   legit: 19,   compressed: 8,  sub: 2.4, substit: 0.6, fake: 0.3 },
+    gpt5:     { name: 'GPT-5',             official: 16,   legit: 17,   compressed: 9,  sub: 3,   substit: 1.0, fake: 0.4 },
+    gpt5pro:  { name: 'GPT-5 Pro',         official: 32,   legit: 34,   compressed: 18, sub: 6,   substit: 2.0, fake: 0.8 },
+    gemini25: { name: 'Gemini 2.5 Flash',  official: 1.8,  legit: 2.0,  compressed: 1.2, sub: 0.6, substit: 0.2, fake: 0.05 }
+  };
+
+  function classify(price, model) {
+    const r = refs[model];
+    if (!r) return null;
+    const ratio = price / r.official;
+    let tier, name, headline, body, context;
+    if (ratio >= 0.95) {
+      tier = 1; name = 'Legitimate tier';
+      headline = `That matches official ${r.name} pricing.`;
+      body = `At <code>¥${price}</code>/M tokens, you&rsquo;re paying roughly the official rate. Compatible with legitimate aggregators (OpenRouter charges +5.5% on top-up only) and direct enterprise resellers. Margin to the operator: 0&ndash;15%. <strong>Most likely category: A &mdash; Legitimate markup resale.</strong>`;
+      context = `Reference: official ${r.name} input price is approximately ¥${r.official}/M tokens (May 2026).`;
+    } else if (ratio >= 0.45) {
+      tier = 2; name = 'Compressed margin';
+      headline = `Aggressively priced but plausible if they have volume discounts.`;
+      body = `At <code>¥${price}</code>/M tokens, you&rsquo;re paying about ${Math.round(ratio * 100)}% of the official rate. This is consistent with mid-tier compliant aggregators eating margin to win customers, or with volume-discounted enterprise resellers. Verify the provider can show you a reseller MSA. <strong>Most likely category: A on thin margin, or mixed-pool routing.</strong>`;
+      context = `Reference: official ${r.name} ≈ ¥${r.official}/M. Compliant compressed-margin tier ≈ ¥${r.compressed}.`;
+    } else if (ratio >= 0.15) {
+      tier = 3; name = 'Subscription reverse (now dead)';
+      headline = `Pre-2026 subscription-arbitrage pricing. Now extinct.`;
+      body = `At <code>¥${price}</code>/M tokens, this matches the pricing PackyCode, AnyRouter, and the Max-carpool platforms used to charge when they were lifting OAuth tokens from $200/month Claude Max subscriptions. After Anthropic&rsquo;s January 2026 OAuth attestation rollout and the April OpenClaw incident, this business model collapsed. <strong>If a provider still quotes you this price today, ask them how their account pool survived January.</strong>`;
+      context = `For reference: this price tier corresponds to the 5&ndash;10x markup that subscription arbitrage offered until Q1 2026.`;
+    } else if (ratio >= 0.04) {
+      tier = 4; name = 'Probable model substitution';
+      headline = `This is too cheap to be the model they claim.`;
+      body = `At <code>¥${price}</code>/M tokens, you&rsquo;re paying ${Math.round(ratio * 100)}% of the real cost of ${r.name}. No legitimate operator can sustain this. The CISPA paper documented this pricing tier serving open-source 7B&ndash;9B models under premium labels: <code>GPT-5</code> rerouted to <code>GLM-4-9B</code>, <code>Gemini-2.5-flash</code> running at ~37% MedQA accuracy. <strong>Most likely category: C &mdash; Model substitution.</strong> Run an LLMmap fingerprint before depending on this.`;
+      context = `Reference: official ${r.name} ≈ ¥${r.official}/M. Substitution tier typically ≈ ¥${r.substit}.`;
+    } else {
+      tier = 5; name = 'Almost certainly fraud';
+      headline = `Run.`;
+      body = `At <code>¥${price}</code>/M tokens you&rsquo;re paying ${(ratio * 100).toFixed(1)}% of the official rate. There is no legitimate way to deliver ${r.name} at this price. Possibilities, in descending order of likelihood: <strong>(1)</strong> hard model substitution (a small open-source model rebranded); <strong>(2)</strong> &ldquo;internal points&rdquo; pricing &mdash; the ¥ on your dashboard is not real currency, it&rsquo;s a site-internal token that converts back to real money at a 3&ndash;5x markup; <strong>(3)</strong> a honey-trap to harvest your prompts and credentials; <strong>(4)</strong> a takedown-pending operator about to disappear with the balance. Any combination is also possible.`;
+      context = `For context: even the cheapest sustainable open-source 7B serving rate is ≈ ¥${r.fake * 2}/M for inputs; pricing below ¥${r.fake} on a "frontier" model is mechanically impossible without substitution.`;
+    }
+    return { tier, name, headline, body, context };
+  }
+
+  function diagnose() {
+    const price = parseFloat(document.getElementById('priceInput').value);
+    const model = document.getElementById('modelSelect').value;
+    const result = document.getElementById('priceResult');
+    if (!price || price <= 0) {
+      result.className = 'pricing-result';
+      result.innerHTML = '<div class="empty">Enter a positive number to diagnose.</div>';
+      return;
+    }
+    const out = classify(price, model);
+    if (!out) return;
+    result.className = 'pricing-result show-tier-' + out.tier;
+    result.innerHTML = `
+      <div class="tier-name">${out.name}</div>
+      <div class="tier-headline">${out.headline}</div>
+      <div class="tier-body">${out.body}</div>
+      <div class="tier-context">${out.context}</div>
+    `;
+  }
+
+  document.getElementById('priceBtn').addEventListener('click', diagnose);
+  document.getElementById('priceInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') diagnose();
+  });
+})();
+
+/* ==================== AUDIT CHECKLIST ==================== */
+(function() {
+  const KEY = 'aimiddlemen.audit.v1';
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { state = {}; }
+
+  const items = document.querySelectorAll('.audit-item');
+  const counter = document.getElementById('auditCount');
+  const bar = document.getElementById('auditBar');
+  const progress = counter ? counter.parentElement : null;
+
+  function render() {
+    let done = 0;
+    items.forEach(item => {
+      const id = item.dataset.id;
+      const isChecked = !!state[id];
+      item.classList.toggle('checked', isChecked);
+      item.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+      if (isChecked) done++;
+    });
+    const total = items.length;
+    if (done === total) {
+      counter.textContent = '✓ All ' + total + ' complete — your provider should make this list unnecessary.';
+      if (progress) progress.classList.add('done');
+    } else {
+      counter.textContent = done + ' of ' + total + ' completed';
+      if (progress) progress.classList.remove('done');
+    }
+    bar.style.width = Math.round((done / total) * 100) + '%';
+  }
+
+  function toggle(item) {
+    const id = item.dataset.id;
+    state[id] = !state[id];
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+    render();
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', () => toggle(item));
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(item); }
+    });
+  });
+
+  render();
+})();
+
+/* ==================== SHARE BUTTONS ==================== */
+(function() {
+  const title = encodeURIComponent('Half the AI APIs you are buying are lying to you. A six-week investigation:');
+  const url = encodeURIComponent(window.location.href);
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+  const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  const hnUrl = `https://news.ycombinator.com/submitlink?u=${url}&t=${title}`;
+  const tw = document.getElementById('shareTwitter'); if (tw) tw.href = twitterUrl;
+  const li = document.getElementById('shareLinkedIn'); if (li) li.href = liUrl;
+  const hn = document.getElementById('shareHN'); if (hn) hn.href = hnUrl;
+  const cp = document.getElementById('copyLink');
+  if (cp) {
+    cp.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const orig = cp.textContent;
+        cp.textContent = 'Link copied ✓';
+        setTimeout(() => cp.textContent = orig, 2000);
+      });
+    });
+  }
+})();
+
+/* ==================== FADE IN ON SCROLL ==================== */
+(function() {
+  const els = document.querySelectorAll('.fade-up');
+  if (!els.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
+})();
+</script>
+
+</body>
+</html>
