@@ -7,10 +7,37 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Mon, 18 May 2026 08:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 08:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="https://gogoduck912.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AI Architecture</title>
+      <link>https://gogoduck912.github.io/tags/ai-architecture/</link>
+      <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/ai-architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Insight</title>
+      <link>https://gogoduck912.github.io/tags/insight/</link>
+      <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/insight/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LLM</title>
+      <link>https://gogoduck912.github.io/tags/llm/</link>
+      <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/llm/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>AI Safety</title>
@@ -27,15 +54,6 @@
       <pubDate>Mon, 18 May 2026 08:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/tags/investigation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LLM</title>
-      <link>https://gogoduck912.github.io/tags/llm/</link>
-      <pubDate>Mon, 18 May 2026 08:00:00 +0000</pubDate>
-      
-      <guid>https://gogoduck912.github.io/tags/llm/</guid>
       <description></description>
     </item>
     
