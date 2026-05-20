@@ -448,6 +448,19 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   letter-spacing: 0.04em;
 }
 
+/* Objections list (§V) */
+.objections {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 22px 0 28px;
+  padding-left: 28px;
+}
+.objections li { margin-bottom: 14px; }
+.objections li strong { font-weight: 700; }
+.objections li:last-child { margin-bottom: 0; }
+
 /* Footer */
 .article-footer {
   background: var(--ink);
@@ -496,10 +509,10 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
 <div class="topbar">
   <div class="inner">
     <div class="row">
-      <span class="brand">Peike Li &middot; Notes</span>
+      <span class="brand">Peike Li &middot; Thoughts</span>
       <nav class="meta" aria-label="Article meta">
-        <span>Insight</span>
-        <span>7 min read</span>
+        <span>Thoughts</span>
+        <span>8 min read</span>
         <span>May 2026</span>
       </nav>
     </div>
@@ -511,7 +524,7 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
 
 <!-- ============ HERO ============ -->
 <section class="hero wrap">
-  <div class="kicker">Insight &middot; The Bets</div>
+  <div class="kicker">Thoughts &middot; The Bets</div>
   <h1>Time is the missing modality.</h1>
   <p class="dek">&ldquo;The model observes tokens, not elapsed time.&rdquo; The next architectural shift is the one that fixes that.<span class="attrib">&mdash; Tan, Tan &amp; Soatto, <a href="https://arxiv.org/abs/2604.00010" target="_blank" rel="noopener noreferrer" style="color: inherit;">Can LLMs Perceive Time?</a> (2026)</span></p>
 
@@ -540,15 +553,15 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   <span class="chapter-num">I &nbsp;&middot;&nbsp; THE FRAMING PROBLEM</span>
   <h2>Three labs. Same phrase. Different problems.</h2>
 
-  <p class="drop-cap">In May 2026, <a href="https://thinkingmachines.ai/blog/interaction-models/" target="_blank" rel="noopener noreferrer">Thinking Machines</a> shipped its first model and called it &ldquo;time-aware.&rdquo; What Mira Murati&rsquo;s team means by that: the model runs on 200-millisecond beats and senses the flow of a conversation, instead of waiting for the user to stop talking.</p>
+  <p class="drop-cap">In May, <a href="https://thinkingmachines.ai/blog/interaction-models/" target="_blank" rel="noopener noreferrer">Thinking Machines</a> released their first model and called it &ldquo;time-aware.&rdquo; What they mean by this is specific. The model wakes up every 200 milliseconds, senses whatever is happening in the conversation, and reacts to it. It does not wait for the user to finish talking before doing anything.</p>
 
-  <p>But &ldquo;time-aware LLM&rdquo; is also the title of a completely different research line. <a href="https://aclanthology.org/2022.tacl-1.15/" target="_blank" rel="noopener noreferrer">Dhingra et al. (TACL 2022)</a> used it to mean a model that knows what was true in 2017 versus what is true in 2026 &mdash; the knowledge-cutoff problem. A 2025 survey, <a href="https://arxiv.org/abs/2505.20243" target="_blank" rel="noopener noreferrer"><em>It&rsquo;s High Time</em></a>, frames it as a program for tracking fact decay, event ordering, and temporal expressions. Different clock. The unit is years.</p>
+  <p>The phrase &ldquo;time-aware LLM,&rdquo; though, has been around in other research lines for a while. Going back to 2022, a <a href="https://aclanthology.org/2022.tacl-1.15/" target="_blank" rel="noopener noreferrer">TACL paper by Dhingra and colleagues</a> used the phrase for a model that knows what was true in 2017 versus what is true today &mdash; the knowledge-cutoff problem. A 2025 survey called <a href="https://arxiv.org/abs/2505.20243" target="_blank" rel="noopener noreferrer"><em>It&rsquo;s High Time</em></a> treats it as a research program for tracking fact decay, event ordering, and temporal expressions. The time scale here is years, not milliseconds.</p>
 
-  <p>Then late 2025, <a href="https://arxiv.org/abs/2510.23853" target="_blank" rel="noopener noreferrer">TicToc-v1</a> coined a third one: &ldquo;temporal blindness.&rdquo; Their target was the agent loop &mdash; does the agent know that two hours passed between your message at 9 AM and its tool call at 2 PM? Usually no. The finding that matters: just dropping timestamps into the prompt nudged accuracy from ~50% to ~65%, then plateaued. Prompting can&rsquo;t fix it. The architecture has to be retrained.</p>
+  <p>In late 2025, the <a href="https://arxiv.org/abs/2510.23853" target="_blank" rel="noopener noreferrer">TicToc-v1</a> paper coined another phrase: &ldquo;temporal blindness.&rdquo; The concern this time is the agent loop &mdash; does the agent register how much wall-clock time has passed between your message and its tool call? Usually not. The finding worth pausing on is that adding timestamps into the prompt only moves agent-alignment accuracy from about 50% to about 65%, and then it stops. Prompting can&rsquo;t fix it.</p>
 
-  <p>Three labs. Three meanings of the same phrase. None of them cite each other. People keep treating the overlap as coincidence.</p>
+  <p>Three research camps. Three meanings of the same phrase. None of them cite each other.</p>
 
-  <p class="pullquote">It&rsquo;s not coincidence. The field is rediscovering, in three places at once, that the same modality is missing.</p>
+  <p class="pullquote">I don&rsquo;t think this is a coincidence. The same modality is being rediscovered in three places at once.</p>
 </section>
 
 <!-- ============ §2 WHY EACH CAMP IS HALF-BLIND ============ -->
@@ -557,18 +570,18 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   <span class="chapter-num">II &nbsp;&middot;&nbsp; THE THREE CLOCKS</span>
   <h2>Each camp picks one clock and is blind to the other two.</h2>
 
-  <p>Put them side by side.</p>
+  <p>It helps to lay them out next to each other.</p>
 </section>
 
 <section class="clocks-section">
   <div class="clocks-intro">
-    <p style="font-family: var(--sans); font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.6;">Three clocks run inside any deployed language model. Right now, almost no system handles more than one of them. TML&rsquo;s release made this visible by claiming the word &ldquo;time-aware&rdquo; for the fastest of the three &mdash; and, in the process, exposing how little anyone has touched the other two.</p>
+    <p style="font-family: var(--sans); font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.6;">Three clocks run inside any deployed language model. Right now, almost no system handles more than one of them. TML&rsquo;s release made this visible by claiming the phrase &ldquo;time-aware&rdquo; for the fastest of the three &mdash; and, in the process, making the gaps on the other two harder to ignore.</p>
   </div>
 
   <div class="clocks-grid">
 
     <article class="clock-card">
-      <span class="tml-tag solved" aria-label="Status: addressed by current time-aware interaction models">TML &middot; solved</span>
+      <span class="tml-tag open" aria-label="Status: open problem, not addressed by current architectures">Open problem</span>
       <div class="axis-tag"><span class="num-pill" aria-hidden="true">1</span>Interaction Clock</div>
       <h3>Milliseconds</h3>
       <div class="scale">10<sup>1</sup> &mdash; 10<sup>3</sup> ms</div>
@@ -581,21 +594,9 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
 
     <article class="clock-card">
       <span class="tml-tag open" aria-label="Status: open problem, not addressed by current architectures">Open problem</span>
-      <div class="axis-tag"><span class="num-pill" aria-hidden="true">2</span>Knowledge Clock</div>
-      <h3>Years</h3>
-      <div class="scale">10<sup>7</sup> &mdash; 10<sup>10</sup> ms</div>
-      <p class="question">Does the model know that its training cutoff is two years stale, and can it reason explicitly about <em>when</em> a fact was last true?</p>
-      <div class="reps">
-        <strong>Representative work</strong>
-        Dhingra et al. 2022 (TACL) &middot; TimeR4 (EMNLP 2024) &middot; TimE (NeurIPS 2025) &middot; LiveFact (2026) &middot; &ldquo;Do LMs Know Time Passes?&rdquo; (2026)
-      </div>
-    </article>
-
-    <article class="clock-card">
-      <span class="tml-tag open" aria-label="Status: open problem, not addressed by current architectures">Open problem</span>
-      <div class="axis-tag"><span class="num-pill" aria-hidden="true">3</span>Agent Clock</div>
+      <div class="axis-tag"><span class="num-pill" aria-hidden="true">2</span>Agent Clock</div>
       <h3>Minutes &mdash; hours</h3>
-      <div class="scale">10<sup>6</sup> &mdash; 10<sup>7</sup> ms</div>
+      <div class="scale">10<sup>5</sup> &mdash; 10<sup>7</sup> ms</div>
       <p class="question">Inside a long-horizon agent loop, does the model know how much wall-clock time has elapsed since the user&rsquo;s last input, and act accordingly?</p>
       <div class="reps">
         <strong>Representative work</strong>
@@ -603,13 +604,25 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
       </div>
     </article>
 
+    <article class="clock-card">
+      <span class="tml-tag open" aria-label="Status: open problem, not addressed by current architectures">Open problem</span>
+      <div class="axis-tag"><span class="num-pill" aria-hidden="true">3</span>Knowledge Clock</div>
+      <h3>Months &mdash; years</h3>
+      <div class="scale">10<sup>10</sup> &mdash; 10<sup>12</sup> ms</div>
+      <p class="question">Does the model know that its training cutoff is two years stale, and can it reason explicitly about <em>when</em> a fact was last true?</p>
+      <div class="reps">
+        <strong>Representative work</strong>
+        Dhingra et al. 2022 (TACL) &middot; TimeR4 (EMNLP 2024) &middot; TimE (NeurIPS 2025) &middot; LiveFact (2026) &middot; &ldquo;Do LMs Know Time Passes?&rdquo; (2026)
+      </div>
+    </article>
+
   </div>
 </section>
 
 <section class="prose tight">
-  <p>None of these communities treats the others&rsquo; problem as the same as theirs. Interaction-clock people think agent reasoning is out of scope. Knowledge-clock people don&rsquo;t think about real-time streams. Agent-clock people aren&rsquo;t worried about sub-second perception. Each one is half-blind to two-thirds of the cognitive failure they all describe.</p>
+  <p>None of these communities treats the others&rsquo; problem as the same as theirs. The interaction-clock researchers consider agent reasoning out of scope. The knowledge-clock researchers do not think about real-time streams. The agent-clock researchers are not worried about sub-second perception. Each of them is half-blind to two-thirds of the cognitive failure they all describe.</p>
 
-  <p>What TML did, basically, was take a phrase that belonged to two of these groups and use it to mean the third. They forced the conversation.</p>
+  <p>What TML did, in effect, was take a phrase one of these communities had already been using and apply it to a different problem. The three communities are now in a position where they have to look at each other.</p>
 </section>
 
 <!-- ============ §3 TIME AS COGNITION ============ -->
@@ -618,9 +631,17 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   <span class="chapter-num">III &nbsp;&middot;&nbsp; TIME AS COGNITION</span>
   <h2>Time isn&rsquo;t an output capability. It&rsquo;s an input modality.</h2>
 
-  <p>Joscha Bach, the cognitive scientist, has the cleanest version of why this matters: <em><a href="https://medium.com/@joschabach/the-time-that-exists-and-the-time-that-is-a-product-of-the-mind-are-different-things-786eeba560f5" target="_blank" rel="noopener noreferrer">the perception of time, as duration, reference to events, and reference to internal clocks, is a feature of cognitive processing, and not an alternative to physics</a></em>. Translated for the LLM stack: a system that can&rsquo;t perceive duration isn&rsquo;t building the same kind of internal model as one that can. Today&rsquo;s LLMs talk about time the way GPT-3 talked about images it had never seen. They&rsquo;ve read about it. They haven&rsquo;t measured it.</p>
+  <p>I think the right way to understand this is that today&rsquo;s LLMs don&rsquo;t perceive time. They read about time. The distinction matters more than it might first appear.</p>
 
-  <p>Tan, Tan &amp; Soatto make the same diagnosis empirically: <em>the model observes tokens, not elapsed time. It does not directly perceive wall-clock duration while generating, and it does not accumulate sensorimotor memories</em>. The 5&ndash;10x error on self-time estimation is Bach&rsquo;s point made measurable. Compare hallucination, the field&rsquo;s defining failure of 2022&ndash;2024. Initial framing: prompt-engineering bug. Eventual framing: structural property of next-token sampling. The reframe came before the engineering, not after. Temporal blindness is on the same arc. It looks at first like a missing timestamp. It&rsquo;ll turn out to be a missing perceptual dimension.</p>
+  <p>The cleanest framing I have seen is from Joscha Bach: <em><a href="https://medium.com/@joschabach/the-time-that-exists-and-the-time-that-is-a-product-of-the-mind-are-different-things-786eeba560f5" target="_blank" rel="noopener noreferrer">the perception of time, as duration, reference to events, and reference to internal clocks, is a feature of cognitive processing, and not an alternative to physics</a></em>. So a model with no duration sense is missing a piece of the cognitive stack, even when it can describe time fluently. The analogous gap is GPT-3 with images. GPT-3 could write paragraphs about a sunset. It had never seen one.</p>
+
+  <p>A paper from earlier this year, Tan-Tan-Soatto, makes the same diagnosis empirically: <em>the model observes tokens, not elapsed time</em>. They measure the gap directly &mdash; when asked to estimate their own task duration, LLMs are off by 5&ndash;10&times;. That is Bach&rsquo;s philosophical point made measurable.</p>
+
+  <p>It helps to compare this to hallucination, the field&rsquo;s defining cognitive failure from 2022 to 2024. The first wave of fixes was prompt-side: RLHF, instruction tuning, sampling tricks. None of them worked structurally; the rate kept plateauing.</p>
+
+  <p>What eventually worked was the reframe &mdash; treating hallucination as a structural property of next-token sampling rather than a bug to be patched. The reframe came before the engineering progress, and in many ways the reframe <em>was</em> the engineering progress. Once the problem was named correctly, the fixes followed.</p>
+
+  <p>Temporal blindness is on the same arc. Right now it looks like a missing timestamp. I think in two years the framing will be that it is a missing perceptual dimension.</p>
 </section>
 
 <!-- ============ §4 THREE BETS ============ -->
@@ -629,30 +650,30 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   <span class="chapter-num">IV &nbsp;&middot;&nbsp; THREE BETS</span>
   <h2>If the framing is right, three concrete things follow.</h2>
 
-  <p>Three bets. Each has a horizon and a named falsifier. I think each one is more likely than not. None of them is obvious yet.</p>
+  <p>Three bets follow from the framing, each with a horizon and a named falsifier. I think each is more likely than not. None of them is obvious yet.</p>
 </section>
 
 <section class="bets-section" style="background: var(--bg-alt);">
 
   <div class="bet">
-    <div class="bet-num">Bet 1 &middot; The retrospective bet</div>
-    <h3>Five years from now, an LLM with no sense of time will look as primitive as a text-only LLM looks today.</h3>
-    <p>The 60.4-point gap between TML (64.7) and GPT-realtime-2 (4.3) on TimeSpeak is the first time anyone has measured the deficit head-on. It&rsquo;s wider than any current MMLU differential. Right now, almost no production benchmark scores it. My guess is that by 2031, time-perception will sit next to vision on every frontier model card &mdash; and the absence of it will read the way &ldquo;text-only&rdquo; reads today: a model from an earlier generation.</p>
-    <div class="horizon">Horizon: 5 years &middot; Falsifier: A 2031 frontier model card from any of the major Western labs that reports nothing in the TimeSpeak / CueSpeak / RepCount / TicToc family or successor &mdash; and no equivalent measure of temporal perception.</div>
-  </div>
-
-  <div class="bet">
-    <div class="bet-num">Bet 2 &middot; The structural-fix bet</div>
+    <div class="bet-num">Bet 1 &middot; The structural-fix bet</div>
     <h3>Temporal blindness is the next hallucination-scale problem, and prompting won&rsquo;t fix it.</h3>
     <p>TicToc-v1 already has the data: prompt-level timestamps move agent alignment from ~50% to ~65%, then plateau. Tan-Tan-Soatto&rsquo;s companion result &mdash; 5&ndash;10x error on self-time estimation &mdash; points to where the failure actually lives: inside the model&rsquo;s implicit world model, not at the surface of the prompt. Same arc hallucination followed: prompt fixes plateau, structural fixes work. I&rsquo;d bet temporal awareness gets reframed from a prompting problem to a training-objective problem within two years.</p>
     <div class="horizon">Horizon: 24 months &middot; Falsifier: A prompt-only technique &mdash; no architectural change, no post-training &mdash; that closes more than half of TicToc-v1&rsquo;s gap on the original benchmark, replicated independently.</div>
   </div>
 
   <div class="bet">
-    <div class="bet-num">Bet 3 &middot; The convergence bet</div>
-    <h3>The next frontier architecture runs multiple clocks in parallel, not one.</h3>
-    <p>TML&rsquo;s under-discussed contribution isn&rsquo;t the 200-ms beat &mdash; Moshi did that in 2024. It&rsquo;s the dual-clock split: a foreground interaction model on a millisecond budget, an async background model that can take minutes for tool use and sustained reasoning, results flowing back into the foreground&rsquo;s context. The mature version, the one a frontier lab ships by 2028, runs three clocks: interaction, agent, knowledge. Probably a fourth too &mdash; the within-session continual-learning clock Karpathy keeps talking about. The architecture won&rsquo;t pick a clock. It&rsquo;ll run them concurrently and arbitrate.</p>
-    <div class="horizon">Horizon: 24&ndash;36 months &middot; Falsifier: A frontier flagship from any of the major Western labs that ships explicit time-perception capability but handles only one of the three clocks &mdash; not two, not three.</div>
+    <div class="bet-num">Bet 2 &middot; The retrospective bet</div>
+    <h3>Three years from now, an LLM with no sense of time will look as primitive as a text-only LLM looks today.</h3>
+    <p>The 60.4-point gap between TML (64.7) and GPT-realtime-2 (4.3) on TimeSpeak is the first time anyone has measured the deficit head-on. It&rsquo;s wider than any current MMLU differential. Right now, almost no production benchmark scores it. My guess is that by 2029, time-perception will sit next to vision on every frontier model card &mdash; and the absence of it will read the way &ldquo;text-only&rdquo; reads today: a model from an earlier generation.</p>
+    <div class="horizon">Horizon: 3 years &middot; Falsifier: A 2029 frontier model card from any of the major Western labs that reports nothing in the TimeSpeak / CueSpeak / RepCount / TicToc family or successor &mdash; and no equivalent measure of temporal perception.</div>
+  </div>
+
+  <div class="bet">
+    <div class="bet-num">Bet 3 &middot; The synthesis bet</div>
+    <h3>World Model labs absorb time-aware interaction as a primitive &mdash; and they move first.</h3>
+    <p>The interaction thesis and the embodied-AI thesis look like rival paradigms. Murati says how we work with AI matters as much as how smart it is. LeCun says language manipulation isn&rsquo;t intelligence; we need World Models. But the two camps are diagnosing the same gap from different sides &mdash; that LLMs are decoupled from the world. <a href="https://dgallitelli95.medium.com/why-thinking-machines-interaction-models-accidentally-proved-the-embodied-ai-thesis-b03f4bc2c0e7" target="_blank" rel="noopener noreferrer">dgallitelli95 already framed TML&rsquo;s release</a> as &ldquo;accidentally proving the embodied-AI thesis,&rdquo; and LeCun&rsquo;s AMI Labs launched in April. The World Model side has the deeper apparatus &mdash; predictive systems need duration as a building block, not a wrapper. I&rsquo;d bet AMI Labs or a comparable World Model program publishes work within 24 months that treats time-aware interaction as an architectural primitive, and the interaction-vs-autonomy framing stops being the relevant axis.</p>
+    <div class="horizon">Horizon: 24 months &middot; Falsifier: By mid-2028, AMI Labs and other major World Model programs have published nothing that explicitly treats time-aware interaction (full-duplex perception, micro-turn architecture, or sub-second visual reactivity) as an architectural primitive.</div>
   </div>
 
 </section>
@@ -661,11 +682,18 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
 <section class="prose">
   <hr class="rule">
   <span class="chapter-num">V &nbsp;&middot;&nbsp; THE STEEL-MAN</span>
-  <h2>Four counter-frames worth taking seriously.</h2>
+  <h2>Four objections worth taking seriously.</h2>
 
-  <p>(i) <a href="https://kingy.ai/ai/interaction-models-explained-how-thinking-machines-200ms-micro-turns-end-turn-based-ai/" target="_blank" rel="noopener noreferrer">Kingy AI&rsquo;s Bitter-Lesson reversal</a>: scaling eats hand-crafted time-awareness the same way it ate hand-crafted search. (ii) <a href="https://www.seangoedecke.com/interaction-models/" target="_blank" rel="noopener noreferrer">Sean Goedecke</a> on TML&rsquo;s dual-clock: a slow background model can contradict what the foreground has already spoken aloud, and no released paper says how to resolve it. (iii) <a href="https://www.brown.edu/news/2026-04-01/yann-lecun-artificial-intelligence-pioneer" target="_blank" rel="noopener noreferrer">Yann LeCun</a>: time-awareness is a downstream symptom of the deeper missing capability, causal physical prediction; the answer is World Models. (iv) <a href="https://karpathy.bearblog.dev/year-in-review-2025" target="_blank" rel="noopener noreferrer">Andrej Karpathy</a>: the hardest version of &ldquo;time-aware&rdquo; is continual learning across sessions, which none of the three labs in this piece is doing.</p>
+  <p>I will try to steelman each of them.</p>
 
-  <p>The bets survive (ii)&ndash;(iv). If LeCun is right about World Models, time-awareness is a near-term component of his program, not a competitor. If Karpathy is right about continual learning, time-awareness is a precondition to it. Only (i) &mdash; the Bitter Lesson reversal &mdash; kills the bets outright. That&rsquo;s the one I&rsquo;d watch.</p>
+  <ol class="objections">
+    <li><strong>The Bitter-Lesson reversal.</strong> Scaling eats hand-crafted time-awareness the same way it ate hand-crafted search. The fix is not architectural; the fix is more parameters and lower latency. <a href="https://kingy.ai/ai/interaction-models-explained-how-thinking-machines-200ms-micro-turns-end-turn-based-ai/" target="_blank" rel="noopener noreferrer">Kingy AI</a> argues this most cleanly.</li>
+    <li><strong>The dual-clock consistency hazard.</strong> A slow background model can contradict what the foreground model has already said out loud, and no released paper says how to resolve it. If the resolution requires collapsing the two clocks back into one, the multi-clock architecture unwinds. <a href="https://www.seangoedecke.com/interaction-models/" target="_blank" rel="noopener noreferrer">Sean Goedecke</a> raised this.</li>
+    <li><strong>The embodied-AI counter.</strong> Time-awareness is a downstream symptom of the deeper missing capability, which is causal physical prediction. Solve World Models and time-awareness comes for free; solve it without World Models and you have solved the wrong problem. This is <a href="https://www.brown.edu/news/2026-04-01/yann-lecun-artificial-intelligence-pioneer" target="_blank" rel="noopener noreferrer">LeCun&rsquo;s position</a>.</li>
+    <li><strong>The continual-learning gap.</strong> The hardest version of &ldquo;time-aware&rdquo; isn&rsquo;t perceiving time within a session. It is updating weights across sessions &mdash; so that a system actually carries memory rather than evaporating it at the context window. None of the three labs in this piece is doing that. <a href="https://karpathy.bearblog.dev/year-in-review-2025" target="_blank" rel="noopener noreferrer">Karpathy</a> keeps naming this gap.</li>
+  </ol>
+
+  <p>I think the bets survive objections 2, 3, and 4. If LeCun is right about World Models, time-awareness is a near-term piece of his program rather than a competitor to it. If Karpathy is right about continual learning, time-awareness is a precondition for the harder problem rather than a substitute. The Bitter-Lesson reversal is the only one that kills the bets outright. That is the one I would actually watch.</p>
 </section>
 
 <!-- ============ KICKER ============ -->
@@ -674,9 +702,9 @@ h3 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.18; margin: 24px 0 10px
   <span class="chapter-num">VI &nbsp;&middot;&nbsp; THE NAMING PROBLEM</span>
   <h2>Whoever names this correctly defines the next era.</h2>
 
-  <p>For two years, hallucination was unfixable because the field called it &ldquo;mistakes&rdquo; and tried to prompt around it. The reframe &mdash; calling it a structural property of sampling, not a bug &mdash; came before the engineering. It <em>was</em> the engineering.</p>
+  <p>Hallucination was unfixable for about two years. People tried prompt engineering, retrieval augmentation, sampling tricks. None of it worked structurally. What eventually worked was the reframe: calling hallucination a structural property of sampling rather than a bug to be patched. The reframe came before the engineering progress, and in many ways the reframe <em>was</em> the engineering progress.</p>
 
-  <p>The same gap is open now around time. Three labs are demonstrating, from three angles, that the same modality is missing. None has the language to claim all three. Each is one-third right. Whoever finds the unified frame &mdash; the cross-clock benchmark, the single architectural story &mdash; gets to define what &ldquo;time-aware LLM&rdquo; means for the rest of the decade.</p>
+  <p>The same gap is open now around time. Three labs are demonstrating, from three angles, that the same modality is missing. None of them has the language to claim all three. Each of them is one-third right. Whoever finds the unified frame &mdash; the cross-clock benchmark, the single architectural story &mdash; gets to define what &ldquo;time-aware LLM&rdquo; means for the rest of the decade.</p>
 
   <p>My bet, in one sentence: the next frontier model card will have a row for time.</p>
 </section>
