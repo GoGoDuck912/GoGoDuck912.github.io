@@ -7,10 +7,19 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Tue, 19 May 2026 08:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 08:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="https://gogoduck912.github.io/tags/llm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Three thoughts on the bitter lesson</title>
+      <link>https://gogoduck912.github.io/post/bitter-lesson/</link>
+      <pubDate>Tue, 26 May 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/post/bitter-lesson/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Time Is the Missing Modality</title>

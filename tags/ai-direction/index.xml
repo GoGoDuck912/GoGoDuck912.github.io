@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Thoughts on DR. PEIKE LI</title>
-    <link>https://gogoduck912.github.io/tags/thoughts/</link>
-    <description>Recent content in Thoughts on DR. PEIKE LI</description>
+    <title>AI Direction on DR. PEIKE LI</title>
+    <link>https://gogoduck912.github.io/tags/ai-direction/</link>
+    <description>Recent content in AI Direction on DR. PEIKE LI</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
     <lastBuildDate>Tue, 26 May 2026 08:00:00 +0000</lastBuildDate>
     
-	    <atom:link href="https://gogoduck912.github.io/tags/thoughts/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="https://gogoduck912.github.io/tags/ai-direction/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       <pubDate>Tue, 26 May 2026 08:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/post/bitter-lesson/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Time Is the Missing Modality</title>
-      <link>https://gogoduck912.github.io/post/time-aware-llm/</link>
-      <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
-      
-      <guid>https://gogoduck912.github.io/post/time-aware-llm/</guid>
       <description></description>
     </item>
     
