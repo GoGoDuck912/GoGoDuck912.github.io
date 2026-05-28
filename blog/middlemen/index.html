@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JTFM1G9ZQK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JTFM1G9ZQK');
+</script>
 <title>Half the 'AI APIs' You're Buying Are Lying to You</title>
 <meta name="description" content="Inside the $1B middleman economy where 45% of AI API providers serve fake models, 9 actively inject malware, and the entire arbitrage gold rush just died in 90 days.">
 <meta name="author" content="Peike Li">
@@ -232,6 +240,8 @@ sup.fn {
   color: var(--ink);
   line-height: 1;
 }
+.topbar .brand a, .hero .byline a { color: inherit; text-decoration: none; }
+.topbar .brand a:hover, .hero .byline a:hover { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
 .topbar .brand sup {
   font-family: var(--sans);
   font-weight: 700;
@@ -758,7 +768,7 @@ em.cn { font-style: normal; font-family: 'PingFang SC', 'Hiragino Sans GB', 'Mic
 <div class="topbar">
   <div class="inner">
     <div class="row">
-      <span class="brand">The Middlemen</span>
+      <span class="brand"><a href="/">Peike Li</a> &middot; Investigation</span>
       <nav class="meta" aria-label="Article meta">
         <span>Investigation</span>
         <span>18 min read</span>
@@ -777,7 +787,7 @@ em.cn { font-style: normal; font-family: 'PingFang SC', 'Hiragino Sans GB', 'Mic
   <h1>Half the &lsquo;AI APIs&rsquo;<br>You&rsquo;re Buying Are<br>Lying to You.</h1>
   <p class="dek">Inside the billion-dollar middleman economy where 45.83% of providers serve fake models, 9 routers actively inject malware into your code, and the entire arbitrage gold rush just died in 90 days.</p>
   <div class="byline">
-    <span><strong>By a researcher</strong> who spent six weeks inside this market</span>
+    <span>By <strong><a href="/">Peike Li</a></strong>, who spent six weeks inside this market</span>
     <span>May 2026</span>
     <span>Saarbr&uuml;cken &middot; Santa Barbara &middot; Hangzhou &middot; San Francisco</span>
   </div>
@@ -1197,7 +1207,7 @@ em.cn { font-style: normal; font-family: 'PingFang SC', 'Hiragino Sans GB', 'Mic
       <a class="share-btn" href="#" id="copyLink">Copy link</a>
     </div>
 
-    <p style="margin-top: 32px; opacity: 0.6; font-size: 12px;">© 2026. Released for educational and journalistic use. No tracking, no analytics on this page. Follow-up pieces in preparation: the technical architecture of compliant AI gateways, the legal mechanics of the Anthropic / DeepSeek distillation accusations, and the post-LiteLLM supply-chain security landscape.</p>
+    <p style="margin-top: 32px; opacity: 0.6; font-size: 12px;">© 2026. Released for educational and journalistic use. Follow-up pieces in preparation: the technical architecture of compliant AI gateways, the legal mechanics of the Anthropic / DeepSeek distillation accusations, and the post-LiteLLM supply-chain security landscape.</p>
   </div>
 </footer>
 
