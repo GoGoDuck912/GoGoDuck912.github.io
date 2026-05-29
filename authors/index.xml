@@ -334,11 +334,11 @@
       
       <guid>https://gogoduck912.github.io/authors/admin/</guid>
       <description>&lt;p&gt;I am a Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.&lt;/p&gt;
-&lt;p&gt;I am currently exploring the intersection of World Models, Efficient AI, and System 2 Reasoning, specifically:&lt;/p&gt;
+&lt;p&gt;I am currently exploring the intersection of Efficient AI, Multimodal AI, and System 2 Reasoning, specifically:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Architecting asynchronous and streaming multimodal frameworks that integrate real-time generation and reasoning.&lt;/li&gt;
-&lt;li&gt;Scaling unified transformers on internet-scale multimodal data to construct high-fidelity and interactive world models.&lt;/li&gt;
-&lt;li&gt;Bridging multimodal generative models with causal physics priors to enable robust generalization and long-horizon decision-making.&lt;/li&gt;
+&lt;li&gt;Scaling unified transformers on internet-scale multimodal data to build high-fidelity generative world models.&lt;/li&gt;
+&lt;li&gt;Making generation streaming and low-latency enough to run in real time—treating latency as a first-class research problem rather than an afterthought.&lt;/li&gt;
+&lt;li&gt;Connecting multimodal generative models with causal and physical consistency as a path from passive generation toward agents that act.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I am open to discuss the future of Multimodal LLMs, Multimodal Generative AI, World Models, and Agentic Foundation Models. I welcome collaborations across industry and academia. Authorized to work in US and Australia.&lt;/p&gt;
 &lt;blockquote&gt;
