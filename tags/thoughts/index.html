@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.a572845bf17b38af8eaa8d017a7f41d1.css">
+    <link rel="stylesheet" href="/css/academic.dbd602ea8e6820389271bcf5d957c7fc.css">
   
 
   
@@ -127,7 +127,7 @@
   <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
   <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2026-05-26T08:00:00&#43;00:00">
+  <meta property="og:updated_time" content="2026-05-29T00:00:00&#43;00:00">
   
 
   
@@ -465,6 +465,15 @@
   
   
   <div>
+    <h2><a href="/post/robotics-scaling-law/">Robotics has a scaling law — just not the one you&#39;re hoping for</a></h2>
+    <div class="article-style">
+      
+      Video gives robots eyes. World models give them imagination. Neither gives them hands. A few thoughts on what robotics' scaling law actually runs on.
+      
+    </div>
+  </div>
+  
+  <div>
     <h2><a href="/post/bitter-lesson/">Three thoughts on the bitter lesson</a></h2>
     <div class="article-style">
       
@@ -590,9 +599,7 @@
     
     <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
 
-    
-<script type="text/javascript" id="clustrmaps" async src="//cdn.clustrmaps.com/map_v2.js?cl=3f51b5&w=500&t=tt&d=K2e4TTJxfPA78UonSZNFPBDfrd4Xx93yaXxvxKD3iXM&co=ffffff&ct=3f51b5"></script>
-<script>
+    <script>
 (function(){
   var btn = document.createElement('button');
   btn.id = 'back-to-top';
@@ -650,21 +657,18 @@
   new MutationObserver(function(){ updateTheme(); }).observe(document.body, {attributes:true, attributeFilter:['class']});
   var dots = [];
 
+  
   var formulas = [
-    'E = mc²','F = ma','∇·E = ρ/ε₀',
-    '∮ B·dl = μ₀I','ΔxΔp ≥ ħ/2',
-    'S = k_B ln Ω','ds² = -c²dt² + dx²',
-    'H|ψ⟩ = E|ψ⟩','∂ψ/∂t = iħHψ',
-    '∇×E = -∂B/∂t','Rμν - ½gμνR = 8πG Tμν',
-    '∫ψ*ψ dτ = 1','∂L/∂q - d/dt(∂L/∂q̇) = 0',
-    'P(A|B) = P(B|A)P(A)/P(B)','Σ F = dp/dt',
-    '∇²φ = -ρ/ε₀','dS/dt ≥ 0',
-    'Z = Σ e^{-βE_i}','Gμν + Λgμν = κTμν',
-    'iħ ∂/∂t |Ψ⟩ = H|Ψ⟩',
-    '∇ × B = μ₀J + μ₀ε₀ ∂E/∂t',
-    'L = T - V','pV = nRT','a² + b² = c²',
-    '∫₂₀^∞ e^{-x²} dx = √π/2',
-    'e^{iπ} + 1 = 0','∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)'
+    'E = mc²',
+    'e^{iπ} + 1 = 0',
+    'F = ma',
+    'a² + b² = c²',
+    'iℏ ∂Ψ/∂t = ĤΨ',
+    '∇·E = ρ/ε₀',
+    '∇×B = μ₀J + μ₀ε₀ ∂E/∂t',
+    'F = G·m₁m₂/r²',
+    'S = k ln W',
+    'E = hf'
   ];
   var fItems = [];
 
@@ -717,7 +721,7 @@
       ctx.save();
       ctx.translate(f.ox, fy);
       ctx.rotate(f.rot);
-      ctx.font = f.size + 'px serif';
+      ctx.font = 'italic ' + f.size + 'px "STIX Two Math", "Cambria Math", "Source Serif 4", Georgia, serif';
       var edgeX = Math.abs(f.ox - c.width / 2) / (c.width / 2);
       var topFade = 1 - fy / c.height;
       var dk = isDark() ? 2.0 : 1.0;
@@ -774,6 +778,139 @@
     }
     draw();
   }
+})();
+</script>
+<script>
+
+
+(function(){
+  function init(){
+    var section = document.getElementById('blog');
+    if(!section) return;
+
+    
+    var heading = section.querySelector('.center-text h1') || section.querySelector('h1');
+    if(heading && !heading.querySelector('a')){
+      var ht = heading.textContent.trim();
+      heading.textContent = '';
+      var ha = document.createElement('a');
+      ha.href = '/blog/'; ha.className = 'blog-title-link';
+      ha.innerHTML = ht + '<span class="blog-readall" aria-hidden="true">Read all posts &rarr;</span>';
+      heading.appendChild(ha);
+    }
+
+    var grid = section.querySelector('.isotope.projects-container');
+    if(!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(cards.length < 2) return;
+
+    
+    for(var i = cards.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+    }
+
+    var carousel = document.createElement('div'); carousel.className = 'blog-carousel';
+    var viewport = document.createElement('div'); viewport.className = 'blog-carousel-viewport';
+    var track = document.createElement('div'); track.className = 'blog-carousel-track';
+    cards.forEach(function(c){ track.appendChild(c); }); 
+    viewport.appendChild(track); carousel.appendChild(viewport);
+
+    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'blog-nav prev'; prev.setAttribute('aria-label', 'Previous post'); prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'blog-nav next'; next.setAttribute('aria-label', 'Next post'); next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    var dots = document.createElement('div'); dots.className = 'blog-dots';
+    carousel.appendChild(prev); carousel.appendChild(next); carousel.appendChild(dots);
+
+    grid.style.display = 'none';
+    grid.parentNode.insertBefore(carousel, grid.nextSibling);
+
+    var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var n = cards.length, idx = 0, animating = false, timer = null;
+
+    function perView(){ var w = window.innerWidth; return w > 1024 ? 3 : (w > 768 ? 2 : 1); }
+    function markCenter(){ var c = Math.floor(perView() / 2); for(var i = 0; i < track.children.length; i++) track.children[i].classList.toggle('is-center', i === c); }
+
+    for(var k = 0; k < n; k++){
+      (function(k){
+        var b = document.createElement('button'); b.type = 'button';
+        b.setAttribute('aria-label', 'Go to post ' + (k + 1));
+        b.addEventListener('click', function(){ goTo(k); restart(); });
+        dots.appendChild(b);
+      })(k);
+    }
+    function syncDots(){
+      for(var k = 0; k < dots.children.length; k++)
+        dots.children[k].className = (k === ((idx % n) + n) % n) ? 'active' : '';
+    }
+    syncDots(); markCenter();
+
+    function step(){
+      var f = track.children[0]; var s = getComputedStyle(track);
+      var gap = parseFloat(s.columnGap || s.gap || '16') || 16;
+      return f.getBoundingClientRect().width + gap;
+    }
+    var EASE = 'transform .6s cubic-bezier(.22,1,.36,1)';
+
+    function advance(){
+      if(animating) return; animating = true;
+      var dx = step();
+      if(reduce){ track.appendChild(track.children[0]); idx = (idx + 1) % n; syncDots(); markCenter(); animating = false; return; }
+      track.style.transition = EASE; track.style.transform = 'translateX(' + (-dx) + 'px)';
+      var done = function(e){
+        if(e.target !== track) return;
+        track.removeEventListener('transitionend', done);
+        track.style.transition = 'none'; track.appendChild(track.children[0]);
+        track.style.transform = 'translateX(0)'; void track.offsetWidth;
+        idx = (idx + 1) % n; syncDots(); markCenter(); animating = false;
+      };
+      track.addEventListener('transitionend', done);
+    }
+    function retreat(){
+      if(animating) return; animating = true;
+      var dx = step();
+      if(reduce){ track.insertBefore(track.children[n - 1], track.children[0]); idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false; return; }
+      track.style.transition = 'none'; track.insertBefore(track.children[n - 1], track.children[0]);
+      track.style.transform = 'translateX(' + (-dx) + 'px)'; void track.offsetWidth;
+      track.style.transition = EASE; track.style.transform = 'translateX(0)';
+      var done = function(e){
+        if(e.target !== track) return;
+        track.removeEventListener('transitionend', done);
+        idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false;
+      };
+      track.addEventListener('transitionend', done);
+    }
+    function goTo(target){
+      var d = ((target - idx) % n + n) % n; if(!d) return;
+      if(d <= n / 2){ (function go(){ advance(); if(--d > 0) setTimeout(go, 640); })(); }
+      else { var s = n - d; (function go(){ retreat(); if(--s > 0) setTimeout(go, 640); })(); }
+    }
+
+    function play(){ if(reduce || n <= 1) return; stop(); timer = setInterval(advance, 3000); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    function restart(){ stop(); play(); }
+
+    next.addEventListener('click', function(){ if(!animating){ advance(); restart(); } });
+    prev.addEventListener('click', function(){ if(!animating){ retreat(); restart(); } });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', play);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : play(); });
+    window.addEventListener('resize', function(){ if(animating) return; track.style.transition = 'none'; track.style.transform = 'translateX(0)'; markCenter(); });
+
+    
+    var sx = 0, sdt = 0;
+    viewport.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sdt = Date.now(); stop(); }, {passive: true});
+    viewport.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      if(Math.abs(dx) > 40 && Date.now() - sdt < 800){ dx < 0 ? advance() : retreat(); }
+      play();
+    }, {passive: true});
+
+    play();
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
