@@ -80,6 +80,13 @@ hr.rule { border: 0; border-top: 1px solid var(--rule); margin: 8px 0 0; }
 .post .more .arrow { transition: transform .25s ease; display: inline-block; }
 .post:hover .more .arrow { transform: translateX(4px); }
 
+/* Type groups */
+.group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 56px 0 0; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.group-head.first { margin-top: 10px; }
+.group-title { font-family: var(--display); font-weight: 900; font-size: clamp(26px, 4vw, 38px); line-height: 1; letter-spacing: -0.03em; margin: 0; }
+.group-count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; white-space: nowrap; }
+.group-note { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.45; color: var(--ink-2); margin: 12px 0 0; max-width: 600px; }
+
 @media (max-width: 680px) {
   .post { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
   .hero { padding: 44px 0 28px; }
@@ -103,13 +110,19 @@ hr.rule { border: 0; border-top: 1px solid var(--rule); margin: 8px 0 0; }
 </div>
 
 <header class="hero wrap">
-  <div class="kicker">Thoughts &amp; Investigations</div>
+  <div class="kicker">Thoughts &middot; Opinion &middot; Investigations</div>
   <h1>Writing.</h1>
-  <p class="dek">Essays and investigations on AI, robotics, world models, and where the field is actually going. Each one is a self-contained piece &mdash; sourced, opinionated, and meant to be read in one sitting.</p>
+  <p class="dek">Essays, opinions, and investigations on AI, robotics, and where the field is actually going &mdash; and the culture around it. Each piece is self-contained: sourced, opinionated, and meant to be read in one sitting.</p>
 </header>
 <div class="wrap"><hr class="rule"></div>
 
 <main class="posts wrap">
+
+  <div class="group-head first">
+    <h2 class="group-title">Thoughts</h2>
+    <span class="group-count">3 pieces</span>
+  </div>
+  <p class="group-note">Short, opinionated reads on where AI and robotics are actually going.</p>
 
   <a class="post" href="/blog/robotics-scaling-law/">
     <span class="thumb"><img src="/blog/robotics-scaling-law/og-card.png" alt="Robotics has a scaling law — just not the one you're hoping for" loading="lazy"></span>
@@ -140,6 +153,28 @@ hr.rule { border: 0; border-top: 1px solid var(--rule); margin: 8px 0 0; }
       <span class="more">Read the thoughts <span class="arrow">&rarr;</span></span>
     </div>
   </a>
+
+  <div class="group-head">
+    <h2 class="group-title">Opinion</h2>
+    <span class="group-count">1 piece</span>
+  </div>
+  <p class="group-note">Where I take a side &mdash; less about the technology than the people and choices around it.</p>
+
+  <a class="post" href="/blog/the-bunker-and-the-bassinet/">
+    <span class="thumb"><img src="/blog/the-bunker-and-the-bassinet/og-card.png" alt="The Bunker and the Bassinet" loading="lazy"></span>
+    <div class="text">
+      <div class="meta-top">May 29, 2026 &nbsp;<span class="dot">&bull;</span>&nbsp; AI &middot; Opinion</div>
+      <h2>The Bunker and the Bassinet</h2>
+      <p class="dek">Elon Musk says people without children have no stake in the future. He&rsquo;s wrong about the insult &mdash; and accidentally right about the word. On the bunker, the bassinet, and what the people building AI quietly do about having kids.</p>
+      <span class="more">Read the opinion <span class="arrow">&rarr;</span></span>
+    </div>
+  </a>
+
+  <div class="group-head">
+    <h2 class="group-title">Investigations</h2>
+    <span class="group-count">1 piece</span>
+  </div>
+  <p class="group-note">Longer, sourced digs into how something actually works.</p>
 
   <a class="post" href="/blog/middlemen/">
     <span class="thumb"><img src="/blog/middlemen/og-card.png" alt="Half the AI APIs you're buying are lying to you" loading="lazy"></span>
