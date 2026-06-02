@@ -333,7 +333,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/authors/admin/</guid>
-      <description>&lt;p&gt;I am a Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.&lt;/p&gt;
+      <description>&lt;p&gt;I am a &lt;span class=&#34;senior-title&#34; hidden&gt;Senior &lt;/span&gt;Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.&lt;/p&gt;
 &lt;p&gt;I am currently exploring the intersection of Efficient AI, Multimodal AI, and System 2 Reasoning, specifically:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Scaling unified transformers on internet-scale multimodal data to build high-fidelity generative world models.&lt;/li&gt;

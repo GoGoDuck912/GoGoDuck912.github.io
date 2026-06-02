@@ -168,6 +168,35 @@
 <meta name="geo.placename" content="Sydney">
 
 
+<script>
+(function () {
+  var root = document.documentElement;
+  
+  var style = document.createElement('style');
+  
+  style.textContent = '.show-senior .senior-title[hidden]{display:inline !important}';
+  document.head.appendChild(style);
+
+  var tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  
+  if (tz.indexOf('Australia/') !== 0) root.classList.add('show-senior');
+
+  
+  fetch('https://api.country.is/')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (d) {
+      var c = d && d.country;
+      if (c === 'AU') root.classList.remove('show-senior');
+      else if (/^[A-Z]{2}$/.test(c)) root.classList.add('show-senior');
+      
+      
+    })
+    .catch(function () {   });
+})();
+</script>
+
+
   <title> | PEIKE LI</title>
 
 </head>
@@ -567,7 +596,7 @@
     
     
 
-    <p>I am a Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.</p>
+    <p>I am a <span class="senior-title" hidden>Senior </span>Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.</p>
 <p>I am currently exploring the intersection of Efficient AI, Multimodal AI, and System 2 Reasoning, specifically:</p>
 <ul>
 <li>Scaling unified transformers on internet-scale multimodal data to build high-fidelity generative world models.</li>

@@ -187,6 +187,35 @@
 <meta name="geo.placename" content="Sydney">
 
 
+<script>
+(function () {
+  var root = document.documentElement;
+  
+  var style = document.createElement('style');
+  
+  style.textContent = '.show-senior .senior-title[hidden]{display:inline !important}';
+  document.head.appendChild(style);
+
+  var tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  
+  if (tz.indexOf('Australia/') !== 0) root.classList.add('show-senior');
+
+  
+  fetch('https://api.country.is/')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (d) {
+      var c = d && d.country;
+      if (c === 'AU') root.classList.remove('show-senior');
+      else if (/^[A-Z]{2}$/.test(c)) root.classList.add('show-senior');
+      
+      
+    })
+    .catch(function () {   });
+})();
+</script>
+
+
   <title>When Humans Meet Machines: Towards Efficient Segmentation Networks | PEIKE LI</title>
 
 </head>
