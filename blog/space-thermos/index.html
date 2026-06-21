@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Is a Thermos, Not a Freezer</title>
+<meta name="description" content="Everyone selling AI data centers in space is right about the power and wrong about the heat. From first principles: why getting rid of a gigawatt of waste heat in a vacuum — not finding the energy to make it — is the problem that decides whether computers ever move to orbit.">
+<meta name="author" content="Peike Li">
+<meta name="theme-color" content="#FBFAF7">
+
+<link rel="canonical" href="https://gogoduck912.github.io/blog/space-thermos/">
+<meta property="og:url" content="https://gogoduck912.github.io/blog/space-thermos/">
+<meta property="og:image" content="https://gogoduck912.github.io/blog/space-thermos/og-card.png">
+<meta name="twitter:image" content="https://gogoduck912.github.io/blog/space-thermos/og-card.png">
+
+<meta property="og:title" content="Space Is a Thermos, Not a Freezer">
+<meta property="og:description" content="Space isn't cold — it's a thermos. Why cooling, not power, is the hard part of putting an AI data center in orbit. A first-principles walk through the physics.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Peike Li">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A glowing radiator panel in orbit beside the headline: Space Is a Thermos, Not a Freezer. The only way to shed a gigawatt of heat in a vacuum is to glow.">
+<meta property="article:published_time" content="2026-06-21T08:00:00Z">
+<meta property="article:section" content="Technology">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Space Is a Thermos, Not a Freezer">
+<meta name="twitter:description" content="Space isn't cold — it's a thermos. Why cooling, not power, is the hard part of putting an AI data center in orbit.">
+<meta name="twitter:image:alt" content="A glowing radiator panel in orbit beside the headline: Space Is a Thermos, Not a Freezer.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='%23E0303E'/%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23E0303E' stroke-width='3' stroke-opacity='0.4'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Space Is a Thermos, Not a Freezer",
+  "description": "Why getting rid of a gigawatt of waste heat in a vacuum — not finding the energy to make it — is the problem that decides whether AI data centers ever move to orbit.",
+  "image": "https://gogoduck912.github.io/blog/space-thermos/og-card.png",
+  "datePublished": "2026-06-21T08:00:00Z",
+  "dateModified": "2026-06-21T08:00:00Z",
+  "author": { "@type": "Person", "name": "Peike Li", "url": "https://gogoduck912.github.io/" },
+  "publisher": { "@type": "Person", "name": "Peike Li", "url": "https://gogoduck912.github.io/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://gogoduck912.github.io/blog/space-thermos/" },
+  "articleSection": "Technology",
+  "keywords": "orbital data center, space data center, AI cooling, Stefan-Boltzmann, thermal radiation, Starcloud, SpaceX, Jeff Bezos, AWS, radiator, Dyson sphere, thermodynamics"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ----- Reset & Tokens ----- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+*:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+:root {
+  --bg: #FBFAF7;
+  --bg-alt: #F0EDE5;
+  --bg-card: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-muted: #888888;
+  --ink-faint: #B5AFA3;
+  --rule: #DDD7CC;
+  --rule-soft: #EAE5D8;
+  --red: #E0303E;
+  --red-deep: #B12530;
+  --red-faint: #FBEAE3;
+  --blue: #2E5266;
+  --blue-deep: #1E3A4A;
+  --blue-faint: #E2EBF0;
+  --green: #5E8C61;
+  --gold: #B8923A;
+  --display: 'Fraunces', 'Source Serif 4', Georgia, serif;
+  --serif:   'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --sans:    'IBM Plex Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ----- Layout ----- */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.prose { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+.wide { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+section { padding: 48px 0; }
+section.tight { padding: 28px 0; }
+
+/* ----- Typography ----- */
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.028em; font-weight: 700; }
+h1 { font-size: clamp(40px, 7.5vw, 82px); line-height: 0.98; margin: 0; font-weight: 900; }
+h2 { font-size: clamp(27px, 3.8vw, 40px); line-height: 1.1; margin: 8px 0 18px; }
+h3 { font-size: clamp(19px, 2.2vw, 25px); line-height: 1.2; margin: 30px 0 10px; }
+.prose p { margin: 0 0 22px; }
+.prose a, .interactive a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--ink-faint); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .2s; }
+.prose a:hover { text-decoration-color: var(--red); }
+.prose ul { margin: 0 0 22px; padding-left: 0; list-style: none; }
+.prose ul li { position: relative; padding-left: 26px; margin-bottom: 10px; }
+.prose ul li::before { content: ''; position: absolute; left: 4px; top: 13px; width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
+
+.pullquote {
+  font-family: var(--display);
+  font-size: clamp(23px, 3vw, 33px);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  border-left: 3px solid var(--red);
+  margin: 40px -8px;
+  padding: 6px 0 6px 26px;
+}
+.pullquote .attribution { display: block; margin-top: 12px; font-style: normal; font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink-muted); letter-spacing: 0; }
+
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin: 28px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.callout .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--red); display: block; margin-bottom: 6px; }
+.callout.cool .label { color: var(--blue); }
+
+.kbd-stat { font-family: var(--mono); font-size: 0.95em; background: var(--bg-card); border: 1px solid var(--rule); padding: 0 6px; border-radius: 3px; color: var(--red-deep); font-weight: 600; }
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 44px auto; max-width: 120px; }
+
+/* ----- Masthead ----- */
+.topbar {
+  border-bottom: 1px solid var(--ink);
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(251, 250, 247, 0.94);
+  padding: 16px 0;
+}
+.topbar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.topbar .row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.topbar .brand { font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+.topbar .brand a { color: inherit; text-decoration: none; }
+.topbar .brand a:hover { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
+.topbar .meta { display: flex; gap: 20px; align-items: baseline; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.topbar .progress { position: absolute; bottom: -2px; left: 0; height: 2px; width: 0%; background: var(--red); transition: width .15s linear; }
+@media (max-width: 600px) { .topbar .meta span:nth-child(1) { display: none; } }
+
+/* ----- Hero ----- */
+.hero { padding: 64px 0 44px; }
+.hero .kicker { font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 22px; }
+.hero .dek { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4; color: var(--ink-2); margin: 26px 0 0; max-width: 660px; }
+.hero .byline { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 22px; font-family: var(--sans); font-size: 13px; color: var(--ink-muted); }
+.hero .byline strong { color: var(--ink); font-weight: 600; }
+.hero .byline a { color: inherit; }
+
+.hero-stats {
+  margin-top: 56px; padding: 36px 0 28px;
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+}
+.hero-stat { font-family: var(--sans); }
+.hero-stat .num { font-family: var(--display); font-size: clamp(32px, 4.8vw, 58px); font-weight: 900; letter-spacing: -0.03em; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; }
+.hero-stat .num.dim { color: var(--ink); }
+.hero-stat .label { margin-top: 10px; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); font-weight: 500; }
+@media (max-width: 720px) { .hero-stats { grid-template-columns: 1fr 1fr; gap: 26px; } }
+
+/* ----- Interactive shells ----- */
+.interactive { background: var(--bg-alt); padding: 52px 0; }
+.ix-card { max-width: 880px; margin: 0 auto; padding: 0 24px; font-family: var(--sans); }
+.ix-eyebrow { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--red); margin-bottom: 10px; }
+.ix-title { font-family: var(--display); font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; margin: 0 0 8px; color: var(--ink); }
+.ix-sub { font-family: var(--sans); font-size: 15px; line-height: 1.55; color: var(--ink-2); margin: 0 0 24px; max-width: 640px; }
+.ix-panel { background: var(--bg-card); border: 1px solid var(--rule); border-radius: 10px; padding: 26px; }
+.ix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+@media (max-width: 720px) { .ix-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+.ix-controls { display: flex; flex-direction: column; gap: 20px; }
+.ix-field label { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; letter-spacing: 0.04em; font-weight: 700; color: var(--ink-2); margin-bottom: 8px; }
+.ix-field label .val { font-family: var(--mono); font-size: 13px; color: var(--red-deep); font-weight: 600; letter-spacing: 0; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--rule); outline-offset: 4px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--red); cursor: pointer; border: 3px solid var(--bg-card); box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+input[type="range"]::-moz-range-thumb { width: 19px; height: 19px; border-radius: 50%; background: var(--red); cursor: pointer; border: 3px solid var(--bg-card); }
+
+.ix-equation { font-family: var(--mono); font-size: 14px; color: var(--ink-2); background: var(--bg-alt); border-radius: 6px; padding: 12px 14px; text-align: center; margin-bottom: 4px; line-height: 1.7; }
+.ix-equation b { color: var(--red-deep); }
+
+.ix-readout { text-align: center; }
+.ix-readout .big { font-family: var(--display); font-weight: 900; font-size: clamp(38px, 7vw, 64px); line-height: 1; color: var(--red); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.ix-readout .big .unit { font-size: 0.4em; color: var(--ink-2); font-weight: 700; margin-left: 4px; }
+.ix-readout .compare { margin-top: 14px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.ix-readout .compare strong { color: var(--ink); }
+
+.ix-svg { width: 100%; height: auto; display: block; }
+.ix-note { font-family: var(--sans); font-size: 13px; line-height: 1.55; color: var(--ink-muted); margin-top: 20px; border-top: 1px dashed var(--rule); padding-top: 16px; }
+.ix-note strong { color: var(--ink-2); }
+
+/* toggle */
+.ix-toggle { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 3px; gap: 2px; margin-bottom: 4px; }
+.ix-toggle button { font-family: var(--sans); font-size: 12.5px; font-weight: 600; border: none; background: transparent; color: var(--ink-2); padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: all .15s; }
+.ix-toggle button.active { background: var(--ink); color: var(--bg); }
+
+/* bars */
+.ix-bars { display: flex; flex-direction: column; gap: 16px; }
+.ix-bar .bhead { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; }
+.ix-bar .bhead .pct { font-family: var(--mono); font-weight: 600; }
+.ix-bar .btrack { height: 12px; background: var(--rule-soft); border-radius: 6px; overflow: hidden; }
+.ix-bar .bfill { height: 100%; width: 0%; border-radius: 6px; transition: width .12s linear; }
+.ix-bar.power .bfill { background: var(--blue); }
+.ix-bar.cool .bfill { background: var(--red); }
+.ix-verdict { margin-top: 18px; font-family: var(--sans); font-size: 14px; line-height: 1.55; color: var(--ink-2); background: var(--bg-alt); border-radius: 6px; padding: 14px 16px; border-left: 3px solid var(--ink-faint); }
+.ix-verdict.bad { border-left-color: var(--red); }
+.ix-verdict.good { border-left-color: var(--green); }
+.ix-verdict strong { color: var(--ink); }
+
+/* ----- Footer ----- */
+.article-footer { background: var(--ink); color: var(--bg); padding: 60px 0; margin-top: 64px; }
+.article-footer .wrap { color: var(--bg); }
+.article-footer h2 { color: var(--bg); margin-top: 0; }
+.article-footer p, .article-footer li { color: rgba(250, 248, 243, 0.78); font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+.article-footer a { color: var(--bg); text-decoration: underline; text-decoration-color: rgba(250, 248, 243, 0.4); }
+.article-footer a:hover { text-decoration-color: var(--red); }
+.sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+.sources-grid h4 { color: var(--bg); font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 12px; font-weight: 700; }
+.sources-grid ul { list-style: none; padding: 0; margin: 0; }
+.sources-grid li { margin-bottom: 8px; }
+.share-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(250, 248, 243, 0.12); }
+.share-btn { font-family: var(--sans); font-size: 13px; font-weight: 600; background: transparent; border: 1px solid rgba(250, 248, 243, 0.3); color: var(--bg); padding: 8px 16px; border-radius: 3px; cursor: pointer; text-decoration: none; transition: all .15s; }
+.share-btn:hover { background: var(--bg); color: var(--ink); }
+@media (max-width: 720px) { .sources-grid { grid-template-columns: 1fr; } }
+
+.fade-up { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <div class="row">
+      <span class="brand"><a href="/">Peike Li</a> &middot; First Principles</span>
+      <nav class="meta" aria-label="Article meta">
+        <span>Physics</span>
+        <span>11 min read</span>
+        <span>June 2026</span>
+      </nav>
+    </div>
+    <div class="progress" id="readProgress"></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="kicker">I ran the numbers on orbital data centers</div>
+  <h1>Space Is a Thermos,<br>Not a Freezer.</h1>
+  <p class="dek">Everyone selling AI data centers in space is right about the power and wrong about the heat. In a vacuum, the only way to get rid of a gigawatt of waste heat is to <em>glow</em> &mdash; and the physics of glowing is brutal.</p>
+  <div class="byline">
+    <span>By <strong><a href="/">Peike Li</a></strong></span>
+    <span>June 2026</span>
+    <span>I worked the radiator math myself</span>
+  </div>
+
+  <div class="hero-stats" id="heroStats">
+    <div class="hero-stat">
+      <div class="num" data-target="2.7" data-decimals="1" data-suffix=" K">0 K</div>
+      <div class="label">Temperature of deep space. It changes a hot radiator&rsquo;s output by about one part in 280 million. The cold is a rounding error.</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num dim" data-target="1000" data-prefix="~" data-suffix="&times;">0</div>
+      <div class="label">How much more densely a GPU sheds heat than any radiator can. The cooling surface must be ~1,000&times; the chip.</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num dim" data-target="14000" data-suffix="">0</div>
+      <div class="label">The space station sheds about 70 kW of heat. One gigawatt data center has to shed 14,000 of those.</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num" data-target="120" data-suffix="&deg;C">0&deg;C</div>
+      <div class="label">What a data center in orbit glows at &mdash; the same temperature a Dyson sphere would. You can&rsquo;t hide it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ §1 THE PITCH ============ -->
+<section class="prose">
+  <h2>The pitch is almost too good to argue with</h2>
+  <p>A pitch is circulating right now, and its appeal is obvious. You take the data centers that are eating the world&rsquo;s electricity, and you move them to orbit. Up there the Sun never sets, so the panels run around the clock. There&rsquo;s no land to buy, no water to drain, no permitting delays. And space is <em>cold</em> &mdash; about 2.7 kelvin, roughly &minus;270&nbsp;&deg;C, colder than anywhere on Earth &mdash; so cooling, the thing that makes data centers such a nightmare to build, should come for free.</p>
+
+  <p>The fantasy now has hardware. In November 2025, a startup called Starcloud put a 60-kilogram satellite into orbit carrying five GPUs &mdash; including the first data-center-grade Nvidia H100 ever flown &mdash; and trained a small model in space. It&rsquo;s valued at around a billion dollars now, the fastest company in Y&nbsp;Combinator&rsquo;s history to get there. SpaceX, in the S-1 it filed in May 2026, named &ldquo;orbital AI compute&rdquo; as a core growth story and floated a target of launching <span class="kbd-stat">100 GW</span> of it a year. Jeff Bezos told CNBC that gigawatt-scale data centers in space are coming within ten to twenty years &mdash; though he couldn&rsquo;t resist mocking Elon Musk&rsquo;s timeline: &ldquo;If you want it to be six years, say it&rsquo;s three.&rdquo;</p>
+
+  <p>I think the energy argument is basically right. The cooling argument is backwards &mdash; and it&rsquo;s the one that decides whether any of this works.</p>
+
+  <p>Here&rsquo;s the whole post in one sentence: <strong>space is not a freezer but a thermos</strong> &mdash; the device we invented to stop heat from moving &mdash; and that one fact is the hardest, most underrated problem in the orbital-compute pitch.</p>
+</section>
+
+<!-- ============ §2 COLD IS A ROUNDING ERROR ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>The cold of space is a rounding error</h2>
+  <p>Nearly everyone gets the same thing wrong here, and it&rsquo;s the most natural mistake to make: <em>space is cold, therefore cooling is easy.</em> The first clause is true. The second does not follow.</p>
+
+  <p>Here&rsquo;s the one equation worth carrying through the whole piece. A warm object radiates heat at a rate proportional to the fourth power of its temperature &mdash; the Stefan-Boltzmann law. Fourth power. That exponent is the entire story: double a surface&rsquo;s temperature and it sheds sixteen times the heat.</p>
+
+  <p>A radiator running at a survivable <span class="kbd-stat">77&nbsp;&deg;C</span> (350 K) throws off about 850 watts per square meter. The 2.7 K background of deep space throws <em>back</em> about three-millionths of a watt per square meter. The ratio is roughly <strong>one part in 280 million</strong>. In other words, how cold space is barely enters the equation at all. What sets your cooling rate is how hot your <em>own</em> radiator runs &mdash; 350 to the fourth power utterly swamps 2.7 to the fourth. The cold of space is a rounding error.</p>
+
+  <p class="pullquote">A vacuum is a wonderful thing to put around coffee, and a terrible thing to put around a megawatt.<span class="attribution">&mdash; Vish Nandlall, telecom engineer, on orbital data centers</span></p>
+
+  <p>So why does cooling in space <em>feel</em> like it should be easy? Because on Earth we almost never cool by radiation. We cool by convection and conduction &mdash; we move heat into air or water and let that fluid carry it away. A vacuum has no fluid. Conduction and convection simply stop working, because there&rsquo;s nothing to conduct or convect into. A satellite, as one ex-NASA thermal engineer put it, &ldquo;is an excellent thermos bottle.&rdquo; That&rsquo;s not a flaw you can engineer around. That <em>is</em> what a vacuum is &mdash; the same reason the flask in your kitchen keeps coffee hot for hours: the emptiness around it kills every heat path except the slow one.</p>
+
+  <p>In orbit, that slow one &mdash; glowing, radiating infrared light, the same heat you feel off a campfire &mdash; is the only path you have left. And a gigawatt data center is, before it&rsquo;s anything else, a gigawatt <em>heater</em>: essentially every watt of electricity it draws comes back out as heat. Your only way to get rid of it is to make a giant surface glow.</p>
+
+  <p>There&rsquo;s exactly one lever that helps, and everyone reaches for it: run the radiator hotter. Because of that fourth power, pushing a panel from 300 K to 400 K cuts the area you need to about a third. The trouble is the lever is mostly bolted down. Silicon stops working reliably much past 100&nbsp;&deg;C, and the second law of thermodynamics insists your radiator be colder than the chip it&rsquo;s cooling. So you&rsquo;re stuck running radiators in the lukewarm range, where they&rsquo;re least effective.</p>
+</section>
+
+<!-- ============ §3 FLUX NOT TEMPERATURE + INTERACTIVE 1 ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>The real problem isn&rsquo;t temperature. It&rsquo;s flux.</h2>
+  <p>Once you accept that you can only cool by glowing, the central problem of orbital computing comes into focus &mdash; and it has nothing to do with how cold space is. It&rsquo;s about <em>flux</em>: heat per unit of area.</p>
+
+  <p>A modern AI chip is a ferocious little concentrator of heat. An Nvidia H100 burns about 700 watts under a postage stamp of silicon &mdash; roughly 86 watts per square centimeter. A radiator glowing at a survivable temperature sheds about 0.06 watts per square centimeter. Line them up:</p>
+  <ul>
+    <li>A GPU die: <strong>~86 W/cm&sup2;</strong></li>
+    <li>A space radiator: <strong>~0.06 W/cm&sup2;</strong></li>
+  </ul>
+  <p>That&rsquo;s a gap of more than a thousand to one. The chip dumps heat about a thousand times more densely than a radiator can shed it &mdash; which means, unavoidably, your cooling surface has to be roughly a thousand times the area of your chips.</p>
+
+  <p>And here&rsquo;s the part the &ldquo;go to space&rdquo; pitch quietly skips: <strong>that ratio is identical on the ground and in orbit.</strong> Stefan-Boltzmann doesn&rsquo;t care what altitude you&rsquo;re at. The chip concentrates heat into a postage stamp; the radiator can only release it across a tennis court &mdash; on Earth, in orbit, anywhere. Space doesn&rsquo;t fix the physics. It just hands you somewhere to unfold the tennis court.</p>
+</section>
+
+<!-- Interactive 1: Radiator explorer -->
+<section class="interactive" aria-label="Interactive: radiator area explorer">
+  <div class="ix-card">
+    <div class="ix-eyebrow">Play with the physics &middot; 1 of 3</div>
+    <h3 class="ix-title">How much radiator does a gigawatt need?</h3>
+    <p class="ix-sub">This is the whole cooling problem in one equation. Drag the dials and watch the fourth power do its work: nudge the temperature up and the radiator collapses; let it drift toward room temperature and it explodes.</p>
+    <div class="ix-panel">
+      <div class="ix-grid">
+        <div class="ix-controls">
+          <div class="ix-equation">
+            Area = <b>P</b> &divide; ( 2 &middot; <b>&epsilon;</b> &middot; &sigma; &middot; <b>T</b><sup>4</sup> )
+          </div>
+          <div class="ix-field">
+            <label for="rP">Waste heat to dump &nbsp;<span class="val" id="rPval">1000 MW</span></label>
+            <input type="range" id="rP" min="50" max="1000" step="10" value="1000" aria-label="Waste heat in megawatts">
+          </div>
+          <div class="ix-field">
+            <label for="rT">Radiator temperature &nbsp;<span class="val" id="rTval">77 &deg;C</span></label>
+            <input type="range" id="rT" min="270" max="400" step="1" value="350" aria-label="Radiator temperature in kelvin">
+          </div>
+          <div class="ix-field">
+            <label for="rE">Emissivity &epsilon; &nbsp;<span class="val" id="rEval">0.90</span></label>
+            <input type="range" id="rE" min="0.5" max="0.95" step="0.05" value="0.9" aria-label="Emissivity">
+          </div>
+          <svg id="rCurve" class="ix-svg" viewBox="0 0 360 150" role="img" aria-labelledby="rCurveT rCurveD">
+            <title id="rCurveT">Required radiator area versus temperature</title>
+            <desc id="rCurveD">A steeply falling curve: as radiator temperature rises, the area needed to reject the heat drops sharply, because radiated power scales as the fourth power of temperature. A marker shows the currently selected temperature.</desc>
+          </svg>
+        </div>
+        <div class="ix-readout">
+          <div class="big"><span id="rArea">0.65</span><span class="unit" id="rUnit">km&sup2;</span></div>
+          <div class="compare" id="rCompare"></div>
+        </div>
+      </div>
+      <p class="ix-note"><strong>The sobering calibration:</strong> the entire International Space Station &mdash; the largest structure humanity has ever flown &mdash; rejects about 70 kilowatts through ~420 m&sup2; of radiator. A single rack of Nvidia&rsquo;s GB300 systems draws roughly twice that. The whole space station, thermally, can&rsquo;t keep half a server rack alive. (A purpose-built hot radiator does better than the station&rsquo;s cold ammonia loop &mdash; but &ldquo;better&rdquo; still lands you at square kilometers and thousands of tons per gigawatt.)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ §4 THE SKY ISN'T EMPTY + INTERACTIVE 2 ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>The sky you&rsquo;re dumping heat into isn&rsquo;t empty</h2>
+  <p>There&rsquo;s a second assumption hiding in the pitch: that a radiator in space sees nothing but cold, empty sky in every direction. In low Earth orbit &mdash; which is where every one of these demos actually flies &mdash; that&rsquo;s just false.</p>
+
+  <p>The Earth is right there, filling roughly a third of your view, and it is not cold: it glows with about 240 watts per square meter of its own infrared, plus the sunlight it bounces back at you. A radiator face pointed at Earth isn&rsquo;t dumping heat into the void; it&rsquo;s being warmed by a planet. And the Sun &mdash; the entire reason you came up here &mdash; is a 1,360-watt-per-square-meter blowtorch that will happily cook any radiator that turns to look at it.</p>
+
+  <p>This creates a genuinely funny geometric problem. Your solar panel wants to stare straight at the Sun, to collect every watt it can. Your radiator wants to do the exact opposite: turn edge-on to the Sun and <em>hide</em> from it, so it isn&rsquo;t soaking up the very heat it&rsquo;s trying to shed. The two halves of your spacecraft want to point in directions ninety degrees apart.</p>
+</section>
+
+<!-- Interactive 2: Orientation war -->
+<section class="interactive" aria-label="Interactive: the orientation war">
+  <div class="ix-card">
+    <div class="ix-eyebrow">Play with the physics &middot; 2 of 3</div>
+    <h3 class="ix-title">The orientation war</h3>
+    <p class="ix-sub">The panel wants the Sun; the radiator wants to duck it. Rotate the spacecraft and watch power and cooling fight. Then flip to the fix everyone actually uses &mdash; and see what it costs.</p>
+    <div class="ix-panel">
+      <div class="ix-toggle" id="oToggle" role="group" aria-label="Mounting configuration">
+        <button class="active" data-mode="bolted" aria-pressed="true">Bolted to one face</button>
+        <button data-mode="gimbal" aria-pressed="false">Gimbaled apart</button>
+      </div>
+      <div class="ix-grid" style="margin-top:18px;">
+        <div>
+          <svg id="oSvg" class="ix-svg" viewBox="0 0 360 220" role="img" aria-labelledby="oSvgT oSvgD">
+            <title id="oSvgT">Spacecraft orientation relative to the Sun</title>
+            <desc id="oSvgD">The Sun is on the left. A spacecraft in the center carries a blue solar panel and a red radiator. As the angle slider changes, the spacecraft rotates, showing how the panel and radiator face the Sun differently.</desc>
+          </svg>
+          <div class="ix-field" style="margin-top:8px;">
+            <label for="oAng">Spacecraft angle to the Sun &nbsp;<span class="val" id="oAngval">0&deg;</span></label>
+            <input type="range" id="oAng" min="0" max="90" step="1" value="0" aria-label="Spacecraft angle to the Sun in degrees">
+          </div>
+        </div>
+        <div>
+          <div class="ix-bars">
+            <div class="ix-bar power">
+              <div class="bhead"><span>&#9889; Solar power collected</span><span class="pct" id="oPwr">100%</span></div>
+              <div class="btrack"><div class="bfill" id="oPwrFill"></div></div>
+            </div>
+            <div class="ix-bar cool">
+              <div class="bhead"><span>&#10052;&#65039; Cooling capacity</span><span class="pct" id="oCool">0%</span></div>
+              <div class="btrack"><div class="bfill" id="oCoolFill"></div></div>
+            </div>
+          </div>
+          <div class="ix-verdict" id="oVerdict"></div>
+        </div>
+      </div>
+      <p class="ix-note"><strong>Why this matters:</strong> bolted to one surface, the Sun you came to harvest is the Sun that cooks your radiator &mdash; there&rsquo;s no angle where both win. The real fix, the one the space station uses, is a separate motor that holds the radiators edge-on while the panels track the Sun. It works. It&rsquo;s also one more giant joint, spinning for years, that nobody can fly up and repair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ §5 RENT A PLANET ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>On Earth, you rent a planet-sized radiator for free</h2>
+  <p>Step back and ask why cooling feels free on the ground, because the answer reframes the whole comparison. When a terrestrial data center blows hot air out of a cooling tower or pipes warm water into a river, the air and the water are not the heat sink. They&rsquo;re a conveyor belt. They carry the heat to the actual sink &mdash; the planet &mdash; and the only way the planet itself gets rid of heat is the same way your orbital radiator does: by glowing into space.</p>
+
+  <p>Here&rsquo;s the thing about that planetary radiator. The Earth radiates about <strong>122 petawatts</strong> to space &mdash; 122 million billion watts &mdash; from a surface of 510 million square kilometers, and it does it for free: zero mass cost, gravity-anchored, pre-installed. A ground data center doesn&rsquo;t avoid radiative cooling. It just rents Earth&rsquo;s enormous radiator and lets the atmosphere shuttle heat over to it.</p>
+
+  <p>So going to space doesn&rsquo;t remove a step from cooling. It removes the planet. You give up the free conveyor belt (no air, no water) and the free radiator (now you build and launch your own), and in exchange you get cheaper electricity. That&rsquo;s the actual trade. Not &ldquo;free cooling&rdquo; &mdash; the opposite of free cooling. (The Sun really is worth maybe five times more up there: constant and unfiltered. But that&rsquo;s an <em>energy</em> win, not a cooling win, and the two keep getting quietly swapped.)</p>
+
+  <p>This is where the gap between the demo and the dream gets hard to wave away. Today: one 60-kilogram satellite, one H100, a toy model. The vision: SpaceX&rsquo;s 100 gigawatts a year. To loft that much hardware would take something like <strong>450 times the entire mass the world launched into space in all of 2025</strong>. Amazon&rsquo;s cloud chief, Matt Garman, put it flatly: there &ldquo;are not enough rockets&rdquo; to launch a million satellites, and it isn&rsquo;t economical.</p>
+
+  <p>To its credit, the community building this is fairly honest about where the argument actually sits. Strip away the noise and the whole debate reduces to a single number: the cost to put a kilogram into orbit. It needs to fall by roughly 10&times;, to around <span class="kbd-stat">$200/kg</span>, for orbital compute to pencil out &mdash; somewhere in the mid-2030s, if Starship delivers. Notice what that means. The physics isn&rsquo;t really in dispute anymore. Cooling is hard, energy is good, and the open question is logistics. As one analysis put it, going to space optimizes the cheapest part of a data center &mdash; the electricity &mdash; while wildly inflating the most expensive part: the hardware, and the rockets to get it there.</p>
+</section>
+
+<!-- ============ §6 CAN'T BEAM A TECHNICIAN ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>You can beam the power up. You can&rsquo;t beam up a technician.</h2>
+  <p>Suppose you solve all of it. You build your square kilometer of radiator, you gimbal it away from the Sun, you get the launch cost down. You still have to keep the thing running for years &mdash; and this is where orbital cooling stops being merely expensive and starts being genuinely dangerous.</p>
+
+  <p>Cooling is the one subsystem on an orbital data center that is both the biggest physical target and the most fragile. It&rsquo;s square kilometers of thin panel &mdash; the largest thing on the spacecraft &mdash; which makes it the most likely thing to be punctured by micrometeoroids and orbital debris. And it&rsquo;s plumbing: pumps, valves, pressurized coolant in long thin tubes, every one of which can wear out or fail. The space station&rsquo;s radiators have already been hit. On the ground, you send a technician. In orbit, over a multi-year mission, a puncture in a coolant line isn&rsquo;t a risk you might run into. It&rsquo;s a schedule.</p>
+
+  <p>You can deliver energy to a satellite many ways &mdash; that&rsquo;s the easy part. You cannot deliver a pair of hands. And the asymmetry compounds: a ground GPU that goes obsolete in five years gets pulled, resold, and recovers 60&ndash;70% of its value. An orbital GPU is fused to its radiator and its solar wing, slowly degraded by radiation, and at end of life it burns up in the atmosphere. You launch a fortune and you get back nothing.</p>
+
+  <p>That&rsquo;s the real shape of the orbital cooling problem. It isn&rsquo;t that physics <em>forbids</em> it &mdash; it doesn&rsquo;t. It&rsquo;s that physics makes the cheapest input, power, a little cheaper, while making the most expensive input &mdash; hardware you can never touch again &mdash; far more expensive.</p>
+</section>
+
+<!-- ============ §7 KICKER: ARTIFICIAL STAR ============ -->
+<section class="prose tight">
+  <hr class="rule">
+  <h2>A gigawatt in orbit is a small star</h2>
+  <p>I&rsquo;ll end on the part I think is genuinely beautiful, because it turns the whole problem into a piece of physics rather than an opinion.</p>
+
+  <p>Strip away the silicon and the marketing and ask what an orbital data center actually <em>is</em>, thermodynamically. It&rsquo;s a body that takes in concentrated energy and radiates it back out as heat. That is the definition of a star. A small, artificial, infrared star, whose fuel is a power cable and whose glow is its own waste heat.</p>
+
+  <p>You can even compute its color. A one-sided surface basking in sunlight at Earth&rsquo;s distance from the Sun, shedding heat only from its lit face, settles at about <strong>120&nbsp;&deg;C</strong>. That isn&rsquo;t a coincidence I&rsquo;m reaching for &mdash; it&rsquo;s the same Stefan-Boltzmann balance that fixes the temperature of a hypothetical Dyson sphere, the megastructure a civilization might wrap around its star to capture all of its energy. Your data center&rsquo;s radiator and an alien Dyson sphere glow at the same temperature, set by the same equation, separated only by scale.</p>
+</section>
+
+<!-- Interactive 3: Artificial-star / Dyson dial -->
+<section class="interactive" aria-label="Interactive: the temperature sunlight sets">
+  <div class="ix-card">
+    <div class="ix-eyebrow">Play with the physics &middot; 3 of 3</div>
+    <h3 class="ix-title">What temperature does sunlight alone set?</h3>
+    <p class="ix-sub">A sun-facing surface that can only cool by glowing settles at a temperature fixed by one thing: its distance from the Sun. Your data center&rsquo;s radiator and an alien Dyson sphere obey the same equation. Drag the collector and find the temperature.</p>
+    <div class="ix-panel">
+      <div class="ix-grid">
+        <div class="ix-controls">
+          <div class="ix-equation"><b>T</b> = ( <b>S</b> &divide; &sigma; )<sup>1/4</sup> &nbsp;&middot;&nbsp; <b>S</b> = 1361 &divide; <b>d</b><sup>2</sup> W/m&sup2;</div>
+          <svg id="dSvg" class="ix-svg" viewBox="0 0 360 150" role="img" aria-labelledby="dSvgT dSvgD">
+            <title id="dSvgT">A collector at a chosen distance from the Sun</title>
+            <desc id="dSvgD">The Sun sits at the left. A glowing collector sits at the chosen distance along an orbit line; its glow color shifts from cool when far to white-hot when near. A dashed marker at one astronomical unit is labeled 120 degrees Celsius.</desc>
+          </svg>
+          <div class="ix-field">
+            <label for="dDist">Distance from the Sun &nbsp;<span class="val" id="dDistval">1.00 AU</span></label>
+            <input type="range" id="dDist" min="0.3" max="5" step="0.01" value="1" aria-label="Distance from the Sun in astronomical units">
+          </div>
+        </div>
+        <div class="ix-readout">
+          <div class="big"><span id="dTemp">120</span><span class="unit">&deg;C</span></div>
+          <div class="compare" id="dCompare"></div>
+        </div>
+      </div>
+      <p class="ix-note"><strong>The coincidence that isn&rsquo;t one:</strong> at Earth&rsquo;s distance a sun-facing collector settles near 120&nbsp;&deg;C &mdash; whether it&rsquo;s your data center&rsquo;s skin or a star-swallowing Dyson sphere. Same law, scaled eighteen orders of magnitude. (Glow color is illustrative; a real 400&nbsp;K surface radiates in the infrared, invisible to the eye.)</p>
+    </div>
+  </div>
+</section>
+
+<section class="prose tight">
+  <p>And here&rsquo;s the kicker inside the kicker. In 1960, Freeman Dyson published a short paper in <em>Science</em> proposing that we could detect advanced alien civilizations precisely by their waste heat &mdash; the unavoidable infrared glow of computation and industry at scale. The same thermodynamics that makes cooling the hard problem of building a data center in space is the thermodynamics that would make that data center, scaled up far enough, visible across the galaxy.</p>
+
+  <div class="callout cool">
+    <span class="label">A footnote for the optimists</span>
+    There&rsquo;s an even cleverer pitch &mdash; that you should fly to space to &ldquo;borrow&rdquo; the 2.7 K cold and compute near the thermodynamic floor, the Landauer limit, the absolute minimum energy any computation requires. It falls apart on the numbers: refrigerating a chip down to 2.7 K costs far more energy than that floor ever saves. The cold is a rounding error here, too.
+  </div>
+
+  <p>You can encrypt the data. You can hide the model weights. You cannot hide the heat. Anything that thinks, at scale, has to glow &mdash; and getting rid of that glow, not finding the power to feed it, is the problem that will decide whether the computers ever really move to space.</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="article-footer">
+  <div class="wrap">
+    <p style="border-left: 3px solid var(--red); padding-left: 18px; font-style: italic; max-width: 660px; margin-top: 0;"><strong style="font-style: normal;">A note on the numbers.</strong> This is a first-principles, back-of-the-envelope analysis built from public figures (NASA, NVIDIA, Starcloud, SpaceX&rsquo;s filings, and Freeman Dyson&rsquo;s 1960 paper) and standard physics &mdash; the Stefan-Boltzmann law above all. Everything quoted to two significant figures is sourced; everything I call &ldquo;roughly&rdquo; is an order-of-magnitude estimate with its assumptions stated inline. The conclusions are my own, and the thesis doesn&rsquo;t hinge on the third decimal place &mdash; it hinges on the fourth power. Corrections welcome.</p>
+
+    <div class="share-row">
+      <a class="share-btn" href="#" id="shareTwitter" target="_blank" rel="noopener noreferrer">Share on X</a>
+      <a class="share-btn" href="#" id="shareLinkedIn" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+      <a class="share-btn" href="#" id="shareHN" target="_blank" rel="noopener noreferrer">Submit to Hacker News</a>
+      <a class="share-btn" href="#" id="copyLink">Copy link</a>
+    </div>
+
+    <p style="margin-top: 32px; opacity: 0.6; font-size: 12px;">&copy; 2026 Peike Li. Released for educational use. The physics is first-principles; the conclusions are mine. Corrections welcome.</p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* ==================== HERO STAT COUNTER ==================== */
+(function() {
+  const heroSection = document.getElementById('heroStats');
+  if (!heroSection) return;
+  let triggered = false;
+
+  function fmt(n, decimals) {
+    if (decimals > 0) return n.toFixed(decimals);
+    return Math.floor(n).toLocaleString('en-US');
+  }
+  function animateNum(el, target, suffix, prefix, decimals) {
+    const start = performance.now();
+    const duration = 1700;
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.innerHTML = (prefix || '') + fmt(target * eased, decimals) + (suffix || '');
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+        heroSection.querySelectorAll('.num').forEach(el => {
+          const target = parseFloat(el.dataset.target);
+          const decimals = parseInt(el.dataset.decimals || '0', 10);
+          animateNum(el, target, el.dataset.suffix || '', el.dataset.prefix || '', decimals);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  obs.observe(heroSection);
+})();
+
+/* ==================== READ PROGRESS ==================== */
+(function() {
+  const bar = document.getElementById('readProgress');
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ==================== INTERACTIVE 1: RADIATOR EXPLORER ==================== */
+(function() {
+  const SIGMA = 5.670374419e-8;
+  const FIELD = 7140;          // m^2, a football/soccer pitch
+  const CPARK = 3.41e6;        // m^2, Central Park
+  const pEl = document.getElementById('rP'), tEl = document.getElementById('rT'), eEl = document.getElementById('rE');
+  if (!pEl) return;
+  const pVal = document.getElementById('rPval'), tVal = document.getElementById('rTval'), eVal = document.getElementById('rEval');
+  const areaEl = document.getElementById('rArea'), unitEl = document.getElementById('rUnit'), cmpEl = document.getElementById('rCompare');
+  const svg = document.getElementById('rCurve');
+  const W = 360, H = 150, ml = 6, mr = 6, mt = 10, mb = 18;
+
+  function areaFor(P_W, T, eps) { return P_W / (2 * eps * SIGMA * Math.pow(T, 4)); } // both faces, m^2
+
+  function fmtArea(m2) {
+    if (m2 >= 1e6) return { v: (m2 / 1e6).toFixed(2), u: 'km&sup2;' };
+    return { v: Math.round(m2).toLocaleString('en-US'), u: 'm&sup2;' };
+  }
+
+  function drawCurve(P_W, eps, Tnow) {
+    const Tmin = 270, Tmax = 400;
+    // y-axis scaled to area at Tmin (the largest)
+    const amax = areaFor(P_W, Tmin, eps);
+    const x = T => ml + (T - Tmin) / (Tmax - Tmin) * (W - ml - mr);
+    const y = a => mt + (1 - a / amax) * (H - mt - mb);
+    let d = '';
+    for (let T = Tmin; T <= Tmax; T += 2) {
+      d += (T === Tmin ? 'M' : 'L') + x(T).toFixed(1) + ' ' + y(areaFor(P_W, T, eps)).toFixed(1) + ' ';
+    }
+    const area = areaFor(P_W, Tnow, eps);
+    const cx = x(Tnow), cy = y(area);
+    svg.innerHTML =
+      '<title id="rCurveT">Required radiator area versus temperature</title>' +
+      '<desc id="rCurveD">A steeply falling curve: as radiator temperature rises, the area needed drops sharply (fourth-power law). A marker shows the selected temperature.</desc>' +
+      '<line x1="' + ml + '" y1="' + (H - mb) + '" x2="' + (W - mr) + '" y2="' + (H - mb) + '" stroke="#DDD7CC" stroke-width="1"/>' +
+      '<path d="' + d + '" fill="none" stroke="#E0303E" stroke-width="2.5"/>' +
+      '<line x1="' + cx.toFixed(1) + '" y1="' + mt + '" x2="' + cx.toFixed(1) + '" y2="' + (H - mb) + '" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>' +
+      '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="5" fill="#1A1A1A"/>' +
+      '<text x="' + ml + '" y="' + (H - 5) + '" font-family="IBM Plex Sans" font-size="9" fill="#888">-3 &deg;C</text>' +
+      '<text x="' + (W - mr) + '" y="' + (H - 5) + '" font-family="IBM Plex Sans" font-size="9" fill="#888" text-anchor="end">127 &deg;C</text>' +
+      '<text x="' + (W/2) + '" y="' + (H - 5) + '" font-family="IBM Plex Sans" font-size="9" fill="#888" text-anchor="middle">radiator temperature &rarr;</text>';
+  }
+
+  function update() {
+    const P_MW = parseFloat(pEl.value), T = parseFloat(tEl.value), eps = parseFloat(eEl.value);
+    const P_W = P_MW * 1e6;
+    pVal.innerHTML = (P_MW >= 1000 ? '1.0 GW' : P_MW + ' MW');
+    tVal.innerHTML = Math.round(T - 273) + ' &deg;C';
+    eVal.textContent = eps.toFixed(2);
+
+    const area = areaFor(P_W, T, eps);
+    const f = fmtArea(area);
+    areaEl.textContent = f.v;
+    unitEl.innerHTML = f.u;
+
+    const fields = area / FIELD;
+    const parkPct = area / CPARK * 100;
+    let cmp = '&asymp; <strong>' + (fields >= 10 ? Math.round(fields).toLocaleString('en-US') : fields.toFixed(1)) + '</strong> soccer fields of glowing panel';
+    if (parkPct >= 1) cmp += '<br>&asymp; <strong>' + Math.round(parkPct) + '%</strong> of Central Park';
+    cmp += '<br><span style="color:var(--ink-muted)">to dump ' + (P_MW >= 1000 ? '1 GW' : P_MW + ' MW') + ' at ' + Math.round(T - 273) + '&thinsp;&deg;C</span>';
+    cmpEl.innerHTML = cmp;
+
+    drawCurve(P_W, eps, T);
+  }
+  [pEl, tEl, eEl].forEach(el => el.addEventListener('input', update));
+  update();
+})();
+
+/* ==================== INTERACTIVE 2: ORIENTATION WAR ==================== */
+(function() {
+  const angEl = document.getElementById('oAng');
+  if (!angEl) return;
+  const angVal = document.getElementById('oAngval');
+  const pwrEl = document.getElementById('oPwr'), pwrFill = document.getElementById('oPwrFill');
+  const coolEl = document.getElementById('oCool'), coolFill = document.getElementById('oCoolFill');
+  const verdict = document.getElementById('oVerdict');
+  const svg = document.getElementById('oSvg');
+  const toggle = document.getElementById('oToggle');
+  let mode = 'bolted';
+
+  function drawCraft(angDeg) {
+    const cx = 235, cy = 110;          // spacecraft body center
+    const sunX = 55, sunY = 110;
+    const a = angDeg * Math.PI / 180;
+    // Sun rays
+    let rays = '';
+    for (let i = -2; i <= 2; i++) {
+      const yy = sunY + i * 16;
+      rays += '<line x1="78" y1="' + yy + '" x2="135" y2="' + yy + '" stroke="#E0A93A" stroke-width="2" opacity="0.5"/>';
+    }
+    // Solar panel: normal points along angle a from the sun-line (a=0 => faces sun). Panel drawn perpendicular to its normal.
+    // panel normal direction (unit): toward sun rotated by a
+    const pnx = -Math.cos(a), pny = Math.sin(a); // normal
+    const plen = 46;
+    // panel surface perpendicular to normal:
+    const psx = -pny, psy = pnx;
+    const p1x = cx + psx * plen, p1y = cy + psy * plen;
+    const p2x = cx - psx * plen, p2y = cy - psy * plen;
+    // Radiator: bolted => same normal as panel; gimbal => edge-on to sun (normal perpendicular to sun-line => vertical normal)
+    let rnx, rny;
+    if (mode === 'bolted') { rnx = pnx; rny = pny; }
+    else { rnx = 0; rny = 1; } // points up/down, edge-on to horizontal sun-line
+    const rsx = -rny, rsy = rnx;
+    const rlen = 40;
+    const off = 14; // offset radiator from body so it's visible
+    const rcx = cx + rnx * off, rcy = cy + rny * off;
+    const r1x = rcx + rsx * rlen, r1y = rcy + rsy * rlen;
+    const r2x = rcx - rsx * rlen, r2y = rcy - rsy * rlen;
+
+    svg.innerHTML =
+      '<title id="oSvgT">Spacecraft orientation relative to the Sun</title>' +
+      '<desc id="oSvgD">The Sun is on the left; the spacecraft carries a blue solar panel and a red radiator that rotate with the angle slider.</desc>' +
+      rays +
+      '<circle cx="' + sunX + '" cy="' + sunY + '" r="20" fill="#E0A93A"/>' +
+      '<text x="' + sunX + '" y="' + (sunY + 44) + '" font-family="IBM Plex Sans" font-size="10" fill="#888" text-anchor="middle">Sun</text>' +
+      '<rect x="' + (cx - 9) + '" y="' + (cy - 9) + '" width="18" height="18" rx="3" fill="#1A1A1A"/>' +
+      '<line x1="' + p1x.toFixed(1) + '" y1="' + p1y.toFixed(1) + '" x2="' + p2x.toFixed(1) + '" y2="' + p2y.toFixed(1) + '" stroke="#2E5266" stroke-width="7" stroke-linecap="round"/>' +
+      '<line x1="' + r1x.toFixed(1) + '" y1="' + r1y.toFixed(1) + '" x2="' + r2x.toFixed(1) + '" y2="' + r2y.toFixed(1) + '" stroke="#E0303E" stroke-width="7" stroke-linecap="round"/>' +
+      '<text x="' + cx + '" y="200" font-family="IBM Plex Sans" font-size="10" text-anchor="middle"><tspan fill="#2E5266">&#9632; solar</tspan>　<tspan fill="#E0303E">&#9632; radiator</tspan></text>';
+  }
+
+  function update() {
+    const ang = parseFloat(angEl.value);
+    angVal.innerHTML = ang + '&deg;';
+    const a = ang * Math.PI / 180;
+    const power = Math.cos(a); // 100% at 0deg
+    let cooling;
+    if (mode === 'bolted') {
+      // radiator faces sun the same as the panel: parasitic ~ cos(a); cooling worst when facing sun
+      cooling = 1 - Math.cos(a);
+    } else {
+      // gimbaled edge-on: cooling stays high regardless of angle
+      cooling = 0.92;
+    }
+    const pPct = Math.max(0, Math.round(power * 100));
+    const cPct = Math.max(0, Math.round(cooling * 100));
+    pwrEl.textContent = pPct + '%'; pwrFill.style.width = pPct + '%';
+    coolEl.textContent = cPct + '%'; coolFill.style.width = cPct + '%';
+
+    if (mode === 'bolted') {
+      const both = Math.min(pPct, cPct);
+      verdict.className = 'ix-verdict bad';
+      if (ang <= 3) verdict.innerHTML = '<strong>Full power, zero cooling.</strong> The panel is drinking sunlight &mdash; and so is the radiator, which is now a solar collector. It can&rsquo;t shed a thing.';
+      else if (ang >= 87) verdict.innerHTML = '<strong>Full cooling, zero power.</strong> The radiator finally faces the dark &mdash; but the panel is edge-on to the Sun and collecting nothing.';
+      else verdict.innerHTML = '<strong>A losing compromise.</strong> Bolted together, every degree you give the panel you take from the radiator. The best you can do is ' + both + '% of each.';
+    } else {
+      verdict.className = 'ix-verdict good';
+      verdict.innerHTML = '<strong>Both win &mdash; for a price.</strong> A dedicated motor holds the radiator edge-on while the panel tracks the Sun. That&rsquo;s the fix the ISS uses &mdash; and a giant joint spinning for years that no one can repair.';
+    }
+    drawCraft(ang);
+  }
+
+  toggle.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mode = btn.dataset.mode;
+      toggle.querySelectorAll('button').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      update();
+    });
+  });
+  angEl.addEventListener('input', update);
+  update();
+})();
+
+/* ==================== INTERACTIVE 3: ARTIFICIAL STAR / DYSON DIAL ==================== */
+(function() {
+  const SIGMA = 5.670374419e-8, S0 = 1361;
+  const dEl = document.getElementById('dDist');
+  if (!dEl) return;
+  const distV = document.getElementById('dDistval'), tEl = document.getElementById('dTemp');
+  const cmp = document.getElementById('dCompare'), svg = document.getElementById('dSvg');
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const hx = c => { c = Math.round(c).toString(16); return c.length < 2 ? '0' + c : c; };
+  const stops = [[58, 90, 122], [224, 48, 62], [255, 197, 107], [255, 244, 214]]; // cold slate -> red -> amber -> white-hot
+  function color(t) {
+    t = Math.max(0, Math.min(1, t));
+    const seg = t * (stops.length - 1), i = Math.floor(seg), f = seg - i;
+    if (i >= stops.length - 1) { const s = stops[stops.length - 1]; return '#' + hx(s[0]) + hx(s[1]) + hx(s[2]); }
+    const a = stops[i], b = stops[i + 1];
+    return '#' + hx(lerp(a[0], b[0], f)) + hx(lerp(a[1], b[1], f)) + hx(lerp(a[2], b[2], f));
+  }
+  const posX = d => lerp(88, 338, Math.pow((d - 0.3) / (5 - 0.3), 0.6));
+  function draw(d, Tk) {
+    const sunX = 34, sy = 75;
+    const cx = posX(d), col = color((Tk - 150) / 600), au1 = posX(1);
+    svg.innerHTML =
+      '<title id="dSvgT">A collector at a chosen distance from the Sun</title><desc id="dSvgD">Sun at left; a glowing collector at the chosen distance; a dashed marker at one AU labeled 120 C.</desc>' +
+      '<line x1="' + sunX + '" y1="' + sy + '" x2="346" y2="' + sy + '" stroke="#DDD7CC" stroke-width="2"/>' +
+      '<line x1="' + au1.toFixed(1) + '" y1="30" x2="' + au1.toFixed(1) + '" y2="120" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>' +
+      '<text x="' + au1.toFixed(1) + '" y="22" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#888">1 AU &middot; 120&deg;C</text>' +
+      '<circle cx="' + sunX + '" cy="' + sy + '" r="15" fill="#E0A93A"/>' +
+      '<circle cx="' + cx.toFixed(1) + '" cy="' + sy + '" r="21" fill="' + col + '" opacity="0.28"/>' +
+      '<rect x="' + (cx - 9).toFixed(1) + '" y="' + (sy - 9) + '" width="18" height="18" rx="4" fill="' + col + '" stroke="#1A1A1A" stroke-width="1.5"/>' +
+      '<text x="346" y="' + (sy + 28) + '" text-anchor="end" font-family="IBM Plex Sans" font-size="9" fill="#888">distance from the Sun &rarr;</text>';
+  }
+  function update() {
+    const d = parseFloat(dEl.value);
+    const S = S0 / (d * d);
+    const Tk = Math.pow(S / SIGMA, 0.25);
+    distV.textContent = d.toFixed(2) + ' AU';
+    tEl.textContent = Math.round(Tk - 273.15);
+    let ctx;
+    if (Math.abs(d - 1) < 0.04) ctx = '<strong>Earth&rsquo;s orbit</strong> &mdash; and the glow of a Dyson sphere.';
+    else if (Math.abs(d - 0.72) < 0.05) ctx = 'Roughly <strong>Venus&rsquo;s</strong> orbit.';
+    else if (Math.abs(d - 1.52) < 0.07) ctx = 'Roughly <strong>Mars&rsquo;s</strong> orbit.';
+    else if (d < 1) ctx = 'Closer in than Earth &mdash; more sun, hotter skin.';
+    else ctx = 'Farther out than Earth &mdash; less sun, colder skin.';
+    cmp.innerHTML = ctx + '<br><span style="color:var(--ink-muted)">sunlight here: ' + Math.round(S).toLocaleString('en-US') + ' W/m&sup2; &middot; ' + Math.round(Tk) + ' K</span>';
+    draw(d, Tk);
+  }
+  dEl.addEventListener('input', update);
+  update();
+})();
+
+/* ==================== SHARE BUTTONS ==================== */
+(function() {
+  const title = encodeURIComponent('Space is not a freezer, it’s a thermos. Why cooling — not power — is the hard part of AI data centers in orbit:');
+  const url = encodeURIComponent(window.location.href);
+  const tw = document.getElementById('shareTwitter'); if (tw) tw.href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url;
+  const li = document.getElementById('shareLinkedIn'); if (li) li.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
+  const hn = document.getElementById('shareHN'); if (hn) hn.href = 'https://news.ycombinator.com/submitlink?u=' + url + '&t=' + encodeURIComponent('Space Is a Thermos, Not a Freezer');
+  const cp = document.getElementById('copyLink');
+  if (cp) cp.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const o = cp.textContent; cp.textContent = 'Link copied ✓';
+      setTimeout(() => cp.textContent = o, 2000);
+    });
+  });
+})();
+
+/* ==================== FADE IN ==================== */
+(function() {
+  const els = document.querySelectorAll('.fade-up');
+  if (!els.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
+})();
+</script>
+
+</body>
+</html>
