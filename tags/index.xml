@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Fri, 29 May 2026 08:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2026 08:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="https://gogoduck912.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,36 @@
     <item>
       <title>AI</title>
       <link>https://gogoduck912.github.io/tags/ai/</link>
-      <pubDate>Fri, 29 May 2026 08:00:00 +0000</pubDate>
+      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI Infrastructure</title>
+      <link>https://gogoduck912.github.io/tags/ai-infrastructure/</link>
+      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/ai-infrastructure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Physics</title>
+      <link>https://gogoduck912.github.io/tags/physics/</link>
+      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/physics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Space</title>
+      <link>https://gogoduck912.github.io/tags/space/</link>
+      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/space/</guid>
       <description></description>
     </item>
     

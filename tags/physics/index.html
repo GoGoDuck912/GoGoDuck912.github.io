@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Peike Li">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gogoduck912.github.io/tags/physics/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:400,500,600,700|DM+Sans:400,500,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e434f046e14caded3443fe52ca6a29c7.css">
+
+  
+    
+    
+    
+    
+      
+    
+    
+    
+    <link rel="stylesheet" href="/css/academic.a6c24cfbae6a6e9e133130c8a961a8eb.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/tags/physics/index.xml" type="application/rss+xml" title="PEIKE LI">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://gogoduck912.github.io/tags/physics/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@DrPatrickLi">
+  <meta property="twitter:creator" content="@DrPatrickLi">
+  
+  <meta property="og:site_name" content="PEIKE LI">
+  <meta property="og:url" content="https://gogoduck912.github.io/tags/physics/">
+  <meta property="og:title" content="Physics | PEIKE LI">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
+  <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
+  
+  <meta property="og:updated_time" content="2026-06-21T08:00:00&#43;00:00">
+  
+
+  
+
+
+  
+<meta name="google-site-verification" content="a8O4G1an2njH4hOkLKEV8NRRhSGYKAbiP1XKaJRJA9c" />
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JTFM1G9ZQK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JTFM1G9ZQK');
+</script>
+
+
+
+<meta name="keywords" content="Peike Li, Google Research, Research Scientist, multimodal foundation models, world models, LLM, multimodal AI, generative AI, video generation, music generation, computer vision, deep learning, NeurIPS, CVPR, ICCV, AAAI, TPAMI">
+
+
+<meta name="twitter:site" content="@DrPatrickLi">
+<meta name="twitter:creator" content="@DrPatrickLi">
+
+
+<meta property="og:type" content="article">
+
+
+
+
+
+
+
+
+<meta name="geo.region" content="AU">
+<meta name="geo.placename" content="Sydney">
+
+
+<script>
+(function () {
+  var root = document.documentElement;
+  
+  var style = document.createElement('style');
+  
+  style.textContent = '.show-senior .senior-title[hidden]{display:inline !important}';
+  document.head.appendChild(style);
+
+  var tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  
+  if (tz.indexOf('Australia/') !== 0) root.classList.add('show-senior');
+
+  
+  fetch('https://api.country.is/')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (d) {
+      var c = d && d.country;
+      if (c === 'AU') root.classList.remove('show-senior');
+      else if (/^[A-Z]{2}$/.test(c)) root.classList.add('show-senior');
+      
+      
+    })
+    .catch(function () {   });
+})();
+</script>
+
+
+  <title>Physics | PEIKE LI</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">PEIKE LI</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Bio</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#blog"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#miscellaneous"><span>Miscellaneous</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+    
+  
+<div class="universal-wrapper pt-3">
+  <h1 itemprop="name">Physics</h1>
+
+  
+
+  
+</div>
+
+
+
+<div class="universal-wrapper">
+  
+
+  
+  
+  <div>
+    <h2><a href="/post/space-thermos/">Space Is a Thermos, Not a Freezer</a></h2>
+    <div class="article-style">
+      
+      From physics first principles: why shedding a gigawatt of waste heat in a vacuum — not finding the power to make it — is the real bottleneck for AI data centers in orbit.
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    <script>
+(function(){
+  var btn = document.createElement('button');
+  btn.id = 'back-to-top';
+  btn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+  btn.setAttribute('aria-label','Back to top');
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  var o = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.home-section').forEach(function(el){o.observe(el);});
+
+  document.querySelectorAll('.card[data-href]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('a')) return;
+      var href = card.getAttribute('data-href');
+      var target = card.getAttribute('target');
+      if(target === '_blank') window.open(href,'_blank');
+      else window.location.href = href;
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var isMobile = window.innerWidth <= 768;
+  var c = document.createElement('canvas');
+  c.id = 'dotgrid-bg';
+  document.body.appendChild(c);
+  var ctx = c.getContext('2d');
+  var mx = -9999, my = -9999;
+  var GAP = isMobile ? 28 : 24;
+  var R = isMobile ? 0.8 : 1.0;
+  var RADIUS = 160;
+  function isDark(){ return document.body.classList.contains('dark'); }
+  var BASE_L = [197, 202, 233], ACT_L = [63, 81, 181];
+  var BASE_D = [60, 65, 90], ACT_D = [140, 158, 255];
+  var BASE = BASE_L, ACT = ACT_L;
+  var FALPHA_COLOR_L = '63, 81, 181';
+  var FALPHA_COLOR_D = '140, 158, 255';
+  var fColor = FALPHA_COLOR_L;
+  function updateTheme(){
+    if(isDark()){ BASE = BASE_D; ACT = ACT_D; fColor = FALPHA_COLOR_D; }
+    else { BASE = BASE_L; ACT = ACT_L; fColor = FALPHA_COLOR_L; }
+  }
+  updateTheme();
+  new MutationObserver(function(){ updateTheme(); }).observe(document.body, {attributes:true, attributeFilter:['class']});
+  var dots = [];
+
+  
+  var formulas = [
+    'E = mc²',
+    'e^{iπ} + 1 = 0',
+    'F = ma',
+    'a² + b² = c²',
+    'iℏ ∂Ψ/∂t = ĤΨ',
+    '∇·E = ρ/ε₀',
+    '∇×B = μ₀J + μ₀ε₀ ∂E/∂t',
+    'F = G·m₁m₂/r²',
+    'S = k ln W',
+    'E = hf'
+  ];
+  var fItems = [];
+
+  function seed(s){ return function(){ s=(s*9301+49297)%233280; return s/233280; }; }
+
+  function layoutFormulas(){
+    fItems = [];
+    var rng = seed(42);
+    var cellW = isMobile ? 200 : 180, cellH = isMobile ? 120 : 100;
+    var cols = Math.ceil(c.width / cellW) + 1;
+    var rows = Math.ceil(c.height / cellH) + 1;
+    for(var row = 0; row < rows; row++){
+      for(var col = 0; col < cols; col++){
+        var fi = Math.floor(rng() * formulas.length);
+        var x = col * cellW + (rng() - 0.5) * cellW * 0.6;
+        var y = row * cellH + (rng() - 0.5) * cellH * 0.5;
+        var rot = (rng() - 0.5) * 0.25;
+        var size = isMobile ? (14 + rng() * 8) : (18 + rng() * 12);
+        fItems.push({ text: formulas[fi], ox: x, oy: y, rot: rot, size: size });
+      }
+    }
+  }
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    dots = [];
+    for(var x = GAP/2; x < c.width; x += GAP)
+      for(var y = GAP/2; y < c.height; y += GAP)
+        dots.push({x:x, y:y});
+    layoutFormulas();
+    if(isMobile) drawStatic();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var scrollOff = 0;
+  window.addEventListener('scroll', function(){
+    scrollOff = window.scrollY;
+    if(isMobile) drawStatic();
+  });
+
+  function drawFormulas(yShift){
+    ctx.save();
+    for(var i = 0; i < fItems.length; i++){
+      var f = fItems[i];
+      var fy = f.oy + yShift;
+      if(fy < -30) fy += Math.ceil(c.height / 180 + 1) * 180;
+      if(fy > c.height + 30) continue;
+      ctx.save();
+      ctx.translate(f.ox, fy);
+      ctx.rotate(f.rot);
+      ctx.font = 'italic ' + f.size + 'px "STIX Two Math", "Cambria Math", "Source Serif 4", Georgia, serif';
+      var edgeX = Math.abs(f.ox - c.width / 2) / (c.width / 2);
+      var topFade = 1 - fy / c.height;
+      var dk = isDark() ? 2.0 : 1.0;
+      var fAlpha = (0.02 + 0.2 * topFade) * (0.3 + 0.7 * edgeX) * dk;
+      ctx.fillStyle = 'rgba(' + fColor + ', ' + fAlpha + ')';
+      ctx.fillText(f.text, 0, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawDots(){
+    for(var i = 0; i < dots.length; i++){
+      var d = dots[i];
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, R, 0, 6.2832);
+      ctx.fillStyle = 'rgba('+BASE[0]+','+BASE[1]+','+BASE[2]+','+(isDark()?0.2:0.3)+')';
+      ctx.fill();
+    }
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0, 0, c.width, c.height);
+    drawFormulas(-(scrollOff * 0.15) % 180);
+    drawDots();
+  }
+
+  if(!isMobile){
+    document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+    document.addEventListener('mouseleave', function(){ mx = -9999; my = -9999; });
+
+    function draw(){
+      ctx.clearRect(0, 0, c.width, c.height);
+      drawFormulas(-(scrollOff * 0.15) % 180);
+      for(var i = 0; i < dots.length; i++){
+        var d = dots[i];
+        var dist = Math.sqrt((d.x - mx)*(d.x - mx) + (d.y - my)*(d.y - my));
+        var t = Math.max(0, 1 - dist / RADIUS);
+        var cx = Math.abs(d.x - c.width / 2) / (c.width / 2);
+        t = t * (0.3 + 0.7 * cx);
+        var cr = Math.round(BASE[0] + (ACT[0] - BASE[0]) * t);
+        var cg = Math.round(BASE[1] + (ACT[1] - BASE[1]) * t);
+        var cb = Math.round(BASE[2] + (ACT[2] - BASE[2]) * t);
+        var dotTopFade = 1 - d.y / c.height;
+        var dotVertMul = 0.2 + 1.2 * dotTopFade;
+        var size = R + t * 1.5;
+        var alpha = (0.35 + t * 0.5) * dotVertMul;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, size, 0, 6.2832);
+        ctx.fillStyle = 'rgba('+cr+','+cg+','+cb+','+alpha+')';
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+})();
+</script>
+<script>
+
+
+(function(){
+  function init(){
+    var section = document.getElementById('blog');
+    if(!section) return;
+
+    
+    var heading = section.querySelector('.center-text h1') || section.querySelector('h1');
+    if(heading && !heading.querySelector('a')){
+      var ht = heading.textContent.trim();
+      heading.textContent = '';
+      var ha = document.createElement('a');
+      ha.href = '/blog/'; ha.className = 'blog-title-link';
+      ha.innerHTML = ht + '<span class="blog-readall" aria-hidden="true">Read all posts &rarr;</span>';
+      heading.appendChild(ha);
+    }
+
+    var grid = section.querySelector('.isotope.projects-container');
+    if(!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(cards.length < 2) return;
+
+    
+    for(var i = cards.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+    }
+
+    var carousel = document.createElement('div'); carousel.className = 'blog-carousel';
+    var viewport = document.createElement('div'); viewport.className = 'blog-carousel-viewport';
+    var track = document.createElement('div'); track.className = 'blog-carousel-track';
+    cards.forEach(function(c){ track.appendChild(c); }); 
+    viewport.appendChild(track); carousel.appendChild(viewport);
+
+    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'blog-nav prev'; prev.setAttribute('aria-label', 'Previous post'); prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'blog-nav next'; next.setAttribute('aria-label', 'Next post'); next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    var dots = document.createElement('div'); dots.className = 'blog-dots';
+    carousel.appendChild(prev); carousel.appendChild(next); carousel.appendChild(dots);
+
+    grid.style.display = 'none';
+    grid.parentNode.insertBefore(carousel, grid.nextSibling);
+
+    var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var n = cards.length, idx = 0, animating = false, timer = null;
+
+    function perView(){ var w = window.innerWidth; return w > 1024 ? 3 : (w > 768 ? 2 : 1); }
+    function markCenter(){ var c = Math.floor(perView() / 2); for(var i = 0; i < track.children.length; i++) track.children[i].classList.toggle('is-center', i === c); }
+
+    for(var k = 0; k < n; k++){
+      (function(k){
+        var b = document.createElement('button'); b.type = 'button';
+        b.setAttribute('aria-label', 'Go to post ' + (k + 1));
+        b.addEventListener('click', function(){ goTo(k); restart(); });
+        dots.appendChild(b);
+      })(k);
+    }
+    function syncDots(){
+      for(var k = 0; k < dots.children.length; k++)
+        dots.children[k].className = (k === ((idx % n) + n) % n) ? 'active' : '';
+    }
+    syncDots(); markCenter();
+
+    function step(){
+      var f = track.children[0]; var s = getComputedStyle(track);
+      var gap = parseFloat(s.columnGap || s.gap || '16') || 16;
+      return f.getBoundingClientRect().width + gap;
+    }
+    var EASE = 'transform .6s cubic-bezier(.22,1,.36,1)';
+
+    function advance(){
+      if(animating) return; animating = true;
+      var dx = step();
+      if(reduce){ track.appendChild(track.children[0]); idx = (idx + 1) % n; syncDots(); markCenter(); animating = false; return; }
+      track.style.transition = EASE; track.style.transform = 'translateX(' + (-dx) + 'px)';
+      var done = function(e){
+        if(e.target !== track) return;
+        track.removeEventListener('transitionend', done);
+        track.style.transition = 'none'; track.appendChild(track.children[0]);
+        track.style.transform = 'translateX(0)'; void track.offsetWidth;
+        idx = (idx + 1) % n; syncDots(); markCenter(); animating = false;
+      };
+      track.addEventListener('transitionend', done);
+    }
+    function retreat(){
+      if(animating) return; animating = true;
+      var dx = step();
+      if(reduce){ track.insertBefore(track.children[n - 1], track.children[0]); idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false; return; }
+      track.style.transition = 'none'; track.insertBefore(track.children[n - 1], track.children[0]);
+      track.style.transform = 'translateX(' + (-dx) + 'px)'; void track.offsetWidth;
+      track.style.transition = EASE; track.style.transform = 'translateX(0)';
+      var done = function(e){
+        if(e.target !== track) return;
+        track.removeEventListener('transitionend', done);
+        idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false;
+      };
+      track.addEventListener('transitionend', done);
+    }
+    function goTo(target){
+      var d = ((target - idx) % n + n) % n; if(!d) return;
+      if(d <= n / 2){ (function go(){ advance(); if(--d > 0) setTimeout(go, 640); })(); }
+      else { var s = n - d; (function go(){ retreat(); if(--s > 0) setTimeout(go, 640); })(); }
+    }
+
+    function play(){ if(reduce || n <= 1) return; stop(); timer = setInterval(advance, 3000); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    function restart(){ stop(); play(); }
+
+    next.addEventListener('click', function(){ if(!animating){ advance(); restart(); } });
+    prev.addEventListener('click', function(){ if(!animating){ retreat(); restart(); } });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', play);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : play(); });
+    window.addEventListener('resize', function(){ if(animating) return; track.style.transition = 'none'; track.style.transform = 'translateX(0)'; markCenter(); });
+
+    
+    var sx = 0, sdt = 0;
+    viewport.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sdt = Date.now(); stop(); }, {passive: true});
+    viewport.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      if(Math.abs(dx) > 40 && Date.now() - sdt < 800){ dx < 0 ? advance() : retreat(); }
+      play();
+    }, {passive: true});
+
+    play();
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2018-2026 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
