@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year}</copyright>
-    <lastBuildDate>Sun, 21 Jun 2026 08:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="https://gogoduck912.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,36 @@
     <item>
       <title>AI</title>
       <link>https://gogoduck912.github.io/tags/ai/</link>
-      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI Direction</title>
+      <link>https://gogoduck912.github.io/tags/ai-direction/</link>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/ai-direction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Thoughts</title>
+      <link>https://gogoduck912.github.io/tags/thoughts/</link>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/thoughts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>World Models</title>
+      <link>https://gogoduck912.github.io/tags/world-models/</link>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/tags/world-models/</guid>
       <description></description>
     </item>
     
@@ -40,29 +67,11 @@
     </item>
     
     <item>
-      <title>Thoughts</title>
-      <link>https://gogoduck912.github.io/tags/thoughts/</link>
-      <pubDate>Sun, 21 Jun 2026 08:00:00 +0000</pubDate>
-      
-      <guid>https://gogoduck912.github.io/tags/thoughts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Opinion</title>
       <link>https://gogoduck912.github.io/tags/opinion/</link>
       <pubDate>Fri, 29 May 2026 08:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/tags/opinion/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>AI Direction</title>
-      <link>https://gogoduck912.github.io/tags/ai-direction/</link>
-      <pubDate>Fri, 29 May 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://gogoduck912.github.io/tags/ai-direction/</guid>
       <description></description>
     </item>
     

@@ -3,31 +3,35 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gogoduck912.github.io/tags/ai/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://gogoduck912.github.io/tags/ai-infrastructure/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
-  </url>
-  <url>
-    <loc>https://gogoduck912.github.io/tags/physics/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
+    <loc>https://gogoduck912.github.io/tags/ai-direction/</loc>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/tags/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/tags/thoughts/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/tags/world-models/</loc>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/tags/ai-infrastructure/</loc>
+    <lastmod>2026-06-21T17:33:35+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/tags/physics/</loc>
+    <lastmod>2026-06-21T17:33:35+08:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/tags/opinion/</loc>
     <lastmod>2026-05-29T20:23:09+10:00</lastmod>
-  </url>
-  <url>
-    <loc>https://gogoduck912.github.io/tags/ai-direction/</loc>
-    <lastmod>2026-05-29T13:40:29+10:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/tags/robotics/</loc>
@@ -341,8 +345,13 @@
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
   </url>
   <url>
+    <loc>https://gogoduck912.github.io/blog/world-model-debates/</loc>
+    <lastmod>2026-06-22T00:00:00+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://gogoduck912.github.io/blog/space-thermos/</loc>
-    <lastmod>2026-06-21T16:57:56+08:00</lastmod>
+    <lastmod>2026-06-21T17:33:35+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
