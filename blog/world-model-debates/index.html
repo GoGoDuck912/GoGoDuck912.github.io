@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JTFM1G9ZQK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JTFM1G9ZQK');
+</script>
+<title>World Models: Three Fights, One Question</title>
+<meta name="description" content="Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model — three debates that are really one: does getting the output right force you to get the world right?">
+<meta name="author" content="Peike Li">
+<meta name="theme-color" content="#FBFAF7">
+
+<!-- Deployed at gogoduck912.github.io/blog/world-model-debates/ via Hugo Academic static-asset pipeline. -->
+<link rel="canonical" href="https://gogoduck912.github.io/blog/world-model-debates/">
+<meta property="og:url" content="https://gogoduck912.github.io/blog/world-model-debates/">
+<meta property="og:image" content="https://gogoduck912.github.io/blog/world-model-debates/og-card.png">
+<meta name="twitter:image" content="https://gogoduck912.github.io/blog/world-model-debates/og-card.png">
+
+<meta property="og:title" content="World Models: Three Fights, One Question">
+<meta property="og:description" content="Generate pixels or not, do video models grasp physics, is an LLM already a world model — three debates that are really one question asked three times.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Peike Li · Thoughts">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The words WORLD MODELS in large type with a red misregistered offset, over the subline: Three fights, one question — does getting the output right force you to get the world right?">
+<meta property="article:published_time" content="2026-06-22T08:00:00Z">
+<meta property="article:section" content="Technology">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="World Models: Three Fights, One Question">
+<meta name="twitter:description" content="Generate pixels or not, do video models grasp physics, is an LLM already a world model — three debates that are really one question asked three times.">
+<meta name="twitter:image:alt" content="The words WORLD MODELS in large type with a red misregistered offset; subline: Three fights, one question.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF7'/%3E%3Ctext x='50' y='72' font-family='Fraunces,Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23E0303E'%3E%3F%3C/text%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "World Models: Three Fights, One Question",
+  "description": "Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model — three debates that are really one: does getting the output right force you to get the world right?",
+  "image": "https://gogoduck912.github.io/blog/world-model-debates/og-card.png",
+  "datePublished": "2026-06-22T08:00:00Z",
+  "dateModified": "2026-06-22T08:00:00Z",
+  "author": { "@type": "Person", "name": "Peike Li", "url": "https://gogoduck912.github.io/" },
+  "publisher": { "@type": "Person", "name": "Peike Li", "url": "https://gogoduck912.github.io/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://gogoduck912.github.io/blog/world-model-debates/" },
+  "articleSection": "Technology",
+  "keywords": "world models, JEPA, Sora, video generation, next-token prediction, Othello-GPT, LeCun, Fei-Fei Li, Sutton, physics, out-of-distribution"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto !important; }
+}
+*:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; border-radius: 2px; }
+
+:root {
+  --bg: #FBFAF7; --bg-alt: #F0EDE5; --bg-card: #FFFFFF;
+  --ink: #1A1A1A; --ink-2: #4A4A4A; --ink-muted: #888888; --ink-faint: #B5AFA3;
+  --rule: #DDD7CC; --rule-soft: #EAE5D8;
+  --red: #E0303E; --red-deep: #B12530; --red-faint: #FBEAE3;
+  --blue: #2E5266; --blue-deep: #1E3A4A; --blue-faint: #E2EBF0;
+  --green: #5E8C61; --gold: #B8923A;
+  --display: 'Fraunces', 'Source Serif 4', Georgia, serif;
+  --serif:   'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --sans:    'IBM Plex Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--serif); font-size: 19px; line-height: 1.65;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Layout */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.prose { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+section { padding: 40px 0; }
+section.lead { padding-top: 20px; }
+
+/* Typography */
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.028em; font-weight: 700; }
+h1 { font-size: clamp(40px, 7.5vw, 80px); line-height: 0.98; margin: 0; font-weight: 900; }
+h2 { font-size: clamp(26px, 3.6vw, 40px); line-height: 1.1; margin: 18px 0 16px; }
+.prose p { margin: 0 0 22px; }
+.prose a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--ink-faint); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .2s; }
+.prose a:hover { text-decoration-color: var(--red); }
+
+.drop-cap::first-letter { font-family: var(--display); font-weight: 900; font-size: 5.0em; line-height: .85; float: left; padding: 6px 12px 0 0; color: var(--ink); }
+
+.pullquote {
+  font-family: var(--sans); font-size: clamp(21px, 2.5vw, 28px); font-weight: 600;
+  line-height: 1.3; letter-spacing: -0.012em; color: var(--ink);
+  border-left: 3px solid var(--red); margin: 30px -8px; padding: 6px 0 6px 22px;
+}
+.pullquote .attribution { display: block; margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--ink-muted); letter-spacing: 0; }
+
+.callout {
+  background: var(--bg-card); border: 1px solid var(--rule); border-radius: 4px;
+  padding: 16px 20px; margin: 26px 0; font-family: var(--sans); font-size: 15px; line-height: 1.55; color: var(--ink-2);
+}
+.callout .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--red); display: block; margin-bottom: 6px; }
+
+.kbd-stat { font-family: var(--mono); font-size: 0.95em; background: var(--bg-card); border: 1px solid var(--rule); padding: 0 6px; border-radius: 3px; }
+
+/* Masthead */
+.topbar { border-bottom: 1px solid var(--ink); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(251, 250, 247, 0.94); padding: 16px 0; }
+.topbar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+.topbar .row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.topbar .brand { font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+.topbar .brand a, .hero .byline a { color: inherit; text-decoration: none; }
+.topbar .brand a:hover, .hero .byline a:hover { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
+.topbar .meta { display: flex; gap: 20px; align-items: baseline; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.topbar .progress { position: absolute; bottom: -18px; left: 0; height: 2px; width: 0%; background: var(--red); transition: width .15s linear; }
+
+/* Hero */
+.hero { padding: 52px 0 44px; position: relative; }
+.hero .kicker { font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 22px; }
+.hero .dek { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4; color: var(--ink-2); margin: 26px 0 0; max-width: 660px; }
+.hero .byline { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 22px; font-family: var(--sans); font-size: 13px; color: var(--ink-muted); }
+.hero .byline strong { color: var(--ink); font-weight: 600; }
+
+/* Misc */
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 22px auto 16px; max-width: 120px; }
+.chapter-num { font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--red); }
+
+/* Three-costumes figure */
+.costumes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 12px 0 8px; font-family: var(--sans); }
+.costume { background: var(--bg-card); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 16px; }
+.costume .tag { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--red); margin-bottom: 14px; }
+.costume .crow { margin-bottom: 13px; }
+.costume .crow:last-child { margin-bottom: 0; }
+.costume .k { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; display: block; margin-bottom: 3px; }
+.costume .v { font-size: 13.5px; line-height: 1.45; color: var(--ink); }
+.costume .v.tell { color: #8E1B24; font-weight: 700; }
+.fig-cap { font-family: var(--sans); font-size: 12.5px; color: var(--ink-muted); margin: 10px 0 0; line-height: 1.5; }
+@media (max-width: 720px) { .costumes { grid-template-columns: 1fr; } }
+
+/* Footer */
+.article-footer { background: var(--ink); color: var(--bg); padding: 56px 0; margin-top: 56px; }
+.article-footer .wrap { color: var(--bg); }
+.article-footer h2 { color: var(--bg); margin-top: 0; font-family: var(--sans); font-size: 26px; }
+.article-footer p, .article-footer li { color: rgba(250, 248, 243, 0.78); font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+.article-footer a { color: var(--bg); text-decoration: underline; text-decoration-color: rgba(250, 248, 243, 0.4); }
+.article-footer a:hover { text-decoration-color: var(--red); }
+.share-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(250, 248, 243, 0.12); }
+.share-btn { font-family: var(--sans); font-size: 13px; font-weight: 600; background: transparent; border: 1px solid rgba(250, 248, 243, 0.3); color: var(--bg); padding: 8px 16px; border-radius: 3px; cursor: pointer; text-decoration: none; transition: all .15s; }
+.share-btn:hover { background: var(--bg); color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <div class="row">
+      <span class="brand"><a href="/">Peike Li</a> &middot; Thoughts</span>
+      <nav class="meta" aria-label="Article meta">
+        <span>Thoughts</span>
+        <span>6 min read</span>
+        <span>June 2026</span>
+      </nav>
+    </div>
+    <div class="progress" id="readProgress"></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="kicker">Thoughts &middot; World models</div>
+  <h1>Three world-model fights,<br>one question.</h1>
+  <p class="dek">Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model. They look like three debates. They&rsquo;re the same question in three costumes.</p>
+  <div class="byline">
+    <span>By <strong><a href="/">Peike Li</a></strong></span>
+    <span>June 2026</span>
+    <span>After reading too many of these arguments back to back</span>
+  </div>
+
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="prose lead">
+  <p class="drop-cap">There are three loud arguments about world models right now, and the field treats them as separate debates. I don&rsquo;t think they are. They&rsquo;re the same question wearing three different costumes &mdash; and once you spot the costume, the answer to all three gets a lot clearer.</p>
+
+  <p>Costume one: should a world model <em>generate pixels</em>, or predict in some abstract space and never bother rendering? Costume two: do video models like Sora actually learn physics, or just learn what physics looks like? Costume three: is a large language model (LLM) already a world model, just from predicting the next word?</p>
+
+  <p>Strip the costumes off and each one asks the same thing: <strong>does getting the output right force you to get the world right?</strong> Predict the next pixel, the next frame, the next token well enough &mdash; are you forced to understand what made it? My read of the evidence: not automatically. Not yet. And the place it breaks is the same in all three.</p>
+</section>
+
+<!-- ============ §1 PIXELS ============ -->
+<section class="prose">
+  <span class="chapter-num">I &nbsp;&middot;&nbsp; PIXELS</span>
+  <h2>Should a world model even draw the world?</h2>
+
+  <p>Yann LeCun has been the loudest &ldquo;no.&rdquo; When OpenAI shipped Sora as a &ldquo;world simulator&rdquo; in early 2024, he called the whole idea of modeling the world by generating pixels <a href="https://futurism.com/the-byte/openai-video-ai-doomed-meta-scientist" target="_blank" rel="noopener noreferrer">&ldquo;as wasteful and doomed to failure&rdquo;</a> as a long-abandoned approach. His alternative is JEPA (Joint Embedding Predictive Architecture): predict in an abstract latent space &mdash; a compressed internal representation, not pixels &mdash; and throw away the detail you can&rsquo;t predict anyway. He&rsquo;s now put real money behind it &mdash; <span class="kbd-stat">$1.03B</span>, the seed round for AMI Labs, the company he left Meta to start, whose pitch is a world model that doesn&rsquo;t render.</p>
+
+  <p>Here&rsquo;s the part the headlines miss: the two sides agree more than they let on. LeCun himself says there&rsquo;s &ldquo;no question that world models should perform prediction in latent space.&rdquo; Everyone&rsquo;s predicting in latent space. The actual fight is narrower &mdash; do you <em>also</em> need a decoder that turns that latent state back into something you can watch? OpenAI&rsquo;s Sora camp and Eric Xing&rsquo;s generative GLP camp say yes: you render in order to ground and check the prediction. LeCun says the decoder is a tax you pay to model details that don&rsquo;t matter.</p>
+
+  <p>So costume one, undressed: is reconstructing the observation a <em>necessary</em> part of understanding the world, or an expensive distraction? Hold that thought.</p>
+</section>
+
+<!-- ============ §2 PHYSICS ============ -->
+<section class="prose">
+  <hr class="rule">
+  <span class="chapter-num">II &nbsp;&middot;&nbsp; PHYSICS</span>
+  <h2>Looking right is not being right.</h2>
+
+  <p>This is where it gets measured, and the cleanest test I&rsquo;ve seen is almost unfairly simple. Train a video model on a tiny, tidy physics world &mdash; balls moving and colliding &mdash; then check whether it learned the laws or just memorized the clips. On the physics it trained on, it&rsquo;s basically perfect: 0.012 error. Step outside that distribution and the error jumps to 0.427 &mdash; an order of magnitude worse &mdash; and throwing more data and parameters at it barely helps. What the model is really doing is reaching for the nearest clip it saw, not running the rule. (Small model, toy 2D world &mdash; not Sora-scale. But the pattern keeps showing up.) That&rsquo;s the <a href="https://phyworld.github.io/" target="_blank" rel="noopener noreferrer">phyworld result</a>, ICML 2025.</p>
+
+  <p class="pullquote">[Sora] is at best a semi-reliable guide to how the world looks. These two&mdash;how the world works, and how the world looks&mdash;are fundamentally different.<span class="attribution">&mdash; Gary Marcus, <a href="https://garymarcus.substack.com/p/no-sora-has-not-learned-physics" target="_blank" rel="noopener noreferrer" style="color:inherit;">&lsquo;No, Sora has not learned physics&rsquo;</a></span></p>
+
+  <p>Even OpenAI&rsquo;s own Sora report admits it: the model can make a man eat a burger and leave bite marks, but glass shatters wrong and objects pop into existence. It nails what the world looks like and fumbles how it works. That&rsquo;s costume two. It&rsquo;s costume one with a number attached: getting the pixels right (looking right) isn&rsquo;t getting the state right (being right). You only find out at the edges.</p>
+</section>
+
+<!-- ============ §3 TOKENS ============ -->
+<section class="prose">
+  <hr class="rule">
+  <span class="chapter-num">III &nbsp;&middot;&nbsp; TOKENS</span>
+  <h2>Is the next word enough?</h2>
+
+  <p>Run the same test on language. Ilya Sutskever&rsquo;s famous claim is that <a href="https://www.dwarkesh.com/p/ilya-sutskever" target="_blank" rel="noopener noreferrer">&ldquo;predicting the next token well means that you understand the underlying reality that led to the creation of that token.&rdquo;</a> And there&rsquo;s real evidence for a soft version of this. Train a small model only on Othello game moves &mdash; no board, no rules &mdash; and you can read the actual board state back out of its internals (a &ldquo;probe&rdquo; is just a little classifier that checks what the model secretly represents). That probe&rsquo;s error drops from 26.2% on an untrained model to <span class="kbd-stat">1.7%</span> on a trained one, and if you edit that internal board, the model&rsquo;s predictions change with it. There&rsquo;s a little world in there, and it&rsquo;s causal.</p>
+
+  <p>That&rsquo;s real evidence an LLM can grow a little world inside itself. But Othello is a tidy, rule-clean game, and &ldquo;there&rsquo;s a board in there&rdquo; is a long way from &ldquo;it models the real world.&rdquo; The skeptical case is simple, and I think it&rsquo;s mostly right: predicting what a person would <em>say</em> isn&rsquo;t predicting what will <em>happen</em>. Richard Sutton, who basically founded RL, won&rsquo;t even grant the premise &mdash; mimicking people, he says, <a href="https://www.dwarkesh.com/p/richard-sutton" target="_blank" rel="noopener noreferrer">&ldquo;is not really to build a model of the world at all.&rdquo;</a> And poke at the internals and the thing looks less like one clean model than a pile of local rules &mdash; a <a href="https://aiguide.substack.com/p/llms-and-world-models-part-2" target="_blank" rel="noopener noreferrer">&ldquo;bag of heuristics&rdquo;</a> (Melanie Mitchell&rsquo;s phrase) that, as Gary Marcus likes to note, can drop a city in the middle of the Atlantic and ace the benchmark anyway. Strong evidence of a real, general world model in there? Not yet.</p>
+
+  <p>Same shape. Third time. The next token is right; whether the world behind it is right is exactly what&rsquo;s in dispute.</p>
+</section>
+
+<!-- ============ §4 THE TELL ============ -->
+<section class="prose">
+  <hr class="rule">
+  <span class="chapter-num">IV &nbsp;&middot;&nbsp; THE TELL</span>
+  <h2>Render vs simulate.</h2>
+
+  <p>World Labs has a clean way to cut this that I think generalizes well past their own work: a <em>renderer</em> outputs what a viewer would see; a <em>simulator</em> outputs what is actually there. Their line about video models is the whole debate in one sentence &mdash; the buildings in the drone shot look flawless from above, but &ldquo;try to drive through the city below and they fall apart.&rdquo;</p>
+
+  <div class="costumes" role="group" aria-label="The three debates share one structure">
+    <div class="costume">
+      <div class="tag">Pixels</div>
+      <div class="crow"><span class="k">The surface it predicts</span><span class="v">The next pixels / frame</span></div>
+      <div class="crow"><span class="k">In-distribution</span><span class="v">Looks like 3D understanding</span></div>
+      <div class="crow"><span class="k">The OOD tell</span><span class="v tell">Drive through the city and it falls apart</span></div>
+    </div>
+    <div class="costume">
+      <div class="tag">Physics</div>
+      <div class="crow"><span class="k">The surface it predicts</span><span class="v">The next frame of motion</span></div>
+      <div class="crow"><span class="k">In-distribution</span><span class="v">0.012 error &mdash; near perfect</span></div>
+      <div class="crow"><span class="k">The OOD tell</span><span class="v tell">0.427 error &mdash; copies the nearest example</span></div>
+    </div>
+    <div class="costume">
+      <div class="tag">Tokens</div>
+      <div class="crow"><span class="k">The surface it predicts</span><span class="v">The next token</span></div>
+      <div class="crow"><span class="k">In-distribution</span><span class="v">A readable, causal board state</span></div>
+      <div class="crow"><span class="k">The OOD tell</span><span class="v tell">Cities in the Atlantic; a bag of heuristics</span></div>
+    </div>
+  </div>
+  <p class="fig-cap">Three debates, one structure. The surface prediction is a real signal that there&rsquo;s structure underneath &mdash; but matching the surface is necessary, not sufficient, for having recovered it.</p>
+
+  <p>That&rsquo;s the unifying move. These aren&rsquo;t identical fights &mdash; what counts as &ldquo;the world&rdquo; differs in each, which is why the three falsifiers look so different &mdash; but the shape is the same. All three are render-vs-simulate, and the tell &mdash; the thing that exposes which one you&rsquo;ve actually got &mdash; is the same every time: <strong>in-distribution, a renderer is indistinguishable from a simulator; out-of-distribution, only the simulator survives.</strong> Sora looks like physics until you ask for a collision it never saw. Call it the <strong>OOD tell</strong>. (It&rsquo;s a tendency, not a law &mdash; at internet scale some physics partially generalizes, so the line blurs. But the direction holds.)</p>
+
+  <p>And that reframes the question worth arguing about. It isn&rsquo;t &ldquo;is X a world model&rdquo; &mdash; a word fight nobody wins, because the phrase already means about five different things. It&rsquo;s &ldquo;does X get the state right when the surface stops being a reliable guide?&rdquo; That one you can measure.</p>
+</section>
+
+<!-- ============ §5 THREE BETS ============ -->
+<section class="prose">
+  <hr class="rule">
+  <span class="chapter-num">V &nbsp;&middot;&nbsp; THREE BETS</span>
+  <h2>Where I&rsquo;d put my chips.</h2>
+
+  <p>First &mdash; and here I&rsquo;ll take the other side of my own evidence: I think autoregressive, causal world models plus scale will close the OOD gap. The phyworld result that spooks everyone ran small diffusion models on a toy 2D world &mdash; not the recipe I&rsquo;d bet on. The recipe I&rsquo;d bet on is the boring one that already worked for language: predict the next state causally, and scale. Wayve&rsquo;s <a href="https://wayve.ai/thinking/scaling-gaia-1/" target="_blank" rel="noopener noreferrer">GAIA-1</a> already reframed driving as next-token prediction and saw LLM-style scaling laws kick in. My read is that OOD physics is a data-and-objective problem, not a wall. I&rsquo;m wrong if a frontier autoregressive world model, scaled another order of magnitude, still shows order-of-magnitude OOD physics degradation that doesn&rsquo;t shrink with scale by 2028.</p>
+
+  <p>Second: the &ldquo;does it actually understand physics&rdquo; question gets answered by robots before it gets answered by video. A video model that fumbles physics just looks a little off; a robot that fumbles physics drops the cup. Embodiment punishes being wrong, so that&rsquo;s where the real out-of-distribution pressure &mdash; and the real progress &mdash; shows up first. I&rsquo;m wrong if the decisive evidence on physical understanding through 2027 keeps coming from video benchmarks rather than embodied agents.</p>
+
+  <p>Third: &ldquo;world model&rdquo; becomes the new &ldquo;AGI&rdquo; &mdash; a phrase so overloaded that serious labs quietly stop putting it in their titles. It already means about five different things; once the marketing catches up, precise people route around it. I&rsquo;m wrong if &ldquo;world model&rdquo; is still the headline term in major model releases through 2027.</p>
+
+  <p>None of this needs the words &ldquo;world model.&rdquo; It needs one test, asked three ways. In short: stop arguing about whether the thing understands the world, and watch what it does when the world stops looking familiar. :)</p>
+</section>
+
+</main>
+
+<footer class="article-footer">
+  <div class="wrap">
+    <p style="border-left: 3px solid var(--red); padding-left: 16px; margin-bottom: 28px; font-style: italic;"><strong style="font-style: normal;">Disclaimer.</strong> The views and opinions expressed in this post are my own and do not reflect those of my employer or any organization I&rsquo;m affiliated with. This is a personal blog; everything here is provided as-is for general informational purposes, may be incomplete or out of date, and could simply be wrong. Quotes link to their primary sources inline.</p>
+
+    <div class="share-row">
+      <a class="share-btn" href="#" id="shareTwitter" target="_blank" rel="noopener noreferrer">Share on X</a>
+      <a class="share-btn" href="#" id="shareLinkedIn" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+      <a class="share-btn" href="#" id="shareHN" target="_blank" rel="noopener noreferrer">Submit to Hacker News</a>
+      <a class="share-btn" href="#" id="copyLink">Copy link</a>
+    </div>
+
+    <p style="margin-top: 32px; opacity: 0.6; font-size: 12px;">&copy; 2026 Peike Li. Released for educational use.</p>
+  </div>
+</footer>
+
+<script>
+/* ==================== READ PROGRESS BAR ==================== */
+(function() {
+  const bar = document.getElementById('readProgress');
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ==================== SHARE BUTTONS ==================== */
+(function() {
+  const title = encodeURIComponent('Three world-model fights — generate pixels, do video models grasp physics, is an LLM already a world model — are one question:');
+  const url = encodeURIComponent(window.location.href);
+  const tw = document.getElementById('shareTwitter'); if (tw) tw.href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+  const li = document.getElementById('shareLinkedIn'); if (li) li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  const hn = document.getElementById('shareHN'); if (hn) hn.href = `https://news.ycombinator.com/submitlink?u=${url}&t=${title}`;
+  const cp = document.getElementById('copyLink');
+  if (cp) {
+    cp.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const orig = cp.textContent;
+        cp.textContent = 'Link copied ✓';
+        setTimeout(() => cp.textContent = orig, 2000);
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
