@@ -928,7 +928,7 @@
       else { var s = n - d; (function go(){ retreat(); if(--s > 0) setTimeout(go, 640); })(); }
     }
 
-    function play(){ if(n <= 1) return; stop(); timer = setInterval(advance, 3000); }
+    function play(){ if(n <= 1) return; stop(); timer = setInterval(advance, 2000); }
     function stop(){ if(timer){ clearInterval(timer); timer = null; } }
     function restart(){ stop(); play(); }
 
