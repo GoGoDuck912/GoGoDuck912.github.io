@@ -3836,7 +3836,7 @@
     grid.parentNode.insertBefore(carousel, grid);
     grid.parentNode.removeChild(grid); 
 
-    var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var reduce = false; 
     var n = cards.length, idx = 0, animating = false, timer = null;
 
     function perView(){ var w = window.innerWidth; return w > 1024 ? 3 : (w > 768 ? 2 : 1); }
@@ -3861,43 +3861,42 @@
       var gap = parseFloat(s.columnGap || s.gap || '16') || 16;
       return f.getBoundingClientRect().width + gap;
     }
-    var EASE = 'transform .6s cubic-bezier(.22,1,.36,1)';
+    var DUR = 600, EASE = 'cubic-bezier(.22,1,.36,1)';
 
-    function advance(){
-      if(animating) return; animating = true;
-      var dx = step();
-      if(reduce){ track.appendChild(track.children[0]); idx = (idx + 1) % n; syncDots(); markCenter(); animating = false; return; }
-      track.style.transition = EASE; track.style.transform = 'translateX(' + (-dx) + 'px)';
-      var done = function(e){
-        if(e.target !== track) return;
-        track.removeEventListener('transitionend', done);
-        track.style.transition = 'none'; track.appendChild(track.children[0]);
-        track.style.transform = 'translateX(0)'; void track.offsetWidth;
-        idx = (idx + 1) % n; syncDots(); markCenter(); animating = false;
-      };
-      track.addEventListener('transitionend', done);
+    function finishStep(dir){
+      if(dir < 0){ track.appendChild(track.children[0]); idx = (idx + 1) % n; }
+      else { idx = ((idx - 1) % n + n) % n; }
+      track.style.transform = 'translateX(0)';
+      syncDots(); markCenter(); animating = false;
     }
-    function retreat(){
-      if(animating) return; animating = true;
-      var dx = step();
-      if(reduce){ track.insertBefore(track.children[n - 1], track.children[0]); idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false; return; }
-      track.style.transition = 'none'; track.insertBefore(track.children[n - 1], track.children[0]);
-      track.style.transform = 'translateX(' + (-dx) + 'px)'; void track.offsetWidth;
-      track.style.transition = EASE; track.style.transform = 'translateX(0)';
-      var done = function(e){
-        if(e.target !== track) return;
-        track.removeEventListener('transitionend', done);
-        idx = ((idx - 1) % n + n) % n; syncDots(); markCenter(); animating = false;
-      };
-      track.addEventListener('transitionend', done);
+    
+    function slide(dir){            
+      if(animating || n <= 1) return; animating = true;
+      var dx = step(), from, to;
+      if(dir < 0){ from = 0; to = -dx; }
+      else { track.insertBefore(track.children[n - 1], track.children[0]); from = -dx; to = 0; }
+      track.style.transform = 'translateX(' + from + 'px)';
+      var ended = false, end = function(){ if(ended) return; ended = true; finishStep(dir); };
+      if(track.animate){
+        var a = track.animate(
+          [{ transform: 'translateX(' + from + 'px)' }, { transform: 'translateX(' + to + 'px)' }],
+          { duration: DUR, easing: EASE }
+        );
+        a.onfinish = end; a.oncancel = end;
+        setTimeout(end, DUR + 250); 
+      } else {
+        setTimeout(end, 0); 
+      }
     }
+    function advance(){ slide(-1); }
+    function retreat(){ slide(1); }
     function goTo(target){
       var d = ((target - idx) % n + n) % n; if(!d) return;
       if(d <= n / 2){ (function go(){ advance(); if(--d > 0) setTimeout(go, 640); })(); }
       else { var s = n - d; (function go(){ retreat(); if(--s > 0) setTimeout(go, 640); })(); }
     }
 
-    function play(){ if(reduce || n <= 1) return; stop(); timer = setInterval(advance, 5000); }
+    function play(){ if(n <= 1) return; stop(); timer = setInterval(advance, 4000); }
     function stop(){ if(timer){ clearInterval(timer); timer = null; } }
     function restart(){ stop(); play(); }
 
