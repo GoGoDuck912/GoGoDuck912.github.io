@@ -38,7 +38,7 @@
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/project/deepsign/</guid>
-      <description>&lt;p&gt;DeepSign is a bidirectional foundation model for sign language. A single model covers both directions of communication: understanding — translating live signing into spoken-language text — and generation — producing natural, expressive signing from text or speech. Built for real-time interaction, it operates directly on live streaming video with latency low enough for natural two-way conversation, and achieves state-of-the-art performance across sign language translation and production benchmarks. DeepSign has not been publicly released yet — more details coming soon.&lt;/p&gt;
+      <description>&lt;p&gt;Sign language is a natural visual language whose tokens are fine-grained body and hand motion — a language where video understanding and video generation must meet. DeepSign is a single foundation model that covers both directions of the task: video to text, translating live signing into spoken-language text; and text to embodied motion, generating natural, expressive signing from written or spoken language. It runs in real time on live streaming video, with latency low enough for natural two-way conversation, and achieves state-of-the-art performance in both directions of the task. Beyond accessibility, DeepSign is a proving ground for world models that both perceive and act. It has not been publicly released yet — more details coming soon.&lt;/p&gt;
 </description>
     </item>
     
