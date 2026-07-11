@@ -1,0 +1,36 @@
+# Peike Li
+
+> Personal website of Peike (Patrick) Li, Research Scientist at Google Research working on multimodal foundation models, world models, and generative AI. Includes peer-reviewed publications spanning computer vision, human parsing, video segmentation, and music generation (T-PAMI, NeurIPS, ICCV, CVPR, AAAI, ACM MM, KDD, BMVC), plus essays on AI research directions.
+
+## About
+
+- [Home and bio](https://gogoduck912.github.io/): Research interests, experience, education, and selected work
+- [All publications](https://gogoduck912.github.io/publication/): Complete list of peer-reviewed papers
+
+## Selected Publications
+
+- [Self-Correction for Human Parsing (T-PAMI)](https://gogoduck912.github.io/publication/self-correction-for-human-parsing/): Self-correction training scheme (SCHP) for human parsing with noisy labels; ranked 1st in the CVPR 2019 LIP Challenge and a widely used open-source baseline
+- [JEN-1: Text-Guided Universal Music Generation with Omnidirectional Diffusion Models (IEEE CAI, Oral)](https://gogoduck912.github.io/publication/jen-1-text-guided-universal-music-generation-with-omnidirectional-diffusion-models/): High-fidelity text-to-music generation with an omnidirectional diffusion model
+- [JEN-1 Composer: A Unified Framework for High-Fidelity Multi-Track Music Generation (AAAI, Oral)](https://gogoduck912.github.io/publication/jen-1-composer-a-unified-framework-for-high-fidelity-multi-track-music-generation/): Unified framework for generating and arranging coherent multi-track music
+- [Consistent Structural Relation Learning for Zero-Shot Segmentation (NeurIPS 2020, Spotlight)](https://gogoduck912.github.io/publication/consistent-structural-relation-learning-for-zero-shot-segmentation/): Zero-shot segmentation by learning structural relations that transfer from seen to unseen categories
+- [Super-Resolving Cross-Domain Face Miniatures by Peeking at One-Shot Exemplar (ICCV 2021)](https://gogoduck912.github.io/publication/super-resolving-cross-domain-face-miniatures-by-peeking-at-one-shot-exemplar/): Cross-domain face super-resolution guided by a single exemplar image
+- [Benchmarking Audio Visual Segmentation for Long-Untrimmed Videos (CVPR)](https://gogoduck912.github.io/publication/benchmarking-audio-visual-segmentation-for-long-untrimmed-videos/): Benchmark and baselines for audio-visual segmentation on long, untrimmed videos
+- [Audio-Visual Segmentation by Exploring Cross-Modal Mutual Semantics (ACM MM)](https://gogoduck912.github.io/publication/audio-visual-segmentation-by-exploring-cross-modal-mutual-semantics/): Audio-visual segmentation that exploits mutual semantics across modalities
+- [When Humans Meet Machines: Towards Efficient Segmentation Networks (BMVC 2020)](https://gogoduck912.github.io/publication/when-humans-meet-machines-towards-efficient-segmentation-networks/): Efficient semantic segmentation network design
+
+## Blog
+
+- [Half the 'AI APIs' You're Buying Are Lying to You](https://gogoduck912.github.io/blog/middlemen/): Investigation into the AI API middleman economy, where 45% of audited providers serve fake models and some routers inject malware
+- [World Models: Three Fights, One Question](https://gogoduck912.github.io/blog/world-model-debates/): Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model -- three debates that are really one
+- [Time Is the Missing Modality](https://gogoduck912.github.io/blog/time-aware-llm/): Three labs call their models "time-aware" and mean three different things; naming it correctly defines the next era of LLM design
+- [Robotics has a scaling law -- just not the one you're hoping for](https://gogoduck912.github.io/blog/robotics-scaling-law/): Robots have no internet to learn from; video and world models are the two best bets to fake one
+- [Space Is a Thermos, Not a Freezer](https://gogoduck912.github.io/blog/space-thermos/): Why rejecting a gigawatt of waste heat in vacuum, not finding the power, decides whether compute ever moves to orbit
+- [Three thoughts on the bitter lesson](https://gogoduck912.github.io/blog/bitter-lesson/): On Rich Sutton's Bitter Lesson and his 2025 claim that LLMs are not actually following it
+- [The Bunker and the Bassinet](https://gogoduck912.github.io/blog/the-bunker-and-the-bassinet/): The people building AI are quietly opting out of having children; the bunker is the tell
+
+## Profiles
+
+- [Google Scholar](https://scholar.google.com/citations?user=dOzTcvwAAAAJ&hl=en): Citation record and full paper list
+- [GitHub](https://github.com/GoGoDuck912): Open-source code and projects
+- [LinkedIn](https://www.linkedin.com/in/peike-li-55786586/): Professional profile
+- [X (Twitter)](https://x.com/DrPatrickLi): Updates and commentary
