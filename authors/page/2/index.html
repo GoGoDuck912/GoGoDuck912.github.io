@@ -93,7 +93,7 @@
     
     
     
-    <link rel="stylesheet" href="/css/academic.7c67e1789646b76d3f62298782bd4b1c.css">
+    <link rel="stylesheet" href="/css/academic.7c0bb2d8f572c7e0f2407c674e24a833.css">
   
 
   
@@ -827,8 +827,8 @@
 
 
 (function(){
-  function init(){
-    var section = document.getElementById('blog');
+  function init(sectionId, indexHref, indexLabel, noun){
+    var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
 
@@ -838,8 +838,8 @@
       var ht = heading.textContent.trim();
       heading.textContent = '';
       var ha = document.createElement('a');
-      ha.href = '/blog/'; ha.className = 'blog-title-link';
-      ha.innerHTML = ht + '<span class="blog-readall" aria-hidden="true">Read all posts &rarr;</span>';
+      ha.href = indexHref; ha.className = 'blog-title-link';
+      ha.innerHTML = ht + '<span class="blog-readall" aria-hidden="true">' + indexLabel + ' &rarr;</span>';
       heading.appendChild(ha);
     }
 
@@ -856,8 +856,8 @@
     cards.forEach(function(c){ track.appendChild(c); }); 
     viewport.appendChild(track); carousel.appendChild(viewport);
 
-    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'blog-nav prev'; prev.setAttribute('aria-label', 'Previous post'); prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
-    var next = document.createElement('button'); next.type = 'button'; next.className = 'blog-nav next'; next.setAttribute('aria-label', 'Next post'); next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'blog-nav prev'; prev.setAttribute('aria-label', 'Previous ' + noun); prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'blog-nav next'; next.setAttribute('aria-label', 'Next ' + noun); next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
     var dots = document.createElement('div'); dots.className = 'blog-dots';
     carousel.appendChild(prev); carousel.appendChild(next); carousel.appendChild(dots);
 
@@ -873,7 +873,7 @@
     for(var k = 0; k < n; k++){
       (function(k){
         var b = document.createElement('button'); b.type = 'button';
-        b.setAttribute('aria-label', 'Go to post ' + (k + 1));
+        b.setAttribute('aria-label', 'Go to ' + noun + ' ' + (k + 1));
         b.addEventListener('click', function(){ goTo(k); restart(); });
         dots.appendChild(b);
       })(k);
@@ -948,9 +948,13 @@
 
     play();
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-  window.addEventListener('load', init); 
+  function boot(){
+    init('blog', '/blog/', 'Read all posts', 'post');
+    init('projects', '/project/', 'View all projects', 'project');
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  window.addEventListener('load', boot); 
 })();
 </script>
 

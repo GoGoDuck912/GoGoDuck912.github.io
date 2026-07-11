@@ -33,6 +33,16 @@
     </item>
     
     <item>
+      <title>DeepSign</title>
+      <link>https://gogoduck912.github.io/project/deepsign/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://gogoduck912.github.io/project/deepsign/</guid>
+      <description>&lt;p&gt;DeepSign is a bidirectional foundation model for sign language. A single model covers both directions of communication: understanding — translating live signing into spoken-language text — and generation — producing natural, expressive signing from text or speech. Built for real-time interaction, it operates directly on live streaming video with latency low enough for natural two-way conversation, and achieves state-of-the-art performance across sign language translation and production benchmarks. DeepSign has not been publicly released yet — more details coming soon.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>JEN-1</title>
       <link>https://gogoduck912.github.io/project/jen-1/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
