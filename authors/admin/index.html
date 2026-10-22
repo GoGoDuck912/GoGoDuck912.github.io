@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://gogoduck912.github.io/authors/admin/">
@@ -124,7 +124,7 @@
   <meta property="og:site_name" content="Peike Li">
   <meta property="og:url" content="https://gogoduck912.github.io/authors/admin/">
   <meta property="og:title" content=" | Peike Li">
-  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
   <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
   
   
@@ -492,7 +492,7 @@
 
       <div class="portrait-title">
         <h2 itemprop="name">Peike Li</h2>
-        <h3 itemprop="jobTitle">Research Scientist @ Google | Scaling World Models for ASI</h3>
+        <h3 itemprop="jobTitle">Research Scientist @ Google | Efficient AI for LLMs &amp; Multimodal Generation</h3>
 
         
       </div>
@@ -594,14 +594,15 @@
     
     
 
-    <p>I am a Research Scientist at Google Research. My long-term research goal is to architect Native Omni Models as the cognitive engine for ASI. I focus on building multimodal foundation models to create unified generalist agents capable of mastering complex digital and physical environments.</p>
+    <p>I am a Research Scientist at Google Research. My long-term goal is generalist models that can perceive, imagine, and act in both digital and physical worlds, and I believe the path there runs through efficiency: models that scale further on the same compute, and run fast enough to interact with the world in real time.</p>
+<p>Today I work on efficient AI for LLMs and multimodal generative models: pretraining efficiency (Gemini, Gemma) and inference efficiency (Veo, SL2T). Before Google, I led the music-generation team behind JEN-1, and earlier interned at Alibaba (Qwen team), Baidu Research, and 360 Research.</p>
 <p>I am currently exploring the intersection of Efficient AI, Multimodal AI, and System 2 Reasoning, specifically:</p>
 <ul>
 <li>Scaling unified transformers on internet-scale multimodal data to build high-fidelity generative world models.</li>
 <li>Making generation streaming and low-latency enough to run in real time—treating latency as a first-class research problem rather than an afterthought.</li>
 <li>Connecting multimodal generative models with causal and physical consistency as a path from passive generation toward agents that act.</li>
 </ul>
-<p>I am open to discuss the future of Multimodal LLMs, Multimodal Generative AI, World Models, and Agentic Foundation Models. I welcome collaborations across industry and academia. Authorized to work in US and Australia.</p>
+<p>I&rsquo;m always happy to talk about efficient world models, video generation, multimodal LLMs, and embodied foundation models, and I welcome collaborations across industry and academia. Authorized to work in the US and Australia.</p>
 <blockquote>
 <p>To accelerate the advent of machine intelligence and sustainable future</p>
 </blockquote>
@@ -613,6 +614,8 @@
       <div class="col-md-5">
         <h3>Interests</h3>
         <ul class="ul-interests">
+          
+          <li>Efficient AI ⚡</li>
           
           <li>LLM 🧠</li>
           
@@ -966,7 +969,7 @@
 
 
 (function(){
-  function init(sectionId, indexHref, indexLabel, noun){
+  function init(sectionId, indexHref, indexLabel, noun, skip){
     var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
@@ -985,6 +988,7 @@
     var grid = section.querySelector('.isotope.projects-container');
     if(!grid) return;
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(skip) cards = cards.filter(function(c){ return !c.matches(skip); }); 
     if(cards.length < 2) return;
 
     
@@ -1088,7 +1092,7 @@
     play();
   }
   function boot(){
-    init('blog', '/blog/', 'Read all posts', 'post');
+    init('blog', '/blog/', 'Read all posts', 'post', '.js-id-Opinion'); 
     init('projects', '/project/', 'View all projects', 'project');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

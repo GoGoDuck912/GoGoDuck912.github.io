@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://gogoduck912.github.io/authors/qingtao-yu/">
@@ -124,7 +124,7 @@
   <meta property="og:site_name" content="Peike Li">
   <meta property="og:url" content="https://gogoduck912.github.io/authors/qingtao-yu/">
   <meta property="og:title" content="Qingtao Yu | Peike Li">
-  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
   <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
   
   <meta property="og:updated_time" content="2024-02-01T15:03:59&#43;10:00">
@@ -774,7 +774,7 @@
 
 
 (function(){
-  function init(sectionId, indexHref, indexLabel, noun){
+  function init(sectionId, indexHref, indexLabel, noun, skip){
     var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
@@ -793,6 +793,7 @@
     var grid = section.querySelector('.isotope.projects-container');
     if(!grid) return;
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(skip) cards = cards.filter(function(c){ return !c.matches(skip); }); 
     if(cards.length < 2) return;
 
     
@@ -896,7 +897,7 @@
     play();
   }
   function boot(){
-    init('blog', '/blog/', 'Read all posts', 'post');
+    init('blog', '/blog/', 'Read all posts', 'post', '.js-id-Opinion'); 
     init('projects', '/project/', 'View all projects', 'project');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

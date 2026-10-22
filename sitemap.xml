@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://gogoduck912.github.io/authors/</loc>
-    <lastmod>2026-06-02T11:32:29+10:00</lastmod>
+    <lastmod>2026-07-15T23:37:33+00:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/authors/boyu-chen/</loc>
@@ -307,7 +307,7 @@
   </url>
   <url>
     <loc>https://gogoduck912.github.io/authors/admin/</loc>
-    <lastmod>2026-06-02T11:32:29+10:00</lastmod>
+    <lastmod>2026-07-15T23:37:33+00:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/publication_types/4/</loc>
@@ -334,7 +334,7 @@
   </url>
   <url>
     <loc>https://gogoduck912.github.io/</loc>
-    <lastmod>2026-07-11T19:57:51+10:00</lastmod>
+    <lastmod>2026-07-15T23:37:33+00:00</lastmod>
   </url>
   <url>
     <loc>https://gogoduck912.github.io/post/</loc>
@@ -349,23 +349,13 @@
     <lastmod>2023-02-27T14:38:16+11:00</lastmod>
   </url>
   <url>
-    <loc>https://gogoduck912.github.io/blog/world-model-debates/</loc>
-    <lastmod>2026-06-22T12:55:42+08:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gogoduck912.github.io/blog/space-thermos/</loc>
-    <lastmod>2026-06-21T17:33:35+08:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gogoduck912.github.io/blog/the-bunker-and-the-bassinet/</loc>
-    <lastmod>2026-05-29T20:23:09+10:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://gogoduck912.github.io/blog/robotics-scaling-law/</loc>
     <lastmod>2026-05-29T13:40:29+10:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/blog/world-model-debates/</loc>
+    <lastmod>2026-06-22T12:55:42+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -381,6 +371,16 @@
   <url>
     <loc>https://gogoduck912.github.io/blog/middlemen/</loc>
     <lastmod>2026-05-18T21:05:41+10:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/blog/space-thermos/</loc>
+    <lastmod>2026-06-21T17:33:35+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gogoduck912.github.io/blog/the-bunker-and-the-bassinet/</loc>
+    <lastmod>2026-05-29T20:23:09+10:00</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

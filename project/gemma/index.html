@@ -736,7 +736,7 @@
 
     <div class="media-body">
       <h5 class="card-title" itemprop="name"><a href="https://gogoduck912.github.io/">Peike Li</a></h5>
-      <h6 class="card-subtitle">Research Scientist @ Google | Scaling World Models for ASI</h6>
+      <h6 class="card-subtitle">Research Scientist @ Google | Efficient AI for LLMs &amp; Multimodal Generation</h6>
       <p class="card-text" itemprop="description">Peike Li is a Research Scientist at Google Research.</p>
       <ul class="network-icon" aria-hidden="true">
         
@@ -1136,7 +1136,7 @@
 
 
 (function(){
-  function init(sectionId, indexHref, indexLabel, noun){
+  function init(sectionId, indexHref, indexLabel, noun, skip){
     var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
@@ -1155,6 +1155,7 @@
     var grid = section.querySelector('.isotope.projects-container');
     if(!grid) return;
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(skip) cards = cards.filter(function(c){ return !c.matches(skip); }); 
     if(cards.length < 2) return;
 
     
@@ -1258,7 +1259,7 @@
     play();
   }
   function boot(){
-    init('blog', '/blog/', 'Read all posts', 'post');
+    init('blog', '/blog/', 'Read all posts', 'post', '.js-id-Opinion'); 
     init('projects', '/project/', 'View all projects', 'project');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

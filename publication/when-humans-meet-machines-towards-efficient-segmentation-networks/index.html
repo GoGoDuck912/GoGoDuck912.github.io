@@ -1102,7 +1102,7 @@
 
 
 (function(){
-  function init(sectionId, indexHref, indexLabel, noun){
+  function init(sectionId, indexHref, indexLabel, noun, skip){
     var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
@@ -1121,6 +1121,7 @@
     var grid = section.querySelector('.isotope.projects-container');
     if(!grid) return;
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(skip) cards = cards.filter(function(c){ return !c.matches(skip); }); 
     if(cards.length < 2) return;
 
     
@@ -1224,7 +1225,7 @@
     play();
   }
   function boot(){
-    init('blog', '/blog/', 'Read all posts', 'post');
+    init('blog', '/blog/', 'Read all posts', 'post', '.js-id-Opinion'); 
     init('projects', '/project/', 'View all projects', 'project');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

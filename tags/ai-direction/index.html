@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models.">
+  <meta name="description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://gogoduck912.github.io/tags/ai-direction/">
@@ -124,7 +124,7 @@
   <meta property="og:site_name" content="Peike Li">
   <meta property="og:url" content="https://gogoduck912.github.io/tags/ai-direction/">
   <meta property="og:title" content="AI Direction | Peike Li">
-  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on multimodal foundation models and world models."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
+  <meta property="og:description" content="Dr. Peike Li — Research Scientist at Google Research, working on efficient AI for LLMs and multimodal generative models, toward world models for digital and physical worlds."><meta property="og:image" content="https://gogoduck912.github.io/img/avatar.jpg">
   <meta property="twitter:image" content="https://gogoduck912.github.io/img/avatar.jpg"><meta property="og:locale" content="en-us">
   
   <meta property="og:updated_time" content="2026-06-22T00:00:00&#43;00:00">
@@ -492,19 +492,19 @@
   
   
   <div>
-    <h2><a href="/post/world-model-debates/">World Models: Three Fights, One Question</a></h2>
+    <h2><a href="/post/robotics-scaling-law/">Robotics has a scaling law — just not the one you&#39;re hoping for</a></h2>
     <div class="article-style">
       
-      Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model — three debates that are really one question. Plus three bets on how each ends.
+      Video gives robots eyes. World models give them imagination. Neither gives them hands. A few thoughts on what robotics' scaling law actually runs on.
       
     </div>
   </div>
   
   <div>
-    <h2><a href="/post/robotics-scaling-law/">Robotics has a scaling law — just not the one you&#39;re hoping for</a></h2>
+    <h2><a href="/post/world-model-debates/">World Models: Three Fights, One Question</a></h2>
     <div class="article-style">
       
-      Video gives robots eyes. World models give them imagination. Neither gives them hands. A few thoughts on what robotics' scaling law actually runs on.
+      Whether to generate pixels, whether video models grasp physics, whether an LLM is already a world model — three debates that are really one question. Plus three bets on how each ends.
       
     </div>
   </div>
@@ -811,7 +811,7 @@
 
 
 (function(){
-  function init(sectionId, indexHref, indexLabel, noun){
+  function init(sectionId, indexHref, indexLabel, noun, skip){
     var section = document.getElementById(sectionId);
     if(!section) return;
     if(section.querySelector('.blog-carousel')) return; 
@@ -830,6 +830,7 @@
     var grid = section.querySelector('.isotope.projects-container');
     if(!grid) return;
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.project-card'));
+    if(skip) cards = cards.filter(function(c){ return !c.matches(skip); }); 
     if(cards.length < 2) return;
 
     
@@ -933,7 +934,7 @@
     play();
   }
   function boot(){
-    init('blog', '/blog/', 'Read all posts', 'post');
+    init('blog', '/blog/', 'Read all posts', 'post', '.js-id-Opinion'); 
     init('projects', '/project/', 'View all projects', 'project');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
