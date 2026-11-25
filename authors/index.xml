@@ -333,15 +333,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://gogoduck912.github.io/authors/admin/</guid>
-      <description>&lt;p&gt;I am a Research Scientist at Google Research. My long-term goal is generalist models that can perceive, imagine, and act in both digital and physical worlds, and I believe the path there runs through efficiency: models that scale further on the same compute, and run fast enough to interact with the world in real time.&lt;/p&gt;
-&lt;p&gt;Today I work on efficient AI for LLMs and multimodal generative models: pretraining efficiency (Gemini, Gemma) and inference efficiency (Veo, SL2T). Before Google, I led the music-generation team behind JEN-1, and earlier interned at Alibaba (Qwen team), Baidu Research, and 360 Research.&lt;/p&gt;
-&lt;p&gt;I am currently exploring the intersection of Efficient AI, Multimodal AI, and System 2 Reasoning, specifically:&lt;/p&gt;
+      <description>&lt;p&gt;I am a Research Scientist at Google Research. My long-term goal is generalist models that perceive, imagine, and act in digital and physical worlds, and I believe the path runs through efficiency: models that scale further on the same compute and run fast enough to interact with the world in real time.&lt;/p&gt;
+&lt;p&gt;At Google, I work on LLM pretraining efficiency (Gemini, Gemma) and inference efficiency for multimodal generation (Veo, Genie). Previously, I worked at Alibaba (Qwen team), Baidu Research, and 360 Research.&lt;/p&gt;
+&lt;p&gt;I am exploring how foundation models move from passive generation to real-time reasoning and action:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Scaling unified transformers on internet-scale multimodal data to build high-fidelity generative world models.&lt;/li&gt;
-&lt;li&gt;Making generation streaming and low-latency enough to run in real time—treating latency as a first-class research problem rather than an afterthought.&lt;/li&gt;
-&lt;li&gt;Connecting multimodal generative models with causal and physical consistency as a path from passive generation toward agents that act.&lt;/li&gt;
+&lt;li&gt;Scaling unified transformers on internet-scale multimodal data into generalist LLMs and world models.&lt;/li&gt;
+&lt;li&gt;Bridging multimodal generative models with System 2 reasoning and causal/physical consistency, toward agents that plan and act.&lt;/li&gt;
+&lt;li&gt;Treating latency and compute efficiency as first-class problems, making LLMs and world models stream fast enough for real-time interaction and physical execution.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I&amp;rsquo;m always happy to talk about efficient world models, video generation, multimodal LLMs, and embodied foundation models, and I welcome collaborations across industry and academia. Authorized to work in the US and Australia.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m always happy to chat about efficient LLM pretraining, multimodal LLMs, world models, and robot foundation models, and welcome collaborations across industry and academia. Authorized to work in the US and Australia.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;To accelerate the advent of machine intelligence and sustainable future&lt;/p&gt;
 &lt;/blockquote&gt;
